@@ -32,7 +32,7 @@ export async function signIn(formData: FormData): Promise<ActionResult> {
     });
 
     if (error) {
-        console.log("Supabase hata mesajı:", error.message);// ← bunu ekle
+        console.log("Supabase hata mesajı:", error.message);
          const errorMap: Record<string, string> = {
       "Invalid login credentials": "E-posta veya şifre hatalı.",
       "Email not confirmed": "E-posta adresinizi doğrulamanız gerekmektedir.",
