@@ -11,7 +11,7 @@ export default function LoginPage() {
     const searchParams = useSearchParams();
 
     useEffect(() => {
-        if (searchParams.get("registered") === "true ") {
+        if (searchParams.get("registered") === "true") {
             toast.success("Hesabınız oluşturuldu. Giriş yapabilirsiniz.");
         }
     }, [searchParams]);

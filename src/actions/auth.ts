@@ -1,8 +1,7 @@
 "use server"
-import { createClient } from "@/lib/supabase/client";
+import { createClient } from "@/lib/supabase/server";
 import { signInSchema, signUpSchema } from "@/types/schemas/auth.schema";
 import { revalidatePath } from "next/cache";
-import { ClientSegmentRoot } from "next/dist/client/components/client-segment";
 import { redirect } from "next/navigation";
 
 
@@ -33,6 +32,7 @@ export async function signIn(formData: FormData): Promise<ActionResult> {
     });
 
     if (error) {
+        console.log("Supabase hata mesajı:", error.message);// ← bunu ekle
          const errorMap: Record<string, string> = {
       "Invalid login credentials": "E-posta veya şifre hatalı.",
       "Email not confirmed": "E-posta adresinizi doğrulamanız gerekmektedir.",
@@ -59,11 +59,11 @@ export async function signUp(formData: FormData): Promise<ActionResult> {
     const validation = signUpSchema.safeParse(rawData);
     if (!validation.success) {
         const firstError = validation.error.issues[0]?.message;
-        return { success: false , message : firstError ?? "Geçersiz form verisi"};
+        return { success: false, message: firstError ?? "Geçersiz form verisi" };
     }
 
     const supabase = await createClient();
-    const { data: authData, error: authError} = await supabase.auth.signUp ({
+    const { data: authData, error: authError } = await supabase.auth.signUp({
         email: validation.data.email,
         password: validation.data.password,
         options: {
@@ -72,32 +72,21 @@ export async function signUp(formData: FormData): Promise<ActionResult> {
             },
         },
     });
+
     if (authError) {
         const errorMap: Record<string, string> = {
-      "User already registered": "Bu e-posta adresi zaten kayıtlı.",
-      "Password should be at least 8 characters": "Şifre en az 8 karakter olmalıdır.",
-    };
-    const message = errorMap[authError.message] ?? "Kayıt olurken bir hata oluştu.";
-    return { success: false, message};
+            "User already registered": "Bu e-posta adresi zaten kayıtlı.",
+            "Password should be at least 8 characters": "Şifre en az 8 karakter olmalıdır.",
+        };
+        const message = errorMap[authError.message] ?? "Kayıt olurken bir hata oluştu.";
+        return { success: false, message };
     }
 
-    if (!authData.user) {
+    if (!authData.session) {
         return {
             success: true,
-            message: " Kayıt başarılı! Lütfen e-posta adresini doğrulayınız.",
+            message: "Kayıt başarılı! Lütfen e-posta adresinizi doğrulayınız.",
         };
-    }
-
-    const { error: profileError } = await supabase.from("users").upsert({
-        id: authData.user.id,
-        email: validation.data.email,
-        name: validation.data.name,
-        created_at: new Date().toISOString(),
-        updated_at: new Date().toISOString(),
-    });
-
-    if( profileError) {
-        console.error("[signUp] Profile sync error:", profileError);
     }
 
     revalidatePath("/", "layout");

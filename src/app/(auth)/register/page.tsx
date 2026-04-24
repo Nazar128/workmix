@@ -52,14 +52,14 @@ export default function RegisterPage() {
           <form action={handleSubmit} className="space-y-5">
             <div className="space-y-1.5">
               <label
-                htmlFor="fullName"
+                htmlFor="name"
                 className="block text-sm font-medium text-slate-300"
               >
                 Ad Soyad
               </label>
               <input
-                id="fullName"
-                name="fullName"
+                id="name"
+                name="name"
                 type="text"
                 autoComplete="name"
                 required
