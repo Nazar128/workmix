@@ -8,7 +8,7 @@ type Member = {
   org_role: string;
   is_owner: boolean;
   joined_at: string;
-  users: { id: string; email: string; full_name: string | null };
+  users: { id: string; email: string; name: string | null };
 };
 
 type Props = {
@@ -128,11 +128,11 @@ export function ManageMembersModal({ org, members, currentUserRole, isOwner }: P
                 >
                   <div className="flex items-center gap-3">
                     <div className="w-9 h-9 rounded-full bg-gradient-to-br from-purple-500 to-indigo-600 flex items-center justify-center text-white text-sm font-bold">
-                      {(member.users.full_name || member.users.email)[0].toUpperCase()}
+                      {(member.users.name || member.users.email)[0].toUpperCase()}
                     </div>
                     <div>
                       <p className="text-sm font-medium text-slate-800">
-                        {member.users.full_name || member.users.email}
+                        {member.users.name || member.users.email}
                       </p>
                       <p className="text-xs text-slate-500">{member.users.email}</p>
                     </div>
