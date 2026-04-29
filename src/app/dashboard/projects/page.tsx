@@ -2,20 +2,30 @@ import { deleteProject, toggleProjectStatus } from '@/actions/projects';
 import AddProjectModal from '@/components/dashboard/AddProjectModal';
 import { EditProjectModal } from '@/components/dashboard/EditProjectModal';
 import { createServerClient } from '@supabase/ssr';
-
 import { cookies } from 'next/headers';
+import { unstable_noStore as noStore } from 'next/cache';
+import Link from 'next/link';
 import { redirect } from 'next/navigation';
-import React from 'react'
+import React from 'react';
 
 export default async function ProjectsPage() {
-    const cookieStore = await cookies();
-    const supabase = createServerClient( process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-        { cookies: {getAll() { return cookieStore.getAll();}, setAll() {},},}
-    );
+  noStore();
+  const cookieStore = await cookies();
+  const supabase = createServerClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+    {
+      cookies: {
+        getAll() { return cookieStore.getAll(); },
+        setAll() {},
+      },
+    }
+  );
 
-    const { data: {user}} = await supabase.auth.getUser();
-    if (!user) redirect("/login");
- const [projectsRes, organizationRes] = await Promise.all([
+  const { data: { user } } = await supabase.auth.getUser();
+  if (!user) redirect("/login");
+
+  const [projectsRes, organizationRes] = await Promise.all([
     supabase
       .from("projects")
       .select("*, organizations(name)")
@@ -25,13 +35,13 @@ export default async function ProjectsPage() {
       .select("id, name")
       .eq("status", "active"),
   ]);
-   return (
+
+  return (
     <div className="p-6">
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-2xl font-bold text-purple-700">Projelerim</h1>
         <AddProjectModal organizations={organizationRes.data || []} />
       </div>
-
       <div className="border border-gray-300 rounded-lg overflow-hidden">
         <table className="w-full text-left border-collapse">
           <thead>
@@ -43,14 +53,14 @@ export default async function ProjectsPage() {
             </tr>
           </thead>
           <tbody>
-            {projectsRes.data?.length === 0 ? (
+            {!projectsRes.data || projectsRes.data.length === 0 ? (
               <tr>
                 <td colSpan={4} className="p-8 text-center text-gray-500">
                   Proje bulunamadı.
                 </td>
               </tr>
             ) : (
-              projectsRes.data?.map((project) => ( 
+              projectsRes.data.map((project) => (
                 <tr key={project.id} className="border-b border-gray-200 hover:bg-gray-50">
                   <td className="p-4">
                     <form action={toggleProjectStatus.bind(null, project.id, project.status)}>
@@ -62,7 +72,9 @@ export default async function ProjectsPage() {
                       </button>
                     </form>
                   </td>
-                  <td className="p-4">{project.name}</td>
+                  <td className="p-4">
+                    <Link href={`/dashboard/projects/${project.id}`}>{project.name}</Link>
+                  </td>
                   <td className="p-4 text-gray-600">
                     {project.organizations?.name || "-"}
                   </td>
@@ -81,5 +93,3 @@ export default async function ProjectsPage() {
     </div>
   );
 }
-
-

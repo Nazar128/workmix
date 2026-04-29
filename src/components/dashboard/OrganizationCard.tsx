@@ -50,8 +50,8 @@ type Member = {
         }
 
         return (
-            <div className={`group relative bg-white rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-all duration-200 overflow-hidden $isDeleting ?"opacity-50 pointer-events-none":""}`}>
-                <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-purple-500 via-indigo-500 to-blue-500 ">
+            <div className={`group relative bg-white rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-all duration-200 overflow-hidden ${isDeleting ?"opacity-50 pointer-events-none": ""}`}>
+                <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-purple-500 via-indigo-500 to-blue-500 " />
                     <div className="p-5">
                         <div className="flex items-start justify-between gap-3 mb-4">
                             <div className="flex items-center gap-3 min-w-20">
@@ -71,10 +71,10 @@ type Member = {
                                         </form> ) : (
                                             <>
                                                 <Link href={`/dashboard/organizations/${org.id}`}>
-  <h3 className="font-bold text-slate-800 text-base truncate hover:text-indigo-600">
-    {org.name}
-  </h3>
-</Link>
+                                                    <h3 className="font-bold text-slate-800 text-base truncate hover:text-indigo-600">
+                                                        {org.name}
+                                                    </h3>
+                                                </Link>
                                                 <p className="text-xs text-slate-400 truncate">/{org.slug}</p>
                                             </>
                                         )
@@ -149,17 +149,15 @@ type Member = {
                                 </button>
                             )}
                              {isOwner && (
-            <button
-              onClick={handleDelete}
-              className="ml-auto flex items-center gap-1.5 text-sm text-red-400 hover:text-red-600 border border-transparent hover:border-red-200 px-3 py-1.5 rounded-lg transition-all"
-            >
-              🗑 Sil
-            </button>
-          )}
-
+                            <button
+                            onClick={handleDelete}
+                            className="ml-auto flex items-center gap-1.5 text-sm text-red-400 hover:text-red-600 border border-transparent hover:border-red-200 px-3 py-1.5 rounded-lg transition-all"
+                            >
+                                🗑 Sil
+                            </button>
+                            )}
                         </div>
                     </div>
-                </div>
             </div>
         )
 

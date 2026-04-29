@@ -141,7 +141,7 @@ export function ManageMembersModal({ org, members, currentUserRole, isOwner }: P
                   <div className="flex items-center gap-2">
                     {member.is_owner ? (
                       <span className="px-2 py-1 bg-amber-100 text-amber-700 text-xs font-semibold rounded-full">
-                        👑 Sahip
+                         Sahip
                       </span>
                     ) : isAdmin && !member.is_owner ? (
                       <select

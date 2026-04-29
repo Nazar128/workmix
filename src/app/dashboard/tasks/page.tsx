@@ -4,6 +4,7 @@ import { redirect } from "next/navigation";
 import AddTaskModal from "@/components/dashboard/AddTaskModal";
 import EditTaskModal from "@/components/dashboard/EditTaskModel";
 import { deleteTask, toggleTaskStatus } from "@/actions/tasks";
+import Link from "next/link";
 
 export default async function TasksPage() {
   const cookieStore = await cookies();
@@ -13,7 +14,7 @@ export default async function TasksPage() {
     {
       cookies: {
         getAll() { return cookieStore.getAll(); },
-        setAll() {},
+        setAll() { },
       },
     }
   );
@@ -58,7 +59,11 @@ export default async function TasksPage() {
                       </button>
                     </form>
                   </td>
-                  <td className="p-4">{task.title}</td>
+                  <td className="p-4">
+                    <Link href={`/dashboard/tasks/${task.id}`} className="text-purple-600 hover:underline font-medium">
+                      {task.title}
+                    </Link>
+                  </td>
                   <td className="p-4 text-gray-600">{task.projects?.name || "-"}</td>
                   <td className="p-4 flex gap-2">
                     <EditTaskModal task={task} />

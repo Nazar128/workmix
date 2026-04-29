@@ -11,8 +11,12 @@ export default function AddProjectModal({
   const [isOpen, setIsOpen] = useState(false);
 
   async function action(formData: FormData) {
-    await createProject(formData);
-    setIsOpen(false);
+    try {
+      await createProject(formData);
+      setIsOpen(false);
+    } catch (error) {
+      alert("Hata: " + (error as Error).message);
+    }
   }
 
   if (!isOpen)
@@ -29,7 +33,7 @@ export default function AddProjectModal({
     <div className="fixed inset-0 bg-gray-900/50 flex items-center justify-center z-50 p-4">
       <div className="bg-white p-6 rounded-lg w-full max-w-md border border-gray-300 shadow-xl">
         <h2 className="text-xl text-purple-800 font-bold mb-4 border-b pb-2">
-          Yeni Proje Oluştur 
+          Yeni Proje Oluştur
         </h2>
         <form action={action} className="space-y-4">
           <div>
