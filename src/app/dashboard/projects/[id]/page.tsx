@@ -23,13 +23,13 @@ export default async function ProjectDetailPage({ params }: { params: Promise<{ 
     supabase.from("project_members").select("project_role, users(name, email)").eq("project_id", id),
   ]);
 
-  if (!project) redirect("/projects");
+  if (!project) redirect("/dashboard/projects");
 
   const done = tasks?.filter((t) => t.status === "done").length ?? 0;
 
   return (
     <div className="p-6">
-      <Link href="/projects" className="text-sm text-gray-500 hover:underline">← Projeler</Link>
+      <Link href="/dashboard/projects" className="text-sm text-gray-500 hover:underline">← Projeler</Link>
 
       <h1 className="text-2xl font-bold text-purple-700 mt-4 mb-4">{project.name}</h1>
       <div className="border border-gray-300 rounded-lg overflow-hidden mb-6">

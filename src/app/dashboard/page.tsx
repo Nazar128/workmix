@@ -2,6 +2,7 @@
 import { Folder, Users, CheckCircle2 } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
 import { StatsCard } from "@/components/dashboard/Statcards";
+import ChatTest from "@/components/chat/Chat";
 
 export default async function DashboardPage() {
   const supabase = await createClient();
@@ -17,6 +18,7 @@ export default async function DashboardPage() {
   return (
     <div className="p-6">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+        <ChatTest />
         <StatsCard
           title="Toplam Proje"
           value={projectCount ?? 0}

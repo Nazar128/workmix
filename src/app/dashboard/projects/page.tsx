@@ -6,35 +6,29 @@ import { cookies } from 'next/headers';
 import { unstable_noStore as noStore } from 'next/cache';
 import Link from 'next/link';
 import { redirect } from 'next/navigation';
-import React from 'react';
+import { createClient } from "@/lib/supabase/server";
 
 export default async function ProjectsPage() {
   noStore();
   const cookieStore = await cookies();
-  const supabase = createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-    {
-      cookies: {
-        getAll() { return cookieStore.getAll(); },
-        setAll() {},
-      },
-    }
-  );
+ const supabase = await createClient();;
 
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) redirect("/login");
 
   const [projectsRes, organizationRes] = await Promise.all([
-    supabase
-      .from("projects")
-      .select("*, organizations(name)")
-      .eq("created_by", user.id),
+
+    supabase.from("projects").select("*, organizations!org_id(name)").eq("created_by", user.id),
+
     supabase
       .from("organizations")
       .select("id, name")
       .eq("status", "active"),
   ]);
+
+  console.log("projects error:", projectsRes.error);
+console.log("projects data:", projectsRes.data);
+console.log("user id:", user.id);
 
   return (
     <div className="p-6">

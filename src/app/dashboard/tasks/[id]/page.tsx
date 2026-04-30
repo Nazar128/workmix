@@ -2,18 +2,19 @@ import { createServerClient } from "@supabase/ssr";
 import { cookies } from "next/headers";
 import { redirect, notFound } from "next/navigation";
 import Link from "next/link";
+import createServer from "next/dist/server/next";
 
 export default async function TaskDetailPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   const cookieStore = await cookies();
   
-  const supabase = createServerClient(
+  const supabase = await createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
     {
       cookies: {
         getAll() { return cookieStore.getAll(); },
-        setAll() {},
+        setAll() { },
       },
     }
   );
@@ -33,7 +34,7 @@ export default async function TaskDetailPage({ params }: { params: Promise<{ id:
 
   return (
     <div className="p-6 max-w-3xl mx-auto">
-      <Link href="/tasks" className="text-gray-500 hover:text-purple-600 mb-4 inline-block">
+      <Link href="/dashboard/tasks" className="text-gray-500 hover:text-purple-600 mb-4 inline-block">
         ← Görevlere Geri Dön
       </Link>
       

@@ -27,6 +27,9 @@ export default async function TasksPage() {
     supabase.from("projects").select("id, name").eq("status", "active")
   ]);
 
+  console.log("tasks error:", tasksRes.error);
+console.log("tasks data:", tasksRes.data);
+console.log("user id:", user.id);
   return (
     <div className="p-6">
       <div className="flex justify-between items-center mb-6">

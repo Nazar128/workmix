@@ -14,6 +14,7 @@ export default function AddTaskModal({ projects }: { projects: any[] }) {
       alert("Görev kaydedilirken bir hata oluştu: " + (error as Error).message);
     }
   }
+  
 
   if (!isOpen)
     return (

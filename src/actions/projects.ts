@@ -1,17 +1,11 @@
 "use server";
-import { createServerClient } from "@supabase/ssr";
+import { createClient } from "@/lib/supabase/server";
 import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
 
 async function getSupabaseClient() {
   const cookieStore = await cookies();
-  const supabase = createServerClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-    {
-      cookies: { getAll() { return cookieStore.getAll(); }, setAll() {} },
-    }
-  );
+ const supabase = await createClient();
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) throw new Error("Unauthorized");
   return { supabase, user };
@@ -21,7 +15,7 @@ export async function deleteProject(id: string) {
   const { supabase, user } = await getSupabaseClient();
   const { error } = await supabase.from("projects").delete().eq("id", id).eq("created_by", user.id);
   if (error) throw new Error(error.message);
-  revalidatePath("/projects");
+  revalidatePath("/dashboard/projects");
 }
 
 export async function toggleProjectStatus(id: string, currentStatus: string) {
@@ -33,7 +27,7 @@ export async function toggleProjectStatus(id: string, currentStatus: string) {
     .eq("id", id)
     .eq("created_by", user.id);
   if (error) throw new Error(error.message);
-  revalidatePath("/projects");
+  revalidatePath("/dashboard/projects");
 }
 
 export async function updateProject(id: string, formData: FormData) {
@@ -48,7 +42,7 @@ export async function updateProject(id: string, formData: FormData) {
     .eq("id", id)
     .eq("created_by", user.id);
   if (error) throw new Error(error.message);
-  revalidatePath("/projects");
+  revalidatePath("/dashboard/projects");
 }
 
 export async function createProject(formData: FormData) {
@@ -64,5 +58,5 @@ export async function createProject(formData: FormData) {
     created_by: user.id,
   });
   if (error) throw new Error(error.message);
-  revalidatePath("/projects");
+  revalidatePath("/dashboard/projects");
 }
