@@ -3,6 +3,7 @@
 import { usePathname } from "next/navigation";
 import { User } from "@supabase/supabase-js";
 import { Bell } from "lucide-react";
+import GlobalSearch from "../GlobalSearch";
 
 const pageTitles: Record<string, string> = {
   "/dashboard": "Dashboard",
@@ -26,6 +27,8 @@ export default function Navbar({ user }: NavbarProps) {
       <h1 className="text-lg font-semibold text-gray-800">{title}</h1>
 
       <div className="flex items-center gap-4">
+
+        <GlobalSearch />
         
         <button className="p-2 rounded-lg hover:bg-gray-100 text-gray-500">
           <Bell size={20} />

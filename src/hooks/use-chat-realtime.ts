@@ -8,6 +8,8 @@ export function useChatRealtime(organizationId: string) {
   const supabase = createClient();
 
   useEffect(() => {
+    if (!organizationId) return;
+
     const fetchHistory = async () => {
       const { data, error } = await supabase
         .from("chat_messages")
@@ -17,7 +19,7 @@ export function useChatRealtime(organizationId: string) {
         `)
         .eq("organization_id", organizationId)
         .order("created_at", { ascending: true });
-      
+
       if (!error && data) {
         setMessages(data);
       }
@@ -30,36 +32,55 @@ export function useChatRealtime(organizationId: string) {
       .on(
         "postgres_changes",
         {
-          event: "INSERT",
+          event: "*",
           schema: "public",
-          table: "chat_messages",
-          filter: `organization_id=eq.${organizationId}`,
+          table: "chat_messages"
         },
         async (payload) => {
-          const { data: userData } = await supabase
-            .from("users")
-            .select("name, avatar_url")
-            .eq("id", payload.new.sender_id)
-            .single();
+          if (payload.eventType === "INSERT") {
+            if (payload.new.organization_id !== organizationId) return;
 
-          const newMessage = {
-            ...payload.new,
-            users: userData || { name: "Bilinmeyen Kullanıcı", avatar_url: null }
-          };
+            const { data: userData } = await supabase
+              .from("users")
+              .select("name, avatar_url")
+              .eq("id", payload.new.sender_id)
+              .single();
 
-          setMessages((current) => [...current, newMessage]);
+            setMessages((prev) => {
+              if (prev.some((m) => m.id === payload.new.id)) return prev;
+              return [
+                ...prev,
+                {
+                  ...payload.new,
+                  users: userData ?? { name: "Bilinmeyen", avatar_url: null },
+                },
+              ];
+            });
+          }
+
+          if (payload.eventType === "UPDATE") {
+            if (payload.new.organization_id !== organizationId) return;
+
+            setMessages((prev) =>
+              prev.map((msg) =>
+                msg.id === payload.new.id
+                  ? { ...msg, ...payload.new, users: msg.users }
+                  : msg
+              )
+            );
+          }
+
+          if (payload.eventType === "DELETE") {
+            setMessages((prev) => prev.filter((msg) => msg.id !== payload.old.id));
+          }
         }
       )
-      .subscribe((status) => {
-        if (status === "SUBSCRIBED") {
-          console.log("Realtime bağlantısı başarılı!");
-        }
-      });
+      .subscribe();
 
     return () => {
       supabase.removeChannel(channel);
     };
-  }, [organizationId, supabase]);
+  }, [organizationId]);
 
-  return { messages };
+  return { messages, setMessages };
 }

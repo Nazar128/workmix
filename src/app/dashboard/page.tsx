@@ -3,6 +3,7 @@ import { Folder, Users, CheckCircle2 } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
 import { StatsCard } from "@/components/dashboard/Statcards";
 import ChatTest from "@/components/chat/Chat";
+import GlobalSearch from "@/components/GlobalSearch";
 
 export default async function DashboardPage() {
   const supabase = await createClient();
