@@ -1,8 +1,12 @@
-import { getAllOrganizations } from "@/actions/admin";
-import AdminDashboardClient from "./AdminDashboardClient";
+import Dashboard from '@/components/admin/Dashboard'
 
 
-export default async function AdminPage() {
-    const organizations = await getAllOrganizations();
-    return <AdminDashboardClient orgs={organizations} />
+const page = () => {
+  return (
+    <div className='mx-auto text-center justify-center'>
+        <Dashboard />
+    </div>
+  )
 }
+
+export default page

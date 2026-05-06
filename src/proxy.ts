@@ -1,13 +1,12 @@
 import { createServerClient } from "@supabase/ssr";
 import { NextRequest, NextResponse } from "next/server";
 
-
-const PROTECTED_ROUTES = ["/dashboard", "/projects", "/tasks", "/settings", "/organizations"];
+const PROTECTED_ROUTES = ["/dashboard", "/projects", "/tasks", "/settings", "/organizations", "/admin"];
 const AUTH_ROUTES = ["/login", "/register"];
 
-export async function proxy( request: NextRequest) {
-    const { pathname} = request.nextUrl;
-    let response  = NextResponse.next({
+export async function proxy(request: NextRequest) {
+    const { pathname } = request.nextUrl;
+    let response = NextResponse.next({
         request,
     });
 
@@ -20,28 +19,24 @@ export async function proxy( request: NextRequest) {
                     return request.cookies.getAll();
                 },
                 setAll(cookiesToSet) {
-                    cookiesToSet.forEach(({name, value }) =>
-                    request.cookies.set(name,value));
-                    response= NextResponse.next({request});
-                    cookiesToSet.forEach(({name, value, options}) => 
-                    response.cookies.set(name, value,options));
+                    cookiesToSet.forEach(({ name, value }) =>
+                        request.cookies.set(name, value));
+                    response = NextResponse.next({ request });
+                    cookiesToSet.forEach(({ name, value, options }) =>
+                        response.cookies.set(name, value, options));
                 },
             },
         }
     );
 
-    const {
-        data: { user },
-    } = await supabase.auth.getUser();
-    
+    const { data: { user } } = await supabase.auth.getUser();
 
-    const isProtectedRoute = PROTECTED_ROUTES.some((route) => 
-    pathname.startsWith(route));
+    const isProtectedRoute = PROTECTED_ROUTES.some((route) => pathname.startsWith(route));
     const isAuthRoute = AUTH_ROUTES.some((route) => pathname.startsWith(route));
 
-    if(!user && isProtectedRoute) {
+    if (!user && isProtectedRoute) {
         const loginUrl = new URL("/login", request.url);
-        loginUrl.searchParams.set("redirectTo",pathname);
+        loginUrl.searchParams.set("redirectTo", pathname);
         return NextResponse.redirect(loginUrl);
     }
 
@@ -49,16 +44,30 @@ export async function proxy( request: NextRequest) {
         return NextResponse.redirect(new URL("/dashboard", request.url));
     }
 
-    if ( pathname === "/") {
+    if (user && pathname.startsWith("/admin")) {
+        const { data: userData } = await supabase
+            .from("users")
+            .select("system_role")
+            .eq("id", user.id)
+            .single();
+
+        if (!userData || userData.system_role !== "super_admin") {
+            return NextResponse.redirect(new URL("/dashboard", request.url));
+        }
+    }
+
+    if (pathname === "/") {
         if (user) {
             return NextResponse.redirect(new URL("/dashboard", request.url));
         }
         return NextResponse.redirect(new URL("/login", request.url));
     }
 
+    return response;
 }
+
 export const config = {
-  matcher: [
-    "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
-  ],
+    matcher: [
+        "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
+    ],
 };

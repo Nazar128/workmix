@@ -128,3 +128,47 @@ export async function updateMemberRole(orgId: string, userId: string, role: stri
   if (error) throw new Error(error.message);
   revalidatePath(`/admin/organizations/${orgId}`);
 }
+export async function getAllUsers() {
+  const supabase = await requireSuperAdmin();
+
+  const { data, error } = await supabase
+    .from("users")
+    .select(`
+      id, name, email, phone, avatar_url, system_role, is_active, bio, 
+       department, job_title, last_login_at
+
+    `)
+    .order("created_at", { ascending: false });
+
+  if (error) throw new Error(error.message);
+  return data;
+}
+
+export async function suspendUser(userId: string, suspend: boolean, reason?: string) {
+  const supabase = await requireSuperAdmin();
+
+  const { error: userError } = await supabase.from("users").update({
+    is_active: !suspend,
+    suspended_at: suspend ? new Date().toISOString() : null,
+    suspended_reason: suspend ? (reason ?? "Yönetici kararı") : null,
+  }).eq("id", userId);
+
+  if (userError) {
+    throw new Error(userError.message);
+    throw new Error("Kullanıcı durumu güncellenemedi.");
+  } 
+
+  const { error: memberError } = await supabase
+    .from("org_members")
+    .update({ status: suspend ? "suspended" : "active" })
+    .eq("user_id", userId);
+
+
+  if (memberError) {
+    console.warn("Üyelik durumları güncellenirken hata oluştu:", memberError.message)
+    throw new Error("Üyelik durumu güncellenemedi.");
+  }
+
+  revalidatePath("/admin");
+  revalidatePath(`/admin/users/${userId}`);
+}
