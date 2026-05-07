@@ -6,9 +6,7 @@ const AUTH_ROUTES = ["/login", "/register"];
 
 export async function proxy(request: NextRequest) {
     const { pathname } = request.nextUrl;
-    let response = NextResponse.next({
-        request,
-    });
+    let response = NextResponse.next({ request });
 
     const supabase = createServerClient(
         process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -45,11 +43,15 @@ export async function proxy(request: NextRequest) {
     }
 
     if (user && pathname.startsWith("/admin")) {
-        const { data: userData } = await supabase
+        const { data: userData, error } = await supabase
             .from("users")
             .select("system_role")
             .eq("id", user.id)
             .single();
+
+        console.log("USER ID:", user.id);
+        console.log("USERDATA:", userData);
+        console.log("ERROR:", error);
 
         if (!userData || userData.system_role !== "super_admin") {
             return NextResponse.redirect(new URL("/dashboard", request.url));

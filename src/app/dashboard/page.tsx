@@ -1,9 +1,8 @@
-
 import { Folder, Users, CheckCircle2 } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
 import { StatsCard } from "@/components/dashboard/Statcards";
 import ChatTest from "@/components/chat/Chat";
-import GlobalSearch from "@/components/GlobalSearch";
+import AnnouncementBanner from "@/components/AnnouncementBanner";
 
 export default async function DashboardPage() {
   const supabase = await createClient();
@@ -17,9 +16,11 @@ export default async function DashboardPage() {
   ]);
 
   return (
-    <div className="p-6">
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-        <ChatTest />
+    <div className="flex flex-col gap-6 p-6">
+      
+      <AnnouncementBanner />
+
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <StatsCard
           title="Toplam Proje"
           value={projectCount ?? 0}
@@ -39,6 +40,11 @@ export default async function DashboardPage() {
           description="Bu ay tamamlanan işler"
         />
       </div>
+
+      <div className="w-full">
+        <ChatTest />
+      </div>
+
     </div>
   );
 }

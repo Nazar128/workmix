@@ -1,5 +1,6 @@
 "use server";
 
+import { logAudit } from "@/lib/audit";
 import { createClient } from "@/lib/supabase/server";
 import { revalidatePath } from "next/cache";
 
@@ -89,6 +90,14 @@ export async function suspendOrganization(orgId: string, suspend: boolean, reaso
       .in("id", userIds);
   }
 
+   await logAudit({
+    action: suspend ? "org.suspended" : "org.activated",
+    entity_type: "organization",
+    entity_id: orgId,
+    org_id: orgId,
+    new_value: { reason: reason ?? "Yönetici kararı" },
+  });
+
   revalidatePath("/admin");
   revalidatePath(`/admin/organizations/${orgId}`);
 }
@@ -101,6 +110,15 @@ export async function updateOrgLimits(orgId: string, maxMembers: number, maxProj
     .eq("id", orgId);
 
   if (error) throw new Error(error.message);
+
+  await logAudit({
+    action: "org.limits_updated",
+    entity_type: "organization",
+    entity_id: orgId,
+    org_id: orgId,
+    new_value: { max_members: maxMembers, max_projects: maxProjects },
+  });
+
   revalidatePath("/admin");
   revalidatePath(`/admin/organizations/${orgId}`);
 }
@@ -169,6 +187,31 @@ export async function suspendUser(userId: string, suspend: boolean, reason?: str
     throw new Error("Üyelik durumu güncellenemedi.");
   }
 
+   await logAudit({
+    action: suspend ? "user.suspended" : "user.activated",
+    entity_type: "user",
+    entity_id: userId,
+    new_value: { reason: reason ?? "Yönetici kararı" },
+  });
+
   revalidatePath("/admin");
   revalidatePath(`/admin/users/${userId}`);
+}
+
+export async function getAuditLogs(entityType?: string, limit = 10) {
+  const supabase = await requireSuperAdmin();
+
+  let query = supabase
+    .from("audit_logs")
+    .select("*, users(name, email)")
+    .order("created_at", { ascending: false })
+    .limit(limit);
+
+  if (entityType) {
+    query = query.eq("entity_type", entityType);
+  }
+
+  const { data, error } = await query;
+  if (error) throw new Error(error.message);
+  return data ?? [];
 }

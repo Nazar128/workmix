@@ -1,7 +1,8 @@
 "use client";
 
 import { suspendUser } from '@/actions/admin';
-import { useTransition } from 'react';
+import { useTransition, useState } from 'react';
+import UserDetailModal from '@/components/admin/UserDetailModal';
 
 interface User {
   id: string;
@@ -13,10 +14,17 @@ interface User {
   is_active: boolean;
   created_at: string;
   last_login_at: string | null;
+  bio?: string;
+  job_title?: string;
+  department?: string;
+  organization_id?: string;
+  email_verified?: boolean;
+  last_sign_in_at?: string;
 }
 
 export default function AdminUsersClient({ users }: { users: User[] }) {
   const [isPending, startTransition] = useTransition();
+  const [selectedUser, setSelectedUser] = useState<User | null>(null);
 
   const handleSuspend = (user: User) => {
     const actionText = user.is_active ? "askıya almak" : "aktif etmek";
@@ -79,7 +87,13 @@ export default function AdminUsersClient({ users }: { users: User[] }) {
                 <td className="px-6 py-4 text-gray-400">
                   {user.created_at ? new Date(user.created_at).toLocaleDateString('tr-TR') : '-'}
                 </td>
-                <td className="px-6 py-4 text-right">
+                <td className="px-6 py-4 text-right flex justify-end gap-2">
+                  <button
+                    onClick={() => setSelectedUser(user)}
+                    className="px-4 py-2 bg-blue-500/10 text-blue-500 rounded-lg font-bold text-xs hover:bg-blue-600 hover:text-white transition-all"
+                  >
+                    DETAY
+                  </button>
                   <button
                     onClick={() => handleSuspend(user)}
                     disabled={isPending}
@@ -97,6 +111,13 @@ export default function AdminUsersClient({ users }: { users: User[] }) {
           </tbody>
         </table>
       </div>
+
+      {selectedUser && (
+        <UserDetailModal 
+          user={selectedUser} 
+          onClose={() => setSelectedUser(null)} 
+        />
+      )}
     </div>
   );
 }
