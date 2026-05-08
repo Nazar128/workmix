@@ -8,6 +8,7 @@ const menuItems = [
     {label: "Tasks", href: "/dashboard/tasks", icon: CheckSquare},
     {label: "Projects", href: "/dashboard/projects", icon: FolderOpen},
     {label: "Organizations", href: "/dashboard/organizations", icon: Building2},
+    {label: "Support", href: "/dashboard/support", icon: Building2},
     {label: "Settings", href: "/dashboard/settings", icon: Settings},
 ]
 
