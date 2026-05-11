@@ -1,6 +1,6 @@
 "use client";
 
-import { Bell, Building2, LayoutDashboard, LogOut, Mail, Shield, Users } from "lucide-react";
+import { Bell, Building2, LayoutDashboard, LogOut, Mail, Settings2, Shield, Users } from "lucide-react";
 import { usePathname } from "next/navigation";
 import Link from "next/link"; 
 
@@ -9,7 +9,8 @@ const navItems = [
   { href: "/admin/organizations", label: "Organizasyonlar", icon: Building2 },
   { href: "/admin/users", label: "Kullanıcılar", icon: Users },
   { href: "/admin/announcements", label: "Duyurular", icon: Bell },
-  { href: "/admin/support", label: "Destek Talepleri", icon: Mail }
+  { href: "/admin/support", label: "Destek Talepleri", icon: Mail },
+  { href: "/admin/settings", label: "Ayarlar", icon: Settings2}
 ];
 
 export default function AdminNavbar() {
