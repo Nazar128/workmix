@@ -29,26 +29,36 @@ export async function toggleProjectStatus(id: string, currentStatus: string) {
   if (error) throw new Error(error.message);
   revalidatePath("/dashboard/projects");
 }
-
 export async function updateProject(id: string, formData: FormData) {
   const { supabase, user } = await getSupabaseClient();
+
+  const rawOrgId = formData.get("org_id") as string | null;
+  const org_id = rawOrgId === "" ? null : rawOrgId;
+
   const { error } = await supabase
     .from("projects")
     .update({
       name: formData.get("name") as string,
       description: formData.get("description") as string,
       visibility: (formData.get("visibility") as string) ?? "private",
+      status: (formData.get("status") as string) ?? "active",
+      org_id: org_id, 
     })
     .eq("id", id)
     .eq("created_by", user.id);
+
   if (error) throw new Error(error.message);
   revalidatePath("/dashboard/projects");
 }
 
 export async function createProject(formData: FormData) {
   const { supabase, user } = await getSupabaseClient();
+
+  const rawOrgId = formData.get("org_id") as string;
+  const org_id = rawOrgId === "" ? null : rawOrgId;
+
   const { error } = await supabase.from("projects").insert({
-    org_id: formData.get("org_id") as string,
+    org_id: org_id,
     name: formData.get("name") as string,
     description: formData.get("description") as string,
     status: "active",
@@ -57,6 +67,7 @@ export async function createProject(formData: FormData) {
     end_date: formData.get("end_date") || null,
     created_by: user.id,
   });
+
   if (error) throw new Error(error.message);
   revalidatePath("/dashboard/projects");
 }

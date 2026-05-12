@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { createProject } from "@/actions/projects";
+import { Plus, X } from "lucide-react";
 
 export default function AddProjectModal({
   organizations,
@@ -23,26 +24,51 @@ export default function AddProjectModal({
     return (
       <button
         onClick={() => setIsOpen(true)}
-        className="bg-purple-900 text-white p-4 rounded-xl"
+        className="flex items-center gap-2 bg-purple-700 hover:bg-purple-800 text-white px-5 py-2.5 rounded-xl transition-all shadow-lg font-medium"
       >
-        Yeni Proje Ekle
+        <Plus className="w-4 h-4" />
+        Yeni Proje Başlat
       </button>
     );
 
   return (
-    <div className="fixed inset-0 bg-gray-900/50 flex items-center justify-center z-50 p-4">
-      <div className="bg-white p-6 rounded-lg w-full max-w-md border border-gray-300 shadow-xl">
-        <h2 className="text-xl text-purple-800 font-bold mb-4 border-b pb-2">
-          Yeni Proje Oluştur
-        </h2>
-        <form action={action} className="space-y-4">
+    <div className="fixed inset-0 bg-gray-900/60 backdrop-blur-sm flex items-center justify-center p-4">
+      <div className="bg-white rounded-2xl w-full max-w-md shadow-2xl overflow-hidden border border-gray-100">
+        <div className="bg-purple-50 p-6 flex justify-between items-center border-b border-purple-100">
+          <h2 className="text-xl text-purple-900 font-bold">Yeni Proje</h2>
+          <button onClick={() => setIsOpen(false)} className="text-purple-400 hover:text-purple-600">
+            <X className="w-6 h-6" />
+          </button>
+        </div>
+
+        <form action={action} className="p-6 space-y-5">
           <div>
-            <label className="block text-sm font-bold text-gray-700">Proje Adı</label>
-            <input name="name" className="w-full border border-gray-300 p-2 rounded mt-1" required />
+            <label className="block text-sm font-semibold text-gray-700 mb-1">Proje Adı</label>
+            <input
+              name="name"
+              placeholder="Proje adını girin..."
+              className="w-full border border-gray-200 p-3 rounded-xl focus:ring-2 focus:ring-purple-500 outline-none"
+              required
+            />
           </div>
+
           <div>
-            <label className="block text-sm font-bold text-gray-700">Organizasyon</label>
-            <select name="org_id" className="w-full border border-gray-300 p-2 rounded mt-1" required>
+            <label className="block text-sm font-semibold text-gray-700 mb-1">Açıklama</label>
+            <textarea
+              name="description"
+              placeholder="Proje hakkında kısa bir bilgi..."
+              className="w-full border border-gray-200 p-3 rounded-xl focus:ring-2 focus:ring-purple-500 outline-none"
+              rows={3}
+            />
+          </div>
+
+          <div>
+            <label className="block text-sm font-semibold text-gray-700 mb-1">Çalışma Alanı</label>
+            <select
+              name="org_id"
+              className="w-full border border-gray-200 p-3 rounded-xl focus:ring-2 focus:ring-purple-500 outline-none bg-white text-gray-700"
+            >
+              <option value="">Bireysel Çalışma Alanı</option>
               {organizations.map((org) => (
                 <option key={org.id} value={org.id}>
                   {org.name}
@@ -50,23 +76,27 @@ export default function AddProjectModal({
               ))}
             </select>
           </div>
-          <div>
-            <label className="block text-sm font-bold text-gray-700">Başlangıç Tarihi</label>
-            <input type="date" name="start_date" className="w-full border border-gray-300 p-2 rounded mt-1" />
+
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <label className="block text-sm font-semibold text-gray-700 mb-1">Başlangıç</label>
+              <input type="date" name="start_date" className="w-full border border-gray-200 p-3 rounded-xl focus:ring-2 focus:ring-purple-500 text-sm" />
+            </div>
+            <div>
+              <label className="block text-sm font-semibold text-gray-700 mb-1">Bitiş</label>
+              <input type="date" name="end_date" className="w-full border border-gray-200 p-3 rounded-xl focus:ring-2 focus:ring-purple-500 text-sm" />
+            </div>
           </div>
-          <div>
-            <label className="block text-sm font-bold text-gray-700">Bitiş Tarihi</label>
-            <input type="date" name="end_date" className="w-full border border-gray-300 p-2 rounded mt-1" />
-          </div>
-          <div className="flex justify-end gap-2 pt-4">
+
+          <div className="flex gap-3 pt-4">
             <button
               type="button"
               onClick={() => setIsOpen(false)}
-              className="px-4 py-2 bg-gray-100 rounded border text-red-700"
+              className="flex-1 px-4 py-3 bg-gray-50 text-gray-600 rounded-xl font-medium hover:bg-gray-100 transition-all"
             >
               İptal
             </button>
-            <button type="submit" className="bg-blue-600 text-white px-4 py-2 rounded">
+            <button type="submit" className="flex-1 bg-purple-700 text-white px-4 py-3 rounded-xl font-bold hover:bg-purple-800 transition-all">
               Kaydet
             </button>
           </div>
