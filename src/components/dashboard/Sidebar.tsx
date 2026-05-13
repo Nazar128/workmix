@@ -1,14 +1,16 @@
 "use client"
-import { Building2, CheckSquare, FolderOpen, Icon, LayoutDashboard, Settings } from "lucide-react";
+import { Building2, CheckSquare, FolderOpen, Icon, LayoutDashboard, Road, Settings, Vault } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const menuItems = [
     {label: "Dashboard", href: "/dashboard", icon: LayoutDashboard},
-    {label: "Tasks", href: "/dashboard/tasks", icon: CheckSquare},
+    {label: "Görevler", href: "/dashboard/tasks", icon: CheckSquare},
     {label: "Projects", href: "/dashboard/projects", icon: FolderOpen},
     {label: "Organizations", href: "/dashboard/organizations", icon: Building2},
     {label: "Support", href: "/dashboard/support", icon: Building2},
+    {label: "İş Çizelgesi", href: "/dashboard/roadmap", icon: Road},
+    {label: "Kaynaklar", href: "/dashboard/vault", icon: Vault},
     {label: "Settings", href: "/dashboard/settings", icon: Settings},
 ]
 
