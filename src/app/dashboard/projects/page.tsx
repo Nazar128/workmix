@@ -16,17 +16,12 @@ export default async function ProjectsPage({
   let query = supabase
     .from("projects")
     .select("*, organizations!org_id(name)")
-    .eq("created_by", user.id);
+    .eq("created_by", user.id)
+    .order('created_at', { ascending: false });
 
-  if (resolvedSearchParams.q && typeof resolvedSearchParams.q === "string") {
-    query = query.ilike("name", `%${resolvedSearchParams.q}%`);
-  }
-  if (resolvedSearchParams.status && typeof resolvedSearchParams.status === "string") {
-    query = query.eq("status", resolvedSearchParams.status);
-  }
-  if (resolvedSearchParams.visibility && typeof resolvedSearchParams.visibility === "string") {
-    query = query.eq("visibility", resolvedSearchParams.visibility);
-  }
+  if (typeof resolvedSearchParams.q === "string") query = query.ilike("name", `%${resolvedSearchParams.q}%`);
+  if (typeof resolvedSearchParams.status === "string") query = query.eq("status", resolvedSearchParams.status);
+  if (typeof resolvedSearchParams.visibility === "string") query = query.eq("visibility", resolvedSearchParams.visibility);
 
   const [projectsRes, organizationRes] = await Promise.all([
     query,
