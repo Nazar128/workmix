@@ -4,6 +4,7 @@ import { useState, createContext, useContext } from "react";
 import Navbar from "@/components/dashboard/Navbar";
 import { Sidebar } from "@/components/dashboard/Sidebar";
 import NoteDrawer from "@/components/dashboard/NoteDrawer";
+import SideBar2 from "./SideBar2";
 
 const NoteDrawerContext = createContext<{
   openNotes: (projectId?: string, projectName?: string) => void;
@@ -14,6 +15,7 @@ export const useNoteDrawer = () => {
   if (!context) throw new Error("useNoteDrawer must be used within a DashboardShell");
   return context;
 };
+
 
 export default function DashboardShell({
   children,
@@ -32,8 +34,11 @@ export default function DashboardShell({
 
   return (
     <NoteDrawerContext.Provider value={{ openNotes }}>
-      <div className="flex h-screen bg-gray-50">
+      <div className="flex h-screen bg-gray-50 overflow-hidden">
+
         <Sidebar />
+        
+
         <div className="flex flex-col flex-1 overflow-hidden">
           <Navbar user={user} onOpenNotes={() => openNotes()} />
           <main className="flex-1 overflow-y-auto p-6">
@@ -41,12 +46,15 @@ export default function DashboardShell({
           </main>
         </div>
 
+
         <NoteDrawer 
           isOpen={isOpen} 
           onClose={() => setIsOpen(false)} 
           projectId={activeProject.id}
           projectName={activeProject.name}
         />
+
+        <SideBar2 />
       </div>
     </NoteDrawerContext.Provider>
   );

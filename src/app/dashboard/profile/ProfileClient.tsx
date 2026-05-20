@@ -3,6 +3,7 @@
 import { changePassword, updateAvatarUrl, updateProfile } from "@/actions/profile";
 import AvatarUpload from "@/components/dashboard/AvatarUpload";
 import { useState, useTransition } from "react";
+import { User, Building2, ShieldCheck, Save, KeyRound, CheckCircle2, AlertCircle } from "lucide-react";
 
 type Profile = { 
   id: string; 
@@ -21,38 +22,59 @@ type Profile = {
 };
 
 function Label({ children }: { children: React.ReactNode }) {
-  return <label className="block text-xs font-medium text-gray-600 mb-1.5 tracking-wider">{children}</label>;
+  return <label className="block text-xs font-semibold text-purple-900/60 uppercase tracking-wider mb-2">{children}</label>;
 }
 
 function Input({ value, onChange, placeholder, type = "text", disabled = false }: { value: string; onChange?: (v: string) => void; placeholder?: string; type?: string; disabled?: boolean }) {
-  return <input type={type} value={value} onChange={(e) => onChange?.(e.target.value)} placeholder={placeholder} disabled={disabled} className="w-full bg-white/5 border-2 border-purple-400 px-4 py-2.5 text-purple-800 placeholder-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 rounded-xl" />;
+  return (
+    <input 
+      type={type} 
+      value={value} 
+      onChange={(e) => onChange?.(e.target.value)} 
+      placeholder={placeholder} 
+      disabled={disabled} 
+      className="w-full bg-white/70 backdrop-blur-sm border border-slate-200/80 px-4 py-2.5 text-slate-800 placeholder-slate-400 focus:outline-none focus:border-purple-500 focus:ring-4 focus:ring-purple-500/10 rounded-xl transition-all text-sm shadow-sm disabled:opacity-50" 
+    />
+  );
 }
 
 function Textarea({ value, onChange, placeholder }: { value: string; onChange: (v: string) => void; placeholder?: string }) {
-  return <textarea value={value} onChange={(e) => onChange(e.target.value)} placeholder={placeholder} rows={3} className="w-full bg-white/5 border-2 border-purple-400 rounded-xl px-4 py-2.5 text-sm text-purple-800 focus:outline-none focus:ring-2 focus:ring-blue-500" />;
+  return (
+    <textarea 
+      value={value} 
+      onChange={(e) => onChange(e.target.value)} 
+      placeholder={placeholder} 
+      rows={3} 
+      className="w-full bg-white/70 backdrop-blur-sm border border-slate-200/80 rounded-xl px-4 py-2.5 text-sm text-slate-800 placeholder-slate-400 focus:outline-none focus:border-purple-500 focus:ring-4 focus:ring-purple-500/10 transition-all shadow-sm" 
+    />
+  );
 }
 
 function Badge({ label }: { label: string }) {
-  return <span className="inline-flex items-center rounded-full bg-gray-800 px-2.5 py-0.5 text-xs font-medium text-gray-400 border border-white/5">{label}</span>;
+  return (
+    <span className="inline-flex items-center rounded-lg bg-purple-50 px-2.5 py-1 text-xs font-semibold text-purple-700 border border-purple-100 uppercase tracking-wider shadow-sm">
+      {label}
+    </span>
+  );
 }
 
 function InfoRow({ label, value }: { label: string; value: string }) {
   return (
-    <div className="flex items-center justify-between py-2  last:border-0">
-      <span className="text-sm text-gray-400">{label}</span>
-      <span className="text-sm text-purple-800">{value}</span>
+    <div className="flex items-center justify-between py-3 border-b border-slate-100 last:border-0 px-1">
+      <span className="text-xs font-medium text-slate-500">{label}</span>
+      <span className="text-sm font-semibold text-slate-700">{value}</span>
     </div>
   );
 }
 
 function SectionCard({ title, icon, children }: { title: string; icon?: React.ReactNode; children: React.ReactNode }) {
   return (
-    <div className="bg-white/[0.03] border border-white/[0.07] rounded-2xl p-6 space-y-4">
-      <div className="flex items-center gap-2 mb-2">
-        {icon && <span className="text-blue-500">{icon}</span>}
-        <h2 className="text-purple-800 font-medium">{title}</h2>
+    <div className="border border-white/20 bg-white/60 backdrop-blur-md rounded-2xl p-6 shadow-[0_8px_30px_rgb(0,0,0,0.02)] space-y-5">
+      <div className="flex items-center gap-2.5 pb-3 border-b border-slate-100">
+        {icon && <span className="text-purple-600">{icon}</span>}
+        <h2 className="text-base font-bold text-slate-800 tracking-tight">{title}</h2>
       </div>
-      {children}
+      <div className="space-y-4">{children}</div>
     </div>
   );
 }
@@ -79,9 +101,9 @@ export default function ProfileClient({ initialProfile }: { initialProfile: Prof
     startProfile(async () => {
       try {
         await updateProfile({ name, phone, bio, job_title: jobTitle, department });
-        setProfileMsg({ ok: true, text: "Profil güncellendi" });
+        setProfileMsg({ ok: true, text: "Profil başarıyla güncellendi." });
       } catch (error) {
-        setProfileMsg({ ok: false, text: "Güncelleme başarısız" });
+        setProfileMsg({ ok: false, text: "Güncelleme sırasında hata oluştu." });
       }
       setTimeout(() => setProfileMsg(null), 3000);
     });
@@ -89,40 +111,50 @@ export default function ProfileClient({ initialProfile }: { initialProfile: Prof
 
   const handlePasswordSave = () => {
     if (newPassword !== confirmPassword) {
-      setPasswordMsg({ ok: false, text: "Şifreler eşleşmiyor" });
+      setPasswordMsg({ ok: false, text: "Şifreler birbiriyle eşleşmiyor." });
       return;
     }
     startPassword(async () => {
       try {
         await changePassword(newPassword);
-        setPasswordMsg({ ok: true, text: "Şifre değiştirildi" });
+        setPasswordMsg({ ok: true, text: "Şifreniz başarıyla değiştirildi." });
         setNewPassword("");
         setConfirmPassword("");
       } catch (error) {
-        setPasswordMsg({ ok: false, text: "Hata oluştu" });
+        setPasswordMsg({ ok: false, text: "Şifre güncellenirken hata oluştu." });
       }
       setTimeout(() => setPasswordMsg(null), 3000);
     });
   };
 
   return (
-    <div className="max-w-4xl mx-auto px-4 py-8 space-y-8">
-      <div>
-        <h1 className="text-purple-800 text-3xl font-bold">Profilim</h1>
-        <p className="text-gray-500 mt-1">Kişisel bilgilerinizi buradan yönetebilirsiniz.</p>
+    <div className="min-h-full bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-50/40 via-slate-50 to-indigo-50/20 max-w-4xl mx-auto px-6 py-8 space-y-8">
+      
+      <div className="flex flex-col gap-1 border-b border-slate-100 pb-5">
+        <h1 className="text-2xl font-bold text-slate-800 tracking-tight">Profil Ayarları</h1>
+        <p className="text-sm text-gray-500">Kişisel bilgilerinizi, kurum verilerinizi ve hesap güvenliğinizi yapılandırın.</p>
       </div>
 
-      <div className="bg-gradient-to-r from-blue-600/10 via-violet-600/10 to-transparent border border-white/10 rounded-3xl p-8 flex flex-col md:flex-row items-center gap-8">
-        <AvatarUpload 
-          currentUrl={profile.avatar_url} 
-          userId={profile.id} 
-          userName={profile.name} 
-          onUploadComplete={async (url) => { await updateAvatarUrl(url); }} 
-        />
-        <div className="text-center md:text-left space-y-2">
-          <h2 className="text-purple-800 text-2xl font-semibold">{profile.name}</h2>
-          <p className="text-gray-500 max-w-md">{profile.bio || "Henüz bir biyografi eklenmemiş."}</p>
-          <div className="flex flex-wrap gap-2 pt-2">
+      <div className="relative overflow-hidden rounded-2xl border border-white/20 bg-gradient-to-br from-purple-900 via-purple-800 to-indigo-950 p-8 shadow-xl text-white flex flex-col md:flex-row items-center gap-8">
+        <div className="absolute -right-10 -top-10 h-40 w-40 rounded-full bg-white/5 blur-2xl" />
+        <div className="absolute -left-10 -bottom-10 h-40 w-40 rounded-full bg-purple-500/10 blur-2xl" />
+        
+        <div className="relative z-10 shrink-0 ring-4 ring-white/10 rounded-full p-1 bg-white/5 backdrop-blur-md">
+          <AvatarUpload 
+            currentUrl={profile.avatar_url} 
+            userId={profile.id} 
+            userName={profile.name} 
+            onUploadComplete={async (url) => { await updateAvatarUrl(url); }} 
+          />
+        </div>
+        
+        <div className="text-center md:text-left space-y-3 relative z-10">
+          <div>
+            <h2 className="text-2xl font-bold tracking-tight">{profile.name}</h2>
+            <p className="text-sm text-purple-200/60 mt-0.5">{profile.job_title || "Unvan Belirtilmemiş"} • {profile.department || "Departman Belirtilmemiş"}</p>
+          </div>
+          <p className="text-sm text-purple-100/80 max-w-md leading-relaxed">{profile.bio || "Henüz bir biyografi eklenmemiş."}</p>
+          <div className="flex flex-wrap justify-center md:justify-start gap-2 pt-1">
             {profile.system_role && <Badge label={profile.system_role} />}
             {profile.is_active && <Badge label="Aktif Hesap" />}
           </div>
@@ -130,78 +162,89 @@ export default function ProfileClient({ initialProfile }: { initialProfile: Prof
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <SectionCard title="Kişisel Bilgiler">
+        <SectionCard title="Kişisel Bilgiler" icon={<User size={18} />}>
           <div className="space-y-4">
-            <div >
+            <div>
               <Label>Ad Soyad</Label>
-              <Input value={name} onChange={setName}  />
+              <Input value={name} onChange={setName} placeholder="Adınızı ve soyadınızı girin" />
             </div>
             <div>
               <Label>Telefon</Label>
-              <Input value={phone} onChange={setPhone} />
+              <Input value={phone} onChange={setPhone} placeholder="Telefon numaranızı girin" />
             </div>
             <div>
               <Label>Biyografi</Label>
-              <Textarea value={bio} onChange={setBio} />
+              <Textarea value={bio} onChange={setBio} placeholder="Kendinizden kısaca bahsedin..." />
             </div>
           </div>
         </SectionCard>
 
-        <SectionCard title="Kurum Bilgileri">
-          <div className="space-y-4">
-            <div>
-              <Label>Ünvan</Label>
-              <Input value={jobTitle} onChange={setJobTitle} />
+        <SectionCard title="Kurum Bilgileri" icon={<Building2 size={18} />}>
+          <div className="space-y-4 flex flex-col h-full justify-between">
+            <div className="space-y-4">
+              <div>
+                <Label>Ünvan</Label>
+                <Input value={jobTitle} onChange={setJobTitle} placeholder="Örn: Kıdemli Yazılım Geliştirici" />
+              </div>
+              <div>
+                <Label>Departman</Label>
+                <Input value={department} onChange={setDepartment} placeholder="Örn: Ar-Ge Müdürlüğü" />
+              </div>
             </div>
-            <div>
-              <Label>Departman</Label>
-              <Input value={department} onChange={setDepartment} />
-            </div>
-            <div className="pt-4 border-2 border-purple-400 space-y-1 ">
-               <InfoRow label="Email" value={profile.email}  />
-               <InfoRow label="Üyelik" value={new Date(profile.created_at).toLocaleDateString("tr-TR")} />
+            <div className="bg-white/50 backdrop-blur-sm rounded-xl p-4 border border-slate-100 shadow-inner mt-4 space-y-1">
+              <InfoRow label="E-Posta Adresi" value={profile.email} />
+              <InfoRow label="Kayıt Tarihi" value={new Date(profile.created_at).toLocaleDateString("tr-TR", { day: 'numeric', month: 'long', year: 'numeric' })} />
             </div>
           </div>
         </SectionCard>
       </div>
 
-      <div className="flex items-center gap-4">
+      <div className="flex flex-wrap items-center gap-4 border-b border-slate-100 pb-6">
         <button 
           onClick={handleProfileSave} 
           disabled={isPendingProfile} 
-          className="px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-medium transition-colors disabled:opacity-50 flex items-center gap-2"
+          className="px-6 py-3 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white rounded-xl font-medium transition-all shadow-md shadow-purple-600/10 disabled:opacity-50 flex items-center gap-2 cursor-pointer"
         >
-          {isPendingProfile ? "Kaydediliyor..." : "Değişiklikleri Kaydet"}
+          <Save size={16} />
+          <span>{isPendingProfile ? "Değişiklikler Kaydediliyor..." : "Değişiklikleri Kaydet"}</span>
         </button>
         {profileMsg && (
-          <span className={profileMsg.ok ? "text-green-400" : "text-red-400"}>{profileMsg.text}</span>
+          <div className={`flex items-center gap-1.5 text-sm font-medium ${profileMsg.ok ? "text-emerald-600" : "text-red-600"}`}>
+            {profileMsg.ok ? <CheckCircle2 size={16} /> : <AlertCircle size={16} />}
+            <span>{profileMsg.text}</span>
+          </div>
         )}
       </div>
 
-      <SectionCard title="Güvenlik ve Şifre">
+      <SectionCard title="Güvenlik ve Şifre Güncelleme" icon={<ShieldCheck size={18} />}>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <Label>Yeni Şifre</Label>
             <Input type="password" value={newPassword} onChange={setNewPassword} placeholder="••••••••" />
           </div>
           <div>
-            <Label>Şifre Tekrar</Label>
+            <Label>Yeni Şifre Tekrar</Label>
             <Input type="password" value={confirmPassword} onChange={setConfirmPassword} placeholder="••••••••" />
           </div>
         </div>
-        <div className="flex items-center gap-4 pt-2">
+        <div className="flex flex-wrap items-center gap-4 pt-2">
           <button 
             onClick={handlePasswordSave} 
             disabled={isPendingPassword || !newPassword}
-            className="px-6 py-2 bg-white/10 hover:bg-white/20 text-white rounded-lg transition-colors disabled:opacity-30"
+            className="px-5 py-2.5 bg-slate-800 hover:bg-slate-700 text-white rounded-xl text-sm font-medium transition-colors disabled:opacity-30 flex items-center gap-2 cursor-pointer shadow-sm"
           >
-            {isPendingPassword ? "Güncelleniyor..." : "Şifreyi Güncelle"}
+            <KeyRound size={15} />
+            <span>{isPendingPassword ? "Şifre Güncelleniyor..." : "Şifreyi Güncelle"}</span>
           </button>
           {passwordMsg && (
-            <span className={passwordMsg.ok ? "text-green-400" : "text-red-400"}>{passwordMsg.text}</span>
+            <div className={`flex items-center gap-1.5 text-sm font-medium ${passwordMsg.ok ? "text-emerald-600" : "text-red-600"}`}>
+              {passwordMsg.ok ? <CheckCircle2 size={16} /> : <AlertCircle size={16} />}
+              <span>{passwordMsg.text}</span>
+            </div>
           )}
         </div>
       </SectionCard>
+
     </div>
   );
 }
