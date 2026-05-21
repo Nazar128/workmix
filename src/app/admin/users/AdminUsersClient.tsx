@@ -42,14 +42,14 @@ export default function AdminUsersClient({ users }: { users: User[] }) {
   return (
     <div className="p-6">
       <div className="flex justify-between items-center mb-8">
-        <h1 className='text-2xl text-gray-100 font-bold uppercase tracking-tight'>
-          Kullanıcı Yönetimi ({users?.length ?? 0})
+        <h1 className='text-4xl text-purple-500 font-bold  tracking-tight'>
+          KULLANICI <span className='text-3xl text-slate-800'>YÖNETİMİ </span>({users?.length ?? 0}) 
         </h1>
       </div>
 
-      <div className="bg-gray-900/50 rounded-xl border border-gray-800 overflow-hidden">
+      <div className="backdrop-blur-md rounded-xl  shadow-2xl shadow-purple-400 overflow-hidden">
         <table className='w-full text-sm text-left'>
-          <thead className="bg-gray-800/50 text-gray-400 uppercase text-xs">
+          <thead className="bg-gray-800/50 text-gray-300 border-b-2  uppercase text-xs">
             <tr>
               <th className="px-6 py-4">Kullanıcı</th>
               <th className="px-6 py-4">İletişim</th>
@@ -61,11 +61,11 @@ export default function AdminUsersClient({ users }: { users: User[] }) {
           </thead>
           <tbody className="divide-y divide-gray-800">
             {users.map((user) => (
-              <tr key={user.id} className="hover:bg-gray-800/30 transition-colors">
+              <tr key={user.id} className="hover:bg-blue-200 transition-colors">
                 <td className="px-6 py-4 flex items-center gap-3">
                   <img 
                     src={user.avatar_url || 'https://via.placeholder.com/40'} 
-                    className="w-10 h-10 rounded-full border border-gray-700 object-cover"
+                    className="w-10 h-10 rounded-full border border-gray-500 object-cover"
                   />
                   <span className="font-medium text-gray-200">{user.name}</span>
                 </td>

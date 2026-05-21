@@ -11,8 +11,10 @@ export default async function AdminPage() {
   ]);
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col ">
       <Dashboard />
+      <br />
+      <div className=' h-0.5 bg-purple-300'></div>
       <AdminDashboardClient
         userLogs={userLogs}
         projectLogs={projectLogs}

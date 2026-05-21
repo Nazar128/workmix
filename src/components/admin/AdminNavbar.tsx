@@ -17,13 +17,13 @@ export default function AdminNavbar() {
   const pathname = usePathname();
 
   return (
-    <aside className="fixed left-0 top-0 h-screen w-64 bg-gray-950 border-r-2 border-purple-900 flex flex-col z-50">
+    <aside className="fixed left-0 top-0 h-screen w-64 bg-gradient-to-tl from-purple-700  via-pink-200 to-blue-400 border-r-2 border-purple-900 flex flex-col z-50">
       <div className="p-6">
         <div className="flex items-center gap-2">
           <Shield className="w-6 h-6 text-red-500" />
           <div>
-            <p className="text-white font-bold text-xl tracking-tight">Workmix</p>
-            <p className="text-purple-500 text-xs font-semibold uppercase tracking-wider">Site Admin</p>
+            <p className="text-white font-bold text-2xl tracking-tight">Workmix</p>
+            <p className="text-purple-500 text-md font-semibold uppercase tracking-wider">Site Admin</p>
           </div>
         </div>
       </div>
@@ -37,8 +37,8 @@ export default function AdminNavbar() {
               href={href}
               className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-all ${
                 active
-                  ? "bg-purple-600/20 text-purple-400 border border-purple-900/50"
-                  : "text-gray-400 hover:bg-gray-900 hover:text-gray-200"
+                  ? "bg-purple-600 text-purple-400 border border-purple-900"
+                  : "text-gray-200 hover:bg-purple-800/20 hover:text-gray-100"
               }`}
             >
               <Icon className="w-5 h-5" />

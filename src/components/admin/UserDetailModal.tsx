@@ -25,19 +25,19 @@ interface Props {
 
 export default function UserDetailModal({ user, onClose }: Props) {
   return (
-    <div className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-      <div className="bg-gray-900 border border-gray-800 w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-2xl shadow-2xl">
+    <div className="fixed inset-0  backdrop-blur-sm z-50 flex items-center justify-center p-4">
+      <div className="bg-gradient-to-tl from-purple-700  via-pink-200 to-blue-400 backdrop-blur-md border border-gray-800 w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-2xl shadow-2xl">
         
-        <div className="p-6 border-b border-gray-800 flex justify-between items-center sticky top-0 bg-gray-900 z-10">
+        <div className="p-6 border-b border-gray-800 flex justify-between items-center sticky top-0 bg-gray-900/50 z-10">
           <h2 className="text-xl font-bold text-white">Kullanıcı Detayları</h2>
-          <button onClick={onClose} className="text-gray-400 hover:text-white transition-colors text-2xl">&times;</button>
+          <button onClick={onClose} className="text-gray-400 hover:scale-125 transition-colors text-2xl">&times;</button>
         </div>
 
         <div className="p-6 space-y-6">
           <div className="flex items-center gap-5">
             <img 
               src={user.avatar_url || 'https://via.placeholder.com/80'} 
-              className="w-24 h-24 rounded-full border-2 border-blue-600 object-cover shadow-lg" 
+              className="w-24 h-24 rounded-full border-2 border-blue-300 object-cover shadow-lg" 
             />
             <div>
               <h3 className="text-2xl font-bold text-white">{user.name || 'İsimsiz Kullanıcı'}</h3>
@@ -68,7 +68,7 @@ export default function UserDetailModal({ user, onClose }: Props) {
         <div className="p-6 border-t border-gray-800 flex justify-end bg-gray-900/50">
           <button 
             onClick={onClose}
-            className="bg-gray-800 hover:bg-white hover:text-black text-white px-8 py-2.5 rounded-xl font-bold transition-all duration-200"
+            className="bg-purple-100 hover:bg-white hover:text-black hover:scale-110 text-purple-950 px-8 py-2.5 rounded-xl font-bold transition-all duration-200"
           >
             Kapat
           </button>
