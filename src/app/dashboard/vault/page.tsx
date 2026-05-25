@@ -82,7 +82,7 @@ export default function VaultPage() {
         </div>
         <button
           onClick={() => setIsModalOpen(true)}
-          className="bg-slate-900 text-white px-8 py-4 rounded-2xl font-bold shadow-2xl hover:bg-indigo-600 transition-all duration-300"
+          className="bg-gradient-to-t from-purple-600 via-purple-300 to-purple-500 to-purple-600 text-white px-8 py-4 rounded-2xl font-bold shadow-2xl hover:bg-purple-600 transition-all duration-300"
         >
           + Yeni Kaynak Ekle
         </button>
@@ -100,7 +100,7 @@ export default function VaultPage() {
 
             <div className="flex flex-wrap gap-2 mb-6">
               {item.tags?.length > 0 ? item.tags.map((tag: string) => (
-                <span key={tag} className="text-[9px] bg-slate-100 text-slate-600 px-3 py-1 rounded-full uppercase font-black tracking-widest group-hover:bg-indigo-50 group-hover:text-indigo-600 transition-colors">
+                <span key={tag} className="text-[9px] bg-slate-100 text-slate-600 px-3 py-1 rounded-full uppercase font-black tracking-widest group-hover:bg-indigo-50 group-hover:text-purple-600 transition-colors">
                   {tag}
                 </span>
               )) : (
@@ -108,7 +108,7 @@ export default function VaultPage() {
               )}
             </div>
 
-            <h3 className="text-2xl font-black text-slate-800 mb-4 leading-tight group-hover:text-indigo-600 transition-colors">
+            <h3 className="text-2xl font-black text-slate-800 mb-4 leading-tight group-hover:text-purple-600 transition-colors">
               {item.title}
             </h3>
 
@@ -139,20 +139,20 @@ export default function VaultPage() {
       </div>
 
       {isModalOpen && (
-        <div className="fixed inset-0 bg-slate-900/80 backdrop-blur-xl z-50 flex items-center justify-center p-6">
-          <div className="bg-white w-full max-w-xl max-h-[90vh] overflow-y-auto rounded-[3.5rem] p-10 md:p-14 shadow-2xl animate-in fade-in zoom-in duration-300">
-            <div className="flex justify-between items-center mb-10">
-              <h2 className="text-3xl font-black tracking-tight">Depoya Ekle<span className="text-indigo-600">.</span></h2>
+        <div className="fixed inset-0  backdrop-blur-xl z-50 flex justify-center p-18">
+          <div className="bg-white/90 w-full max-w-xl max-h-[90vh] overflow-y-auto rounded-[3.5rem] p-8 md:p-12 shadow-2xl animate-in fade-in zoom-in duration-300">
+            <div className="flex justify-between items-center mb-6">
+              <h2 className="text-3xl font-black tracking-tight">Depoya Ekle<span className="text-purple-600"> .</span></h2>
               <button onClick={() => setIsModalOpen(false)} className="bg-slate-100 p-3 rounded-2xl text-slate-400 hover:text-red-500 transition-colors">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
               </button>
             </div>
 
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form onSubmit={handleSubmit} className="space-y-4">
               <div className="space-y-2">
                 <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-2">Başlık</label>
                 <input
-                  className="w-full p-5 bg-slate-50 border-2 border-transparent focus:border-indigo-600 focus:bg-white rounded-2xl outline-none font-bold transition-all shadow-inner"
+                  className="w-full p-4 bg-slate-50 border-2 border-transparent focus:border-indigo-600 focus:bg-white rounded-2xl outline-none font-bold transition-all shadow-inner"
                   placeholder="Kaynağın adı nedir?"
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
@@ -163,7 +163,7 @@ export default function VaultPage() {
               <div className="space-y-2">
                 <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-2">URL </label>
                 <input
-                  className="w-full p-5 bg-slate-50 border-2 border-transparent focus:border-indigo-600 focus:bg-white rounded-2xl outline-none font-bold transition-all shadow-inner"
+                  className="w-full p-4 bg-slate-50 border-2 border-transparent focus:border-indigo-600 focus:bg-white rounded-2xl outline-none font-bold transition-all shadow-inner"
                   placeholder="https://..."
                   value={url}
                   onChange={(e) => setUrl(e.target.value)}
@@ -173,7 +173,7 @@ export default function VaultPage() {
               <div className="space-y-2">
                 <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-2">Açıklama / İçerik</label>
                 <textarea
-                  className="w-full p-5 bg-slate-50 border-2 border-transparent focus:border-indigo-600 focus:bg-white rounded-2xl outline-none font-medium h-32 resize-none transition-all shadow-inner"
+                  className="w-full p-4 bg-slate-50 border-2 border-transparent focus:border-indigo-600 focus:bg-white rounded-2xl outline-none font-medium h-32 resize-none transition-all shadow-inner"
                   placeholder="Bu kaynak hakkında neler bilmelisin?"
                   value={content}
                   onChange={(e) => setContent(e.target.value)}
@@ -184,7 +184,7 @@ export default function VaultPage() {
               <div className="space-y-2">
                 <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-2">Etiketler </label>
                 <input
-                  className="w-full p-5 bg-slate-50 border-2 border-transparent focus:border-indigo-600 focus:bg-white rounded-2xl outline-none font-bold transition-all shadow-inner"
+                  className="w-full p-4 bg-slate-50 border-2 border-transparent focus:border-indigo-600 focus:bg-white rounded-2xl outline-none font-bold transition-all shadow-inner"
                   placeholder="nextjs, api, tasarım"
                   value={tags}
                   onChange={(e) => setTags(e.target.value)}
@@ -193,7 +193,7 @@ export default function VaultPage() {
 
               <button 
                 type="submit" 
-                className="w-full py-6 bg-indigo-600 text-white rounded-[2rem] font-black text-lg shadow-xl shadow-indigo-100 hover:bg-indigo-700 hover:-translate-y-1 transition-all mt-4"
+                className="w-full py-5 bg-gradient-to-t from-purple-600 via-purple-300 to-purple-500 to-purple-600 text-white rounded-[2rem] font-black text-lg shadow-xl shadow-indigo-100 hover:bg-purple-700 hover:-translate-y-1 transition-all mt-4"
               >
                 KAYNAĞI DEPOLA
               </button>

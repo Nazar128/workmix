@@ -64,7 +64,7 @@ export default function GlobalSearch() {
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}
                     placeholder="Ara... (Ctrl+K)"
-                    className="w-full bg-white/5 border border-white/10 rounded-lg pl-9 pr-8 py-2 text-sm text-gray-500 outline-none focus:border-blue-500/50 placeholder:text-gray-600 transition-colors"
+                    className=" w-60 border border-[#936fb3] rounded-lg pl-9 pr-8 py-2 text-sm text-gray-100 outline-none focus:border-purple-500 placeholder:text-gray-200 transition-colors"
                 />
                 {query && (
                     <button onClick={clear} className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-300">

@@ -42,24 +42,25 @@ export default function SideBar2() {
   }, []);
 
   return (
-    <div className="h-full flex flex-row-reverse relative z-50 select-none pointer-events-auto">
-      <div className="w-16 h-full bg-white border-l border-gray-200 flex flex-col items-center py-6 justify-between shadow-sm relative z-30 pointer-events-auto">
+    <div className=" h-full bg-purple-950/20 backdrop-blur-[12px] border-l-2  border-white/10  ">
+      <div className="h-full bg-purple-50/40 flex flex-row-reverse relative z-150 select-none pointer-events-auto ">
+      <div className="w-16 h-full   flex flex-col items-center py-6 justify-between relative z-30 pointer-events-auto">
         <div className="flex flex-col gap-6 items-center w-full">
           <button 
             onClick={() => setIsChatOpen(!isChatOpen)}
             className={`p-3 rounded-xl transition-all relative cursor-pointer ${
               isChatOpen 
                 ? 'bg-purple-50 text-purple-600 border border-purple-100' 
-                : 'text-gray-500 hover:bg-gray-50 hover:text-gray-800'
+                : 'text-gray-50 hover:bg-[#be9edc] hover:text-gray-800'
             }`}
           >
             <MessageSquare size={22} />
             <span className="absolute top-2.5 right-2.5 w-2 h-2 bg-purple-500 rounded-full ring-2 ring-white"></span>
           </button>
-          <button className="p-3 rounded-xl text-gray-400 hover:bg-gray-50 hover:text-gray-700 transition cursor-pointer">
+          <button className="p-3 rounded-xl text-gray-50 hover:bg-[#be9edc] hover:text-gray-800 transition cursor-pointer">
             <Bell size={22} />
           </button>
-          <button className="p-3 rounded-xl text-gray-400 hover:bg-gray-50 hover:text-gray-700 transition cursor-pointer">
+          <button className="p-3 rounded-xl text-gray-50 hover:bg-[#be9edc] hover:text-gray-800 transition cursor-pointer">
             <Bookmark size={22} />
           </button>
         </div>
@@ -104,5 +105,8 @@ export default function SideBar2() {
         </div>
       </div>
     </div>
+    </div>
+ 
+    
   );
 }
