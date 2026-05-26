@@ -21,7 +21,7 @@ export default async function AdminLayout({
     if (profile?.system_role !== "super_admin") redirect("/");
 
     return (
-        <div className="min-h-screen   text-gray-600 flex">
+        <div className="min-h-screen  dark:bg-black text-gray-600 flex">
             <AdminNavbar />
             <main className="flex-1 pl-64 min-h-screen">
                 <div className="p-8 max-w-7xl mx-auto">

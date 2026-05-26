@@ -23,10 +23,16 @@ export default async function DashboardLayout({
     }
   );
 
-  const { data: { user } } = await supabase.auth.getUser();
+  const { data: { user: authUser } } = await supabase.auth.getUser();
+  
+  let profile = null;
+  if (authUser) {
+    const { data } = await supabase .from("users").select("*").eq("id", authUser.id).single();
+    profile = data;
+  }
 
   return (
-    <DashboardShell user={user}>
+    <DashboardShell user={profile}>
       {children}
     </DashboardShell>
   );

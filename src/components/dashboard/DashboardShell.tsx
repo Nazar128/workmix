@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, createContext, useContext } from "react";
+import { useState, createContext, useContext, useEffect } from "react";
 import Navbar from "@/components/dashboard/Navbar";
 import { Sidebar } from "@/components/dashboard/Sidebar";
 import NoteDrawer from "@/components/dashboard/NoteDrawer";
@@ -36,7 +36,8 @@ export default function DashboardShell({
 
   return (
     <NoteDrawerContext.Provider value={{ openNotes }}>
-      <div className="flex bg-purple-50/20 backdrop-blur-[4px] overflow-hidden min-h-screen">
+      <ThemeHandler themePreference={user?.theme_preference} />
+      <div className="flex bg-purple-50/20 dark:bg-black text-foreground backdrop-blur-[4px] overflow-hidden min-h-screen transition-colors duration-300">
         <div className="flex flex-col flex-1 overflow-hidden">
           <Navbar 
             user={user} 
@@ -45,11 +46,10 @@ export default function DashboardShell({
             onToggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)}
           />
           
-          <div className="flex flex-col md:flex-row flex-1">
-            
+          <div className="flex flex-col md:flex-row flex-1 dark:bg-black">
             <Sidebar isOpen={isSidebarOpen} />
             
-            <main className="flex-1 overflow-y-auto p-6">
+            <main className="flex-1 overflow-y-auto p-6 bg-transparent dark:bg-black">
               {children}
             </main>
             
@@ -68,4 +68,18 @@ export default function DashboardShell({
       </div>
     </NoteDrawerContext.Provider>
   );
+}
+
+export  function ThemeHandler({ themePreference }: { themePreference?: 'dark' | 'light' | string }) {
+  useEffect(() => {
+    const root = window.document.documentElement;
+
+    if (themePreference === "dark") {
+      root.classList.add("dark");
+    } else {
+      root.classList.remove("dark");
+    }
+  }, [themePreference]);
+
+  return null; 
 }

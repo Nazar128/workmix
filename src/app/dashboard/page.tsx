@@ -15,7 +15,7 @@ export default async function DashboardPage() {
   ]);
 
   return (
-    <div className="min-h-full bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-purple-50/40 via-slate-50 to-indigo-50/20 flex flex-col gap-4">
+    <div className="min-h-full  from-purple-50/40 via-slate-50 to-indigo-50/20 flex flex-col gap-4">
       
       <div className="flex flex-col md:flex-row md:items-center justify-between  border-b border-gray-100 ">
         <div>
