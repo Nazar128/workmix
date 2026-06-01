@@ -26,44 +26,44 @@ export default function LoginPage() {
     }
 
     return (
-        <div className="min-h-screen flex items-center justify-center p-6 bg-[#fafaff] relative overflow-hidden">
+        <div className="min-h-screen flex items-center justify-center p-3 md:p-6 bg-[#fafaff] relative overflow-hidden">
             <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-purple-200/50 rounded-full blur-[120px]" />
             <div className="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-indigo-200/50 rounded-full blur-[120px]" />
 
             <div className="w-full max-w-[440px] relative z-10">
                 <div className="text-center mb-10">
-                    <div className="inline-block p-4 rounded-[2rem] bg-white shadow-sm mb-6">
+                    <div className="inline-block p-3 md:p-4  rounded-[2rem] bg-white shadow-sm mb-6">
                         <Image 
                             src="/workmıxlogo.png" 
                             alt="WorkMix Logo" 
                             width={180} 
                             height={40} 
-                            className="h-9 w-auto object-contain" 
+                            className="md:h-9  h-6 w-auto object-contain" 
                         />
                     </div>
-                    <h1 className="text-2xl font-black text-slate-900 tracking-tight">Tekrar Hoş Geldiniz</h1>
-                    <p className="text-slate-500 mt-2 font-medium">WorkMix hesabınıza güvenle giriş yapın</p>
+                    <h1 className="text-xl md:text-2xl font-black text-purple-700 tracking-tight">Tekrar Hoş Geldiniz</h1>
+                    <p className="text-slate-500 mt-2 text-sm md:font-medium">WorkMix hesabınıza güvenle giriş yapın</p>
                 </div>
 
-                <div className="bg-white/70 backdrop-blur-2xl border border-white rounded-[2.5rem] p-10 shadow-[0_20px_50px_rgba(79,70,229,0.08)]">
+                <div className=" backdrop-blur-2xl border border-white rounded-[2.5rem] px-2 py-3 md:p-10 shadow-[0_20px_50px_rgba(79,70,229,0.08)]">
                     <form action={handleSubmit} className="space-y-6">
-                        <div className="space-y-2">
-                            <label htmlFor="email" className="block text-xs font-black uppercase tracking-widest text-slate-400 ml-1">
-                                E-Posta Adresi
+                        <div className="space-y-1 md:space-y-2">
+                            <label htmlFor="email" className="block text-[13px] md:text-xs font-black  tracking-widest text-slate-400 ml-1">
+                                Email
                             </label>
                             <input
                                 id="email"
                                 name="email"
                                 type="email"
                                 required
-                                placeholder="adiniz@sirket.com"
-                                className="w-full px-5 py-3.5 bg-white border border-slate-100 rounded-2xl text-slate-700 placeholder-slate-300 text-sm focus:outline-none focus:ring-4 focus:ring-purple-500/5 focus:border-purple-500 transition-all duration-300 shadow-sm"
+                                placeholder="-------@gmail.com"
+                                className="w-full px-1.5 md:px-5 py-1 md:py-3.5 bg-white border border-slate-100 rounded-2xl text-slate-700 placeholder-slate-300 text-sm focus:outline-none focus:ring-4 focus:ring-purple-500/5 focus:border-purple-500 transition-all duration-300 shadow-sm"
                             />
                         </div>
 
                         <div className="space-y-2">
                             <div className="flex items-center justify-between ml-1">
-                                <label htmlFor="password" className="block text-xs font-black uppercase tracking-widest text-slate-400">
+                                <label htmlFor="password" className="block text-[13px] md:text-xs font-black tracking-widest text-slate-400">
                                     Şifre
                                 </label>
                                 <Link
@@ -79,14 +79,14 @@ export default function LoginPage() {
                                 type="password"
                                 required
                                 placeholder="••••••••"
-                                className="w-full px-5 py-3.5 bg-white border border-slate-100 rounded-2xl text-slate-700 placeholder-slate-300 text-sm focus:outline-none focus:ring-4 focus:ring-purple-500/5 focus:border-purple-500 transition-all duration-300 shadow-sm"
+                                className="w-full px-1.5 md:px-5 py-1 md:py-3.5 bg-white border border-slate-100 rounded-2xl text-slate-700 placeholder-slate-300 text-sm focus:outline-none focus:ring-4 focus:ring-purple-500/5 focus:border-purple-500 transition-all duration-300 shadow-sm"
                             />
                         </div>
 
                         <button
                             type="submit"
                             disabled={isPending}
-                            className="w-full py-4 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 disabled:opacity-70 text-white text-sm font-black rounded-2xl shadow-lg shadow-purple-200 transition-all duration-300 active:scale-[0.98] flex items-center justify-center gap-3 group"
+                            className="w-full py-2 md:py-4 bg-gradient-to-r from-purple-600 via-purple-400 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 disabled:opacity-70 text-white text-sm font-black rounded-2xl shadow-lg shadow-purple-200 transition-all duration-300 active:scale-[0.98] flex items-center justify-center gap-3 group"
                         >
                             {isPending ? (
                                 <span className="flex items-center gap-2">
@@ -105,16 +105,16 @@ export default function LoginPage() {
                         </button>
                     </form>
 
-                    <div className="relative my-8">
+                    <div className="relative my-4 md:my-8">
                         <div className="absolute inset-0 flex items-center">
                             <div className="w-full border-t border-slate-100" />
                         </div>
-                        <div className="relative flex justify-center text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
+                        <div className="relative flex justify-center text-[9px] md:text-[10px] font-black uppercase tracking-[0.2em] text-slate-400">
                             <span className="bg-white/0 px-4">veya</span>
                         </div>
                     </div>
 
-                    <p className="text-center text-sm font-medium text-slate-500">
+                    <p className="text-center text-[11px] md:text-sm font-medium text-slate-500">
                         Henüz bir hesabınız yok mu?{" "}
                         <Link
                             href="/register"
@@ -125,11 +125,7 @@ export default function LoginPage() {
                     </p>
                 </div>
                 
-                <footer className="mt-12 text-center">
-                    <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">
-                        © 2026 WorkMix Cloud Platform
-                    </p>
-                </footer>
+              
             </div>
         </div>
     );

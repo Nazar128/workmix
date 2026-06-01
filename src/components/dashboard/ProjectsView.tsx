@@ -31,16 +31,16 @@ export default function ProjectsView({ initialProjects = [], organizations = [] 
       <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-purple-200/30 blur-[120px] rounded-full -z-10" />
       <div className="absolute bottom-[-10%] right-[-10%] w-[30%] h-[30%] bg-indigo-200/30 blur-[100px] rounded-full -z-10" />
 
-      <header className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center gap-8 mb-16">
+      <header className="max-w-3xl mx-auto flex flex-col justify-between items-start md:items-center gap-8 mb-16">
         <div className="space-y-3">
           <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="inline-flex items-center gap-2 px-3 py-1 bg-purple-100 text-purple-700 rounded-lg text-xs font-bold tracking-widest uppercase">
             <Rocket className="w-3.5 h-3.5" />
             <span>WorkMix Pro</span>
           </motion.div>
-          <h1 className="text-5xl font-black tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-purple-900 via-violet-800 to-indigo-900">
-            Çalışma Alanım
+          <h1 className="text-3xl md:text-4xl font-black tracking-tight text-purple-700 bg-clip-text text-transparent bg-gradient-to-r from-purple-900 via-violet-800 to-indigo-900">
+            PROJE<span className="text-slate-900">LERİM</span>
           </h1>
-          <p className="text-slate-500 font-medium max-w-md">Kişisel hedefleriniz ve kurumsal projeleriniz için tek bir dijital merkez.</p>
+          <p className="text-slate-500 text-sm md:font-medium max-w-md">Kişisel hedefleriniz ve kurumsal projeleriniz için tek bir dijital merkez.</p>
         </div>
         
         <div className="flex flex-wrap items-center gap-4 bg-white/60 backdrop-blur-md p-2 rounded-[2rem] border border-white shadow-xl shadow-purple-500/5">
@@ -53,13 +53,13 @@ export default function ProjectsView({ initialProjects = [], organizations = [] 
         <section className="space-y-10">
           <div className="flex items-center gap-4">
             <div className="h-10 w-2 bg-gradient-to-b from-purple-600 to-violet-400 rounded-full" />
-            <h2 className="text-3xl font-extrabold tracking-tight text-slate-800 flex items-center gap-3">
+            <h2 className="text-2xl md:text-3xl font-extrabold tracking-tight text-slate-800 flex items-center gap-3">
               Bireysel Projeler
               <span className="text-sm font-medium text-slate-400">({personalProjects.length})</span>
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
             <AnimatePresence>
               {personalProjects.map((project, idx) => (
                 <motion.div
@@ -69,7 +69,7 @@ export default function ProjectsView({ initialProjects = [], organizations = [] 
                   transition={{ delay: idx * 0.1 }}
                   className="group relative bg-white/80 backdrop-blur-sm border border-white rounded-[2.5rem] p-8 shadow-sm hover:shadow-2xl hover:shadow-purple-500/10 hover:border-purple-100 transition-all duration-500"
                 >
-                  <div className="flex justify-between items-start mb-8">
+                  <div className="flex justify-between items-start mb-4 md:mb-8">
                     <div className="bg-gradient-to-br from-purple-500 to-violet-600 p-4 rounded-2xl shadow-lg shadow-purple-200 group-hover:rotate-6 transition-transform">
                       <StickyNote className="w-6 h-6 text-white" />
                     </div>
@@ -79,16 +79,16 @@ export default function ProjectsView({ initialProjects = [], organizations = [] 
                   </div>
 
                   <Link href={`/dashboard/projects/${project.id}`}>
-                    <h3 className="text-2xl font-bold text-slate-800 mb-3 group-hover:text-purple-700 transition-colors">
+                    <h3 className="text-xl md:text-2xl font-bold text-slate-800 mb-1 md:mb-3 group-hover:text-purple-700 transition-colors">
                       {project.name}
                     </h3>
                   </Link>
 
-                  <p className="text-slate-500 text-sm leading-relaxed mb-8 h-10 line-clamp-2">
+                  <p className="text-slate-500 text-[10px] md:text-sm leading-relaxed mb-4 md:mb-8 h-10 line-clamp-2">
                     {project.description || "Henüz bir açıklama metni eklenmemiş."}
                   </p>
 
-                  <div className="flex items-center justify-between pt-6 border-t border-slate-100">
+                  <div className="flex items-center justify-between pt-2 md:pt-6 border-t border-slate-100">
                     <div className="flex items-center gap-2 text-slate-400 font-bold text-[10px] tracking-tighter uppercase">
                       <Calendar className="w-4 h-4 text-purple-400" />
                       {new Date(project.created_at).toLocaleDateString('tr-TR', { month: 'long', year: 'numeric' })}
@@ -108,8 +108,8 @@ export default function ProjectsView({ initialProjects = [], organizations = [] 
 
         <section className="space-y-10 pb-24">
           <div className="flex items-center gap-4">
-            <div className="h-10 w-2 bg-gradient-to-b from-indigo-600 to-blue-400 rounded-full" />
-            <h2 className="text-3xl font-extrabold tracking-tight text-slate-800 flex items-center gap-3">
+            <div className="h-10 w-2 bg-gradient-to-b from-purple-600 to-blue-400 rounded-full" />
+            <h2 className="text-2xl md:text-3xl font-extrabold tracking-tight text-slate-800 flex items-center gap-3">
               Kurumsal Alan
             </h2>
           </div>
@@ -118,17 +118,17 @@ export default function ProjectsView({ initialProjects = [], organizations = [] 
             <table className="w-full text-left">
               <thead>
                 <tr className="bg-slate-50/50">
-                  <th className="px-10 py-6 text-xs font-black uppercase tracking-widest text-slate-400">Status</th>
-                  <th className="px-10 py-6 text-xs font-black uppercase tracking-widest text-slate-400">Project</th>
-                  <th className="px-10 py-6 text-xs font-black uppercase tracking-widest text-slate-400 text-right">Actions</th>
+                  <th className="px-5 py-2 md:px-10 md:py-6 text-xs font-black uppercase tracking-widest text-slate-400">Durum</th>
+                  <th className="px-5 py-2 md:px-10 md:py-6 text-xs font-black uppercase tracking-widest text-slate-400">Proje</th>
+                  <th className="px-12 py-2 md:px-10 md:py-6 text-xs font-black uppercase tracking-widest text-slate-400 text-right">İşlemler</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-100">
                 {corporateProjects.map((project) => (
                   <tr key={project.id} className="group hover:bg-purple-50/30 transition-colors">
-                    <td className="px-10 py-8">
+                    <td className="px-4 py-2 md:px-10 md:py-8">
                       <form action={toggleProjectStatus.bind(null, project.id, project.status)}>
-                        <button type="submit" className={`flex items-center gap-2 px-4 py-2 rounded-xl text-[10px] font-black transition-all ${
+                        <button type="submit" className={`flex items-center gap-2 p-1 md:px-4 md:py-2 rounded-xl text-[8px] md:text-[10px] font-black transition-all ${
                           project.status === "active" 
                           ? "bg-purple-100 text-purple-700 ring-1 ring-purple-200 shadow-sm shadow-purple-100" 
                           : "bg-slate-100 text-slate-400 ring-1 ring-slate-200"
@@ -138,28 +138,28 @@ export default function ProjectsView({ initialProjects = [], organizations = [] 
                         </button>
                       </form>
                     </td>
-                    <td className="px-10 py-8">
+                    <td className="px-4 py-2 md:px-10 md:py-8">
                       <div className="flex flex-col">
-                        <Link href={`/dashboard/projects/${project.id}`} className="text-lg font-bold text-slate-800 hover:text-purple-700 transition-colors">
+                        <Link href={`/dashboard/projects/${project.id}`} className="text-md font-semibold md:text-lg md:font-bold text-slate-800 hover:text-purple-700 transition-colors">
                           {project.name}
                         </Link>
                         <div className="flex items-center gap-2 mt-1">
                           <Layout className="w-3 h-3 text-indigo-400" />
-                          <span className="text-[11px] font-bold text-indigo-400 uppercase tracking-tighter">
+                          <span className="text-[9px] md:text-[11px] font-bold text-indigo-400 uppercase tracking-tighter">
                             {project.organizations?.name}
                           </span>
                         </div>
                       </div>
                     </td>
-                    <td className="px-10 py-8">
-                      <div className="flex justify-end items-center gap-4">
+                    <td className="px-4 py-2 md:px-10 md:py-8">
+                      <div className="flex  items-center gap-4">
                         <button onClick={() => openNotes(project.id, project.name)} className="p-3 bg-white border border-slate-100 text-purple-600 rounded-xl hover:bg-purple-600 hover:text-white transition-all shadow-sm">
-                          <StickyNote className="w-4 h-4" />
+                          <StickyNote className="w-3 h-3 md:w-4 md:h-4" />
                         </button>
                         <EditProjectModal project={project} />
                         <form action={deleteProject.bind(null, project.id)}>
                           <button type="submit" className="p-3 bg-white border border-slate-100 text-red-400 hover:bg-red-50 rounded-xl transition-all shadow-sm">
-                            <Trash2 className="w-4 h-4" />
+                            <Trash2 className="w-3 h-3 md:w-4 md:h-4" />
                           </button>
                         </form>
                       </div>

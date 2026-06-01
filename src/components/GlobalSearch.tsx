@@ -53,7 +53,7 @@ export default function GlobalSearch() {
     };
     const showDropdown = query.length >= 2;
     return (
-        <div className="relative w-full max-w-md">
+        <div className="relative w-12 md:w-full ">
             <div className="relative">
                 <svg className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-4.35-4.35M17 11A6 6 0 1 1 5 11a6 6 0 0 1 12 0z" />
@@ -63,8 +63,8 @@ export default function GlobalSearch() {
                     type="text"
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}
-                    placeholder="Ara... (Ctrl+K)"
-                    className=" w-60 border border-[#936fb3] rounded-lg pl-9 pr-8 py-2 text-sm text-gray-100 outline-none focus:border-purple-500 placeholder:text-gray-200 transition-colors"
+                    placeholder="Ara..."
+                    className="px-8 w-44 border border-[#936fb3] rounded-lg  pr-8 py-2 text-sm text-gray-100 outline-none focus:border-purple-500 placeholder:text-gray-200 transition-colors"
                 />
                 {query && (
                     <button onClick={clear} className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-300">

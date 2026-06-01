@@ -31,29 +31,30 @@ export default function RegisterPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-6 bg-[#fafaff] relative overflow-hidden">
+    <div className="min-h-screen flex items-center justify-center p-3 md:p-5 bg-[#fafaff] relative overflow-hidden">
       <div className="absolute top-[-10%] right-[-10%] w-[40%] h-[40%] bg-purple-200/50 rounded-full blur-[120px]" />
       <div className="absolute bottom-[-10%] left-[-10%] w-[40%] h-[40%] bg-indigo-200/50 rounded-full blur-[120px]" />
 
       <div className="w-full max-w-[480px] relative z-10">
-        <div className="text-center mb-10">
-          <div className="inline-block p-4 rounded-[2rem] bg-white shadow-sm mb-6">
-            <Image 
-              src="/workmıxlogo.png" 
-              alt="WorkMix Logo" 
-              width={180} 
-              height={40} 
-              className="h-9 w-auto object-contain" 
-            />
-          </div>
-          <h1 className="text-2xl font-black text-slate-900 tracking-tight">Yeni Hesap Oluştur</h1>
-          <p className="text-slate-500 mt-2 font-medium">WorkMix ile projelerinizi yönetmeye başlayın</p>
+        <div className="text-center mb-2 md:mb-8">
+            <div className="inline-block p-3 md:p-4  rounded-[2rem] bg-white shadow-sm mb-1 md:mb-6">
+                                  <Image 
+                                      src="/workmıxlogo.png" 
+                                      alt="WorkMix Logo" 
+                                      width={180} 
+                                      height={40} 
+                                      className="md:h-9  h-6 w-auto object-contain" 
+                                  />
+                              </div>
+        
+          <h1 className="text-xl md:text-2xl font-black text-purple-700 tracking-tight">Yeni Hesap Oluştur</h1>
+          <p className="text-slate-500 mt-2 text-[11px] md:font-medium">WorkMix ile projelerinizi yönetmeye başlayın</p>
         </div>
 
-        <div className="bg-white/70 backdrop-blur-2xl border border-white rounded-[2.5rem] p-10 shadow-[0_20px_50px_rgba(79,70,229,0.08)]">
-          <form action={handleSubmit} className="space-y-5">
-            <div className="space-y-2">
-              <label htmlFor="name" className="block text-xs font-black uppercase tracking-widest text-slate-400 ml-1">
+        <div className="bg-white/70 backdrop-blur-2xl border border-white rounded-[2.5rem]  px-2 py-3 md:p-10 shadow-[0_20px_50px_rgba(79,70,229,0.08)]">
+          <form action={handleSubmit} className="space-y-4 md:space-y-5">
+            <div className="space-y-1 md:space-y-2">
+              <label htmlFor="name" className="block text-xs font-black tracking-widest text-slate-400 ml-1">
                 Ad Soyad
               </label>
               <input
@@ -62,12 +63,12 @@ export default function RegisterPage() {
                 type="text"
                 required
                 placeholder="Nazar Kalçık"
-                className="w-full px-5 py-3.5 bg-white border border-slate-100 rounded-2xl text-slate-700 placeholder-slate-300 text-sm focus:outline-none focus:ring-4 focus:ring-purple-500/5 focus:border-purple-500 transition-all duration-300 shadow-sm"
+                className="w-full px-1.5 py-1 md:px-5 md:py-3.5 bg-white border border-slate-100 rounded-2xl text-slate-700 placeholder-slate-300 text-[12px] md:text-sm focus:outline-none focus:ring-4 focus:ring-purple-500/5 focus:border-purple-500 transition-all duration-300 shadow-sm"
               />
             </div>
 
-            <div className="space-y-2">
-              <label htmlFor="email" className="block text-xs font-black uppercase tracking-widest text-slate-400 ml-1">
+            <div className="space-y-1 md:space-y-2">
+              <label htmlFor="email" className="block text-xs font-black tracking-widest text-slate-400 ml-1">
                 E-Posta Adresi
               </label>
               <input
@@ -76,13 +77,13 @@ export default function RegisterPage() {
                 type="email"
                 required
                 placeholder="nazar@sirket.com"
-                className="w-full px-5 py-3.5 bg-white border border-slate-100 rounded-2xl text-slate-700 placeholder-slate-300 text-sm focus:outline-none focus:ring-4 focus:ring-purple-500/5 focus:border-purple-500 transition-all duration-300 shadow-sm"
+                className="w-full px-1.5 py-1 md:px-5 md:py-3.5 bg-white border border-slate-100 rounded-2xl text-slate-700 placeholder-slate-300 text-[12px] md:text-sm focus:outline-none focus:ring-4 focus:ring-purple-500/5 focus:border-purple-500 transition-all duration-300 shadow-sm"
               />
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <label htmlFor="password" className="block text-xs font-black uppercase tracking-widest text-slate-400 ml-1">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-4">
+              <div className="space-y-1 md:space-y-2">
+                <label htmlFor="password" className="block text-xs font-black  tracking-widest text-slate-400 ml-1">
                   Şifre
                 </label>
                 <input
@@ -91,11 +92,11 @@ export default function RegisterPage() {
                   type="password"
                   required
                   placeholder="••••••••"
-                  className="w-full px-5 py-3.5 bg-white border border-slate-100 rounded-2xl text-slate-700 placeholder-slate-300 text-sm focus:outline-none focus:ring-4 focus:ring-purple-500/5 focus:border-purple-500 transition-all duration-300 shadow-sm"
+                  className="w-full px-1.5 py-1 md:px-5 md:py-3.5 bg-white border border-slate-100 rounded-2xl text-slate-700 placeholder-slate-300 text-[12px] md:text-sm focus:outline-none focus:ring-4 focus:ring-purple-500/5 focus:border-purple-500 transition-all duration-300 shadow-sm"
                 />
               </div>
-              <div className="space-y-2">
-                <label htmlFor="confirmPassword" className="block text-xs font-black uppercase tracking-widest text-slate-400 ml-1">
+              <div className="space-y-1 md:space-y-2">
+                <label htmlFor="confirmPassword" className="block text-xs font-black  tracking-widest text-slate-400 ml-1">
                   Tekrar
                 </label>
                 <input
@@ -104,7 +105,7 @@ export default function RegisterPage() {
                   type="password"
                   required
                   placeholder="••••••••"
-                  className="w-full px-5 py-3.5 bg-white border border-slate-100 rounded-2xl text-slate-700 placeholder-slate-300 text-sm focus:outline-none focus:ring-4 focus:ring-purple-500/5 focus:border-purple-500 transition-all duration-300 shadow-sm"
+                  className="w-full px-1.5 py-1 md:px-5 md:py-3.5 bg-white border border-slate-100 rounded-2xl text-slate-700 placeholder-slate-300 text-[12px] md:text-sm focus:outline-none focus:ring-4 focus:ring-purple-500/5 focus:border-purple-500 transition-all duration-300 shadow-sm"
                 />
               </div>
             </div>
@@ -112,7 +113,7 @@ export default function RegisterPage() {
             <button
               type="submit"
               disabled={isPending}
-              className="w-full py-4 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 disabled:opacity-70 text-white text-sm font-black rounded-2xl shadow-lg shadow-purple-200 transition-all duration-300 active:scale-[0.98] flex items-center justify-center gap-3 group mt-4"
+              className="w-full py-2 md:py-4 bg-gradient-to-r from-purple-600 via-purple-400 to-indigo-600 hover:from-purple-700 hover:to-indigo-700 disabled:opacity-70 text-white text-sm font-black rounded-2xl shadow-lg shadow-purple-200 transition-all duration-300 active:scale-[0.98] flex items-center justify-center gap-3 group mt-4"
             >
               {isPending ? (
                 <span className="flex items-center gap-2">
@@ -133,15 +134,9 @@ export default function RegisterPage() {
             </button>
           </form>
 
-          <p className="text-[11px] text-slate-400 text-center mt-6 leading-relaxed font-medium">
-            Kayıt olarak{" "}
-            <Link href="/terms" className="text-purple-500 hover:underline">Kullanım Şartları</Link>
-            {" "}ve{" "}
-            <Link href="/privacy" className="text-purple-500 hover:underline">Gizlilik Politikası</Link>
-            'nı kabul etmiş olursunuz.
-          </p>
+        
 
-          <div className="relative my-8">
+          <div className="relative my-4 md:my-6">
             <div className="absolute inset-0 flex items-center">
               <div className="w-full border-t border-slate-100" />
             </div>
@@ -150,7 +145,7 @@ export default function RegisterPage() {
             </div>
           </div>
 
-          <p className="text-center text-sm font-medium text-slate-500">
+          <p className="text-center text-[10px] md:text-sm font-medium text-slate-500">
             Zaten hesabınız var mı?{" "}
             <Link
               href="/login"
@@ -161,11 +156,6 @@ export default function RegisterPage() {
           </p>
         </div>
 
-        <footer className="mt-12 text-center">
-          <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest">
-            © 2026 WorkMix Cloud Platform
-          </p>
-        </footer>
       </div>
     </div>
   );
