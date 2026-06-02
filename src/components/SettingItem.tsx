@@ -19,8 +19,8 @@ export default function SettingItem ({ label, description, value, type, onUpdate
     return (
         <div className="flex items-center justify-between p-4">
             <div className="flex-1 pr-4">
-                <h3 className="text-md text-gray-400">{label}</h3>
-                <p className="text-sm text-gray-600 mt-2">{description}</p>
+                <h3 className="text-sm md:text-md text-gray-400">{label}</h3>
+                <p className="text-xs md:text-sm text-gray-600 mt-2">{description}</p>
             </div>
 
             <div className="flex items-center gap-3">
@@ -29,18 +29,18 @@ export default function SettingItem ({ label, description, value, type, onUpdate
                 )}
 
                 {type === "number" && (
-                    <input type="number" value={value} onChange={(e) => onUpdate(parseInt(e.target.value))} disabled={loading} className="w-20 p-2  bg-black/20 border border-white/10" />
+                    <input type="number" value={value} onChange={(e) => onUpdate(parseInt(e.target.value))} disabled={loading} className="w-20 p-1 md:p-2  bg-black/20 border border-white/10" />
                 )}
 
                 {type === "text" && (
-                    <textarea value={value} onChange={(e) => onUpdate(e.target.value)} disabled={loading} className="w-64 p-2 bg-black/20 border border-white/10" />
+                    <textarea value={value} onChange={(e) => onUpdate(e.target.value)} disabled={loading} className="w-64  p-1 md:p-2 bg-black/20 border border-white/10" />
                 )}
                 {type === "segments" && (
                     <div className="inline-flex rounded-lg bg-purple-700 p-1 border border-white/10">
                         {options.map((option) => {
                             const isSelected = value === option.value;
                             return(
-                                <button key={option.value} type="button" disabled={loading} onClick={() => onUpdate(option.value)} className={`px-4 py-2 text-sm font-medium rounded-md transition-all duration-200 
+                                <button key={option.value} type="button" disabled={loading} onClick={() => onUpdate(option.value)} className={`px-4 py-0.5 md:py-2 text-xs md:text-sm font-medium rounded-md transition-all duration-200 
                                     ${isSelected ? 'bg-purple-600 text-white text-md' : ' text-gray-400 hover:bg-white/10'}`}>{option.label}</button>
                             )
                         })}

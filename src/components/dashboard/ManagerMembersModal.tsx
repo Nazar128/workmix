@@ -75,14 +75,14 @@ export function ManageMembersModal({ org, members, currentUserRole, isOwner }: P
   return (
     <div className="fixed inset-0 bg-black/40 backdrop-blur-sm flex items-center justify-center z-50 p-4">
       <div className="bg-white rounded-2xl w-full max-w-lg shadow-2xl border border-slate-100 overflow-hidden">
-        <div className="bg-gradient-to-r from-slate-800 to-slate-700 px-6 py-4 flex justify-between items-center">
+        <div className="bg-gradient-to-t from-purple-600 to-slate-700 px-6 py-2 md:py-4 flex justify-between items-center">
           <div>
-            <h2 className="text-white font-bold text-lg">{org.name}</h2>
-            <p className="text-slate-400 text-sm">Üye Yönetimi</p>
+            <h2 className="text-white font-bold text-md md:text-lg">{org.name} <span className="text-slate-300 text-[12px] md:text-sm"> Üye Yönetimi</span></h2>
+            
           </div>
           <button
             onClick={() => setIsOpen(false)}
-            className="text-slate-400 hover:text-white text-xl transition-colors"
+            className="text-slate-400 hover:text-white text-lg md:text-xl transition-colors"
           >
             ✕
           </button>
@@ -90,7 +90,7 @@ export function ManageMembersModal({ org, members, currentUserRole, isOwner }: P
         <div className="flex border-b border-slate-100">
           <button
             onClick={() => setTab("list")}
-            className={`flex-1 py-3 text-sm font-medium transition-colors ${
+            className={`flex-1 py-2 md:py-3 text-sm font-medium transition-colors ${
               tab === "list"
                 ? "text-slate-900 border-b-2 border-slate-800"
                 : "text-slate-400 hover:text-slate-600"
@@ -101,7 +101,7 @@ export function ManageMembersModal({ org, members, currentUserRole, isOwner }: P
           {isAdmin && (
             <button
               onClick={() => setTab("invite")}
-              className={`flex-1 py-3 text-sm font-medium transition-colors ${
+              className={`flex-1 py-2 md:py-3 text-sm font-medium transition-colors ${
                 tab === "invite"
                   ? "text-slate-900 border-b-2 border-slate-800"
                   : "text-slate-400 hover:text-slate-600"
@@ -120,7 +120,7 @@ export function ManageMembersModal({ org, members, currentUserRole, isOwner }: P
           )}
 
           {tab === "list" && (
-            <div className="space-y-2 max-h-80 overflow-y-auto pr-1">
+            <div className="space-y-4 max-h-80 overflow-y-auto pr-1">
               {members.map((member) => (
                 <div
                   key={member.id}
@@ -184,9 +184,9 @@ export function ManageMembersModal({ org, members, currentUserRole, isOwner }: P
           )}
 
           {tab === "invite" && isAdmin && (
-            <form action={handleInvite} className="space-y-4">
+            <form action={handleInvite} className="space-y-2 md:space-y-4">
               <div>
-                <label className="block text-sm font-semibold text-slate-700 mb-1">
+                <label className="block text-xs md:text-sm font-semibold text-slate-700 mb-1">
                   E-posta Adresi
                 </label>
                 <input
@@ -194,19 +194,19 @@ export function ManageMembersModal({ org, members, currentUserRole, isOwner }: P
                   name="email"
                   placeholder="kullanici@ornek.com"
                   required
-                  className="w-full border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-slate-400"
+                  className="w-full border border-slate-200 rounded-xl px-4 py-1 md:py-2.5 text-[12px] md:text-sm focus:outline-none focus:ring-2 focus:ring-slate-400"
                 />
               </div>
               <div>
-                <label className="block text-sm font-semibold text-slate-700 mb-1">Rol</label>
+                <label className="block text-xs md:text-sm font-semibold text-slate-700 mb-1">Rol</label>
                 <select
                   name="role"
-                  className="w-full border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-slate-400"
+                  className="w-full border border-slate-200 rounded-xl px-4 py-1 md:py-2.5 text-[12px] md:text-sm focus:outline-none focus:ring-2 focus:ring-slate-400"
                 >
                   <option value="member">Üye</option>
                   <option value="admin">Yönetici</option>
                 </select>
-                <p className="text-xs text-slate-400 mt-1">
+                <p className="text-[10px] md:text-xs text-slate-400 mt-1">
                   Yöneticiler üye ekleyip çıkarabilir, projeleri yönetebilir.
                 </p>
               </div>
@@ -214,13 +214,13 @@ export function ManageMembersModal({ org, members, currentUserRole, isOwner }: P
                 <button
                   type="button"
                   onClick={() => setTab("list")}
-                  className="flex-1 py-2.5 border border-slate-200 rounded-xl text-sm text-slate-600 hover:bg-slate-50 transition-colors"
+                  className="flex-1 py-1 md:py-2.5 border border-slate-200 rounded-xl text-sm text-slate-600 hover:bg-slate-50 transition-colors"
                 >
                   İptal
                 </button>
                 <button
                   type="submit"
-                  className="flex-1 py-2.5 bg-slate-800 text-white rounded-xl text-sm font-medium hover:bg-slate-700 transition-colors"
+                  className="flex-1 py-1 md:py-2.5 bg-gradient-to-t from-purple-600 to-slate-700 text-white rounded-xl text-sm font-medium hover:bg-slate-700 transition-colors"
                 >
                   Davet Gönder
                 </button>

@@ -77,11 +77,11 @@ export function OrganizationCard({ org, members, projectCount, currentUserRole, 
           <ChevronRight size={20} />
         </Link>
 
-        <div className="p-10">
-          <div className="flex items-center gap-6 mb-10">
+        <div className="py-10 px-8 md:px-12">
+          <div className="flex items-center gap-4 md:gap-6 mb-4 sm:mb-7 md:mb-10">
             <div className="relative shrink-0">
               <div className="absolute inset-0 bg-purple-600 blur-2xl opacity-20 group-hover:opacity-50 transition-opacity" />
-              <div className="relative w-16 h-16 rounded-[1.8rem] bg-gradient-to-br from-purple-600 to-indigo-700 flex items-center justify-center text-white text-2xl font-black shadow-xl ring-4 ring-white/50">
+              <div className="relative w-8 h-8 sm:h-12 sm:w-12  md:w-16 md:h-16 rounded-[1.8rem] bg-gradient-to-br from-purple-600 via-purple-400 to-indigo-700 flex items-center justify-center text-white text-2xl font-black shadow-xl ring-4 ring-white/50">
                 {org.name[0].toUpperCase()}
               </div>
             </div>
@@ -101,17 +101,17 @@ export function OrganizationCard({ org, members, projectCount, currentUserRole, 
               ) : (
                 <div className="space-y-1">
                   <Link href={`/dashboard/organizations/${org.id}`}>
-                    <h3 className="text-xl font-black text-slate-900 tracking-tight truncate hover:text-purple-600 transition-colors">
+                    <h3 className="text-md md:text-xl font-black text-slate-900 tracking-tight truncate hover:text-purple-600 transition-colors">
                       {org.name}
                     </h3>
                   </Link>
                   <div className="flex items-center gap-3">
-                    <span className="text-[11px] font-black uppercase tracking-[0.2em] text-purple-400 leading-none">
+                    <span className=" text-[9px] md:text-[11px] font-black uppercase tracking-[0.2em] text-purple-400 leading-none">
                       {org.slug}
                     </span>
                     <div className="flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-emerald-50 border border-emerald-100">
                       <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                      <span className="text-[9px] font-bold text-emerald-600 uppercase tracking-tighter">Live</span>
+                      <span className="text-[9px] md:text-[11px] font-bold text-emerald-600 uppercase tracking-tighter">Live</span>
                     </div>
                   </div>
                 </div>
@@ -121,12 +121,12 @@ export function OrganizationCard({ org, members, projectCount, currentUserRole, 
 
           <div className="grid grid-cols-2 gap-4 mb-10">
             <div className="p-6 rounded-[2.2rem] bg-gradient-to-b from-purple-50/50 to-white border border-purple-100 shadow-sm group-hover:border-purple-300 transition-all">
-              <div className="flex items-center gap-2 mb-3 text-purple-400">
+              <div className="flex items-center gap-2 mb-1.5 md:mb-3 text-purple-400">
                 <Users size={14} strokeWidth={3} />
-                <span className="text-[10px] font-black uppercase tracking-[0.15em]">Ekip</span>
+                <span className="text-[9px] md:text-[10px] font-black tracking-[0.15em]">EKİP</span>
               </div>
               <div className="flex items-baseline gap-1.5">
-                <span className="text-3xl font-black text-slate-900 leading-none">{memberCount}</span>
+                <span className=" text-2xl md:text-3xl font-black text-slate-900 leading-none">{memberCount}</span>
                 <span className="text-xs font-bold text-purple-300">/ {org.max_members}</span>
               </div>
             </div>
@@ -134,10 +134,10 @@ export function OrganizationCard({ org, members, projectCount, currentUserRole, 
             <div className="p-6 rounded-[2.2rem] bg-gradient-to-b from-indigo-50/50 to-white border border-indigo-100 shadow-sm group-hover:border-indigo-300 transition-all">
               <div className="flex items-center gap-2 mb-3 text-indigo-400">
                 <Layout size={14} strokeWidth={3} />
-                <span className="text-[10px] font-black uppercase tracking-[0.15em]">Proje</span>
+                <span className="text-[9px] md:text-[10px] font-black uppercase tracking-[0.15em]">Proje</span>
               </div>
               <div className="flex items-baseline gap-1.5">
-                <span className="text-3xl font-black text-slate-900 leading-none">{projectCount}</span>
+                <span className="text-2xl md:text-3xl font-black text-slate-900 leading-none">{projectCount}</span>
                 <span className="text-xs font-bold text-indigo-300">/ {org.max_projects}</span>
               </div>
             </div>
@@ -161,14 +161,14 @@ export function OrganizationCard({ org, members, projectCount, currentUserRole, 
             </div>
             
             <div className="flex flex-col items-end gap-2">
-              <div className="flex items-center gap-1.5 px-4 py-2 rounded-2xl bg-slate-900 text-white text-[10px] font-black uppercase tracking-[0.1em] shadow-lg shadow-slate-200">
+              <div className="flex items-center gap-1.5 md:px-4 p-2 rounded-2xl bg-slate-900 text-white text-[10px] font-black uppercase tracking-[0.1em] shadow-lg shadow-slate-200">
                 <Zap size={10} className="text-amber-400 fill-amber-400" />
                 {org.plan}
               </div>
             </div>
           </div>
 
-          <div className="flex items-center gap-3 pt-8 border-t border-slate-100/60">
+          <div className="flex items-center gap-3 md:pt-8 border-t border-slate-100/60">
             <div className="flex-1">
               <ManageMembersModal org={org} members={members} currentUserRole={currentUserRole} isOwner={isOwner} />
             </div>
@@ -177,7 +177,7 @@ export function OrganizationCard({ org, members, projectCount, currentUserRole, 
               {isAdmin && !isEditing && (
                 <button 
                   onClick={() => setIsEditing(true)} 
-                  className="p-3.5 rounded-2xl bg-white text-slate-400 hover:text-purple-600 border border-slate-100 hover:border-purple-200 hover:bg-purple-50 shadow-sm transition-all active:scale-90"
+                  className="p-1 md:p-3.5 rounded-2xl bg-white text-slate-400 hover:text-purple-600 border border-slate-100 hover:border-purple-200 hover:bg-purple-50 shadow-sm transition-all active:scale-90"
                 >
                   <Settings2 size={18} />
                 </button>
@@ -185,7 +185,7 @@ export function OrganizationCard({ org, members, projectCount, currentUserRole, 
               {isOwner && (
                 <button
                   onClick={handleDelete}
-                  className="p-3.5 rounded-2xl bg-white text-slate-300 hover:text-red-500 hover:bg-red-50 border border-slate-100 hover:border-red-100 shadow-sm transition-all active:scale-90"
+                  className="p-1 md:p-3.5 rounded-2xl bg-white text-slate-300 hover:text-red-500 hover:bg-red-50 border border-slate-100 hover:border-red-100 shadow-sm transition-all active:scale-90"
                 >
                   <Trash2 size={18} />
                 </button>

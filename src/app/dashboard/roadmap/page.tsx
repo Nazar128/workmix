@@ -83,23 +83,23 @@ export default function RoadmapPage() {
   };
 
   return (
-    <div className="p-6 md:p-12 bg-[#F1F5F9] min-h-screen font-sans text-slate-900">
-      <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-6">
+    <div className="p-2 md:p-12 bg-[#F1F5F9] min-h-screen font-sans text-slate-900">
+      <div className="max-w-6xl ml-3  mx-auto flex flex-col md:flex-row justify-between items-start md:items-center mb-6 md:mb-8 gap-6">
         <div>
-          <h1 className="text-5xl font-black tracking-tight text-slate-900 mb-2">
-            Roadmap<span className="text-purple-600">.</span>
+          <h1 className="text-3xl md:text-5xl font-black tracking-tight text-slate-900 mb-2">
+            Yol Haritası <span className="text-purple-600 ">.</span>
           </h1>
-          <p className="text-slate-500 font-medium">Projelerinin ilerlemesini şık bir şekilde takip et.</p>
+          <p className="text-slate-500 text-sm md:font-medium">Kendi yol haritanı oluştur.</p>
         </div>
         <button
           onClick={() => setIsModalOpen(true)}
-          className="group relative bg-gradient-to-t from-purple-500 via-purple-300 to-purple-500 text-white px-8 py-4 rounded-2xl font-bold shadow-2xl hover:bg-indigo-600 transition-all duration-300"
+          className="group relative bg-gradient-to-t from-purple-500 via-purple-300 to-purple-500 text-white px-6 md:px-8 py-2 md:py-4 rounded-2xl font-medium md:font-bold shadow-2xl hover:bg-indigo-600 transition-all duration-300"
         >
           <span className="relative z-10">+ Yeni Harita Oluştur</span>
         </button>
       </div>
 
-      <div className="max-w-6xl mx-auto grid grid-cols-1 gap-8">
+      <div className="max-w-6xl mx-auto grid grid-cols-1 gap-4 md:gap-8">
         {roadmaps.map((roadmap) => (
           <div key={roadmap.id} className="bg-white rounded-[3rem] p-8 md:p-12 shadow-[0_20px_50px_rgba(0,0,0,0.05)] border border-white relative overflow-hidden group">
             <div className="absolute top-0 left-0 w-2 h-full bg-purple-600 opacity-0 group-hover:opacity-100 transition-all"></div>
@@ -108,21 +108,21 @@ export default function RoadmapPage() {
               onClick={() => deleteRoadmap(roadmap.id)}
               className="absolute top-4 right-10 text-slate-300 hover:text-red-700 transition-colors"
             >
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><line x1="10" y1="11" x2="10" y2="17"/><line x1="14" y1="11" x2="14" y2="17"/></svg>
             </button>
 
-            <div className="flex flex-col lg:flex-row gap-12">
+            <div className="flex flex-col lg:flex-row gap-6 md:gap-12">
               <div className="lg:w-1/3">
-                <div className="inline-block px-4 py-1.5 bg-purple-100 text-purple-600 rounded-full text-xs font-black uppercase tracking-widest mb-4">
+                <div className="inline-block px-4 py-1.5 bg-purple-100 text-purple-600 rounded-full text-[10px] md:text-xs font-black uppercase tracking-widest mb-4">
                   PROJE PLANI
                 </div>
-                <h2 className="text-4xl font-black text-slate-800 leading-[1.1] tracking-tight">{roadmap.title}</h2>
+                <h2 className="text-2xl sm:text-3xl md:text-4xl font-black text-slate-800 leading-[1.1] tracking-tight">{roadmap.title}</h2>
                 <div className="mt-6 flex items-center gap-3">
                    <div className="flex -space-x-2">
                       <div className="w-8 h-8 rounded-full bg-slate-200 border-2 border-white"></div>
                       <div className="w-8 h-8 rounded-full bg-purple-100 border-2 border-white flex items-center justify-center text-[10px] font-bold">NK</div>
                    </div>
-                   <p className="text-xs text-slate-400 font-bold uppercase tracking-tighter">Sana Özel</p>
+                   <p className="text-[9px] md:text-xs text-slate-400 font-bold uppercase tracking-tighter">Sana Özel</p>
                 </div>
               </div>
 
@@ -133,21 +133,21 @@ export default function RoadmapPage() {
                   ?.sort((a: any, b: any) => a.created_at.localeCompare(b.created_at))
                   .map((step: any, index: number) => (
                     <div key={step.id} className="flex gap-6 relative group/item">
-                      <div className={`z-10 w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 font-black text-lg transition-all duration-500 shadow-sm
+                      <div className={`z-10 w-7 h-7 md:w-12 md:h-12 rounded-2xl flex items-center justify-center shrink-0 font-black text-md md:text-lg transition-all duration-500 shadow-sm
                         ${step.is_completed 
-                          ? "bg-emerald-500 text-white rotate-[360deg] scale-110" 
+                          ? "bg-emerald-500 text-white rotate-[360deg] scale-105" 
                           : "bg-slate-900 text-white group-hover/item:bg-purple-600"}`}>
                         {step.is_completed ? "✓" : index + 1}
                       </div>
 
                       <div className="flex-1 pt-1">
                         <div className="flex justify-between items-start">
-                          <h3 className={`text-xl font-bold transition-all ${step.is_completed ? "text-slate-400 line-through" : "text-slate-800"}`}>
+                          <h3 className={`text-lg md:text-xl font-bold transition-all ${step.is_completed ? "text-slate-400 line-through" : "text-slate-800"}`}>
                             {step.title}
                           </h3>
                           <button 
                             onClick={() => toggleMilestone(step.id, step.is_completed)}
-                            className="text-[10px] font-black text-purple-600 uppercase tracking-widest hover:text-purple-400"
+                            className="top-2 -right-2 text-[9px] md:text-[10px] font-black text-purple-600  tracking-widest hover:text-purple-400"
                           >
                             {step.is_completed ? "Geri Al" : "Tamamla"}
                           </button>
@@ -155,10 +155,10 @@ export default function RoadmapPage() {
                         {step.target_date && (
                           <div className="inline-flex items-center gap-1.5 mt-1 bg-slate-100 px-2 py-0.5 rounded-md">
                             <span className="w-1.5 h-1.5 rounded-full bg-purple-500"></span>
-                            <p className="text-slate-600 font-bold text-[10px]">{step.target_date}</p>
+                            <p className="text-slate-600 font-bold text-[10px] md:text-sm">{step.target_date}</p>
                           </div>
                         )}
-                        <p className="text-slate-500 text-sm mt-3 leading-relaxed font-medium">{step.description}</p>
+                        <p className="text-slate-500 text-[12px] md:text-sm mt-3 leading-relaxed font-medium">{step.description}</p>
                       </div>
                     </div>
                   ))}
@@ -169,20 +169,20 @@ export default function RoadmapPage() {
       </div>
 
       {isModalOpen && (
-        <div className="fixed inset-0  backdrop-blur-xl z-50 flex  justify-center p-24">
-          <div className="bg-white/90 w-full max-w-2xl max-h-[85vh] overflow-y-auto rounded-[3.5rem] p-10 md:p-14 shadow-2xl animate-in fade-in zoom-in duration-300">
-            <div className="flex justify-between items-center mb-10">
-              <h2 className="text-4xl font-black tracking-tight">Yeni Harita<span className="text-purple-600">.</span></h2>
+        <div className="fixed inset-0  backdrop-blur-xl z-50 flex  justify-center p-6 py-10 md:p-24">
+          <div className="bg-white/90 w-full max-w-2xl max-h-[90vh] overflow-y-auto rounded-[3.5rem] p-6 md:p-14 shadow-2xl animate-in fade-in zoom-in duration-300">
+            <div className="flex justify-between items-center mb-2 md:mb-10">
+              <h2 className="text-2xl md:text-3xl sm:text-3xl md:text-4xl font-black tracking-tight">Yeni Harita <span className="text-purple-600">.</span></h2>
               <button onClick={() => setIsModalOpen(false)} className="bg-slate-100 p-3 rounded-2xl hover:bg-red-50 transition-colors text-slate-400 hover:text-red-500">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
               </button>
             </div>
 
-            <form onSubmit={handleSubmit} className="space-y-8">
+            <form onSubmit={handleSubmit} className="space-y-4 md:space-y-8">
               <div className="space-y-2">
-                <label className="text-xs font-black uppercase tracking-widest text-slate-400 ml-2">Yol Haritası Başlığı</label>
+                <label className="text-xs font-black  tracking-widest text-slate-400 ml-2">Başlık</label>
                 <input
-                  className="w-full p-6 bg-slate-50 border-2 border-transparent focus:border-indigo-600 focus:bg-white rounded-[2rem] outline-none font-bold text-xl transition-all shadow-inner"
+                  className="w-full p-2 px-3 md:p-6 bg-slate-50 border-2 border-transparent focus:border-indigo-600 focus:bg-white rounded-[2rem] outline-none font-bold text-sm md:text-lg transition-all shadow-inner"
                   placeholder="Projen için bir başlık belirle..."
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
@@ -190,14 +190,14 @@ export default function RoadmapPage() {
                 />
               </div>
 
-              <div className="space-y-6">
-                <label className="text-xs font-black uppercase tracking-widest text-slate-400 ml-2">Aşamalar (Milestones)</label>
+              <div className="space-y-2 md:space-y-6">
+                <label className="text-xs font-black  tracking-widest text-slate-400 ml-2">Aşamalar</label>
                 {milestones.map((m, i) => (
-                  <div key={i} className="p-8 bg-slate-50 rounded-[2.5rem] border border-slate-100 space-y-6 relative overflow-hidden">
+                  <div key={i} className="p-8 bg-slate-50 rounded-[2.5rem] border border-slate-100 space-y-2 md:space-y-6 relative overflow-hidden">
                     <div className="absolute top-0 left-0 w-1.5 h-full bg-slate-200"></div>
-                    <div className="flex flex-col md:flex-row gap-4">
+                    <div className="flex flex-col md:flex-row gap-2 md:gap-4">
                       <input
-                        className="flex-1 p-4 bg-white border-none rounded-2xl text-sm font-bold shadow-sm focus:ring-2 focus:ring-indigo-500 outline-none"
+                        className="flex-1 p-2 md:p-4 bg-white border-none rounded-2xl text-xs md:text-sm font-bold shadow-sm focus:ring-2 focus:ring-indigo-500 outline-none"
                         placeholder="Aşama başlığı nedir?"
                         value={m.title}
                         onChange={(e) => {
@@ -209,7 +209,7 @@ export default function RoadmapPage() {
                       />
                       <input
                         type="date"
-                        className="p-4 bg-white border-none rounded-2xl text-sm font-bold shadow-sm focus:ring-2 focus:ring-indigo-500 outline-none"
+                        className="p-2 md:p-4 bg-white border-none rounded-2xl text-xs md:text-sm font-bold shadow-sm focus:ring-2 focus:ring-indigo-500 outline-none"
                         value={m.target_date}
                         onChange={(e) => {
                           const newM = [...milestones];
@@ -219,7 +219,7 @@ export default function RoadmapPage() {
                       />
                     </div>
                     <textarea
-                      className="w-full p-4 bg-white border-none rounded-2xl text-sm h-28 resize-none shadow-sm focus:ring-2 focus:ring-indigo-500 outline-none font-medium"
+                      className="w-full p-2 md:p-4 bg-white border-none rounded-2xl text-xs md:text-sm h-20 md:h-28 resize-none shadow-sm focus:ring-2 focus:ring-indigo-500 outline-none font-medium"
                       placeholder="Detaylar, notlar veya kaynaklar..."
                       value={m.description}
                       onChange={(e) => {
@@ -232,17 +232,17 @@ export default function RoadmapPage() {
                 ))}
               </div>
 
-              <div className="flex flex-col gap-4">
+              <div className="flex flex-col gap-2 md:gap-4">
                 <button
                   type="button"
                   onClick={() => setMilestones([...milestones, { title: "", target_date: "", description: "" }])}
-                  className="w-full py-4 border-2 border-dashed border-slate-200 rounded-2xl text-slate-400 font-bold hover:border-purple-400 hover:text-purple-600 transition-all"
+                  className="w-full py-2 md:py-4 border-2 border-dashed border-slate-200 rounded-2xl text-slate-400 text-sm font-bold hover:border-purple-400 hover:text-purple-600 transition-all"
                 >
                   + Bir Aşama Daha Ekle
                 </button>
                 <button 
                   type="submit" 
-                  className="w-full py-6 bg-gradient-to-t from-purple-600 via-purple-300 to-purple-500 text-white rounded-[2rem] font-black text-lg shadow-xl shadow-indigo-200 hover:bg-indigo-700 hover:-translate-y-1 transition-all"
+                  className="w-full py-2 md:py-6 bg-gradient-to-t from-purple-600 via-purple-300 to-purple-500 text-white rounded-[2rem] font-black text-md md:text-lg shadow-xl shadow-indigo-200 hover:bg-indigo-700 hover:-translate-y-1 transition-all"
                 >
                   YOL HARİTASINI OLUŞTUR
                 </button>

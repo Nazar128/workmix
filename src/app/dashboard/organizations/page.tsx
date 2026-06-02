@@ -47,29 +47,27 @@ export default async function OrganizationsPage() {
   .in("org_id", orgIds.length > 0 ? orgIds : ["00000000-0000-0000-0000-000000000000"]);
 
   return (
-    <div className="p-8 min-h-screen bg-[#FDFCFE]">
+    <div className="p-2 md:p-8 min-h-screen ">
       <div className="max-w-7xl mx-auto ">
         
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 bg-white/40 backdrop-blur-xl border border-white/60 p-2 rounded-[3rem] shadow-xl shadow-purple-100/20">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 bg-white/40 backdrop-blur-xl border border-white/60 p-2 md:p-2 rounded-[3rem] shadow-xl shadow-purple-100/20">
           <div>
-            <h1 className="text-4xl font-black bg-gradient-to-r from-purple-600 via-indigo-600 to-blue-600 bg-clip-text text-transparent tracking-tight">
-              ORGANİZASYONLARIM
-            </h1>
-            <p className="text-slate-500 mt-2 font-medium text-lg">
+            <h1 className="text-xl sm:text-2xl md:text-4xl font-bold tracking-tight text-purple-700 ">
+            ORGANİZASYON<span className="text-slate-900">LARIM</span>
+          </h1>
+            <p className="text-slate-500 mt-2 text-sm md:font-medium md:text-lg">
               Yönettiğiniz veya üyesi olduğunuz ekipleri buradan takip edin.
             </p>
           </div>
-          <div className="shrink-0 transition-transform hover:scale-105 active:scale-95">
+          <div className="shrink-0 mb-2 transition-transform hover:scale-105 active:scale-95">
             <AddOrganizationModal />
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2   gap-4 md:gap-8">
           {!orgMembers || orgMembers.length === 0 ? (
             <div className="col-span-full flex flex-col items-center justify-center p-24 bg-white/50 backdrop-blur-md border-2 border-dashed border-purple-100 rounded-[4rem] text-center">
-              <div className="w-24 h-24 bg-purple-50 rounded-[2rem] flex items-center justify-center text-4xl mb-6 shadow-inner">
-                🏢
-              </div>
+             
               <h2 className="text-2xl font-black text-slate-800 mb-3 tracking-tight">
                 Henüz bir organizasyon yok
               </h2>

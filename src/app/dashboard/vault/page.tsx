@@ -73,16 +73,16 @@ export default function VaultPage() {
 
   return (
     <div className="p-6 md:p-12 bg-[#F1F5F9] min-h-screen font-sans text-slate-900">
-      <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center mb-16 gap-6">
+      <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-start md:items-center mb-4 md:mb-16 gap-3 md:gap-6">
         <div>
-          <h1 className="text-5xl font-black tracking-tight text-slate-900 mb-2">
-            Kaynaklar<span className="text-indigo-600">.</span>
+          <h1 className="text-3xl md:text-5xl font-black tracking-tight text-slate-900 mb-2">
+            Kaynaklar<span className="text-purple-600">.</span>
           </h1>
-          <p className="text-slate-500 font-medium">Teknik dökümanlar, linkler ve önemli notlar deposu.</p>
+          <p className="text-sm text-slate-500 font-medium">Teknik dökümanlar, linkler ve önemli notlar deposu.</p>
         </div>
         <button
           onClick={() => setIsModalOpen(true)}
-          className="bg-gradient-to-t from-purple-600 via-purple-300 to-purple-500 to-purple-600 text-white px-8 py-4 rounded-2xl font-bold shadow-2xl hover:bg-purple-600 transition-all duration-300"
+          className="bg-gradient-to-t from-purple-600 via-purple-300 to-purple-500 to-purple-600 text-white p-2 px-8 md:py-4 rounded-2xl font-bold text-sm shadow-2xl hover:bg-purple-600 transition-all duration-300"
         >
           + Yeni Kaynak Ekle
         </button>
@@ -90,7 +90,7 @@ export default function VaultPage() {
 
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {resources.map((item) => (
-          <div key={item.id} className="group bg-white rounded-[2.5rem] p-8 shadow-[0_15px_40px_rgba(0,0,0,0.04)] border border-white hover:border-indigo-100 transition-all relative flex flex-col h-full">
+          <div key={item.id} className="group bg-white rounded-[2.5rem] p-4 md:p-8 shadow-[0_15px_40px_rgba(0,0,0,0.04)] border border-white hover:border-indigo-100 transition-all relative flex flex-col h-full">
             <button
               onClick={() => deleteResource(item.id)}
               className="absolute top-6 right-6 text-slate-200 hover:text-red-500 transition-colors opacity-0 group-hover:opacity-100"
@@ -100,7 +100,7 @@ export default function VaultPage() {
 
             <div className="flex flex-wrap gap-2 mb-6">
               {item.tags?.length > 0 ? item.tags.map((tag: string) => (
-                <span key={tag} className="text-[9px] bg-slate-100 text-slate-600 px-3 py-1 rounded-full uppercase font-black tracking-widest group-hover:bg-indigo-50 group-hover:text-purple-600 transition-colors">
+                <span key={tag} className="text-[8px] md:text-[9px] bg-slate-100 text-slate-600 px-3 py-1 rounded-full uppercase font-black tracking-widest group-hover:bg-indigo-50 group-hover:text-purple-600 transition-colors">
                   {tag}
                 </span>
               )) : (
@@ -108,11 +108,11 @@ export default function VaultPage() {
               )}
             </div>
 
-            <h3 className="text-2xl font-black text-slate-800 mb-4 leading-tight group-hover:text-purple-600 transition-colors">
+            <h3 className="text-xl md:text-2xl font-black text-slate-800 mb-2 md:mb-4 leading-tight group-hover:text-purple-600 transition-colors">
               {item.title}
             </h3>
 
-            <p className="text-slate-500 text-sm leading-relaxed mb-8 flex-grow font-medium line-clamp-4">
+            <p className="text-slate-500 text-[11px] md:text-sm leading-relaxed mb-2 md:mb-8 flex-grow font-medium line-clamp-4">
               {item.content}
             </p>
 
@@ -122,7 +122,7 @@ export default function VaultPage() {
                   href={item.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 text-indigo-600 font-black text-xs uppercase tracking-widest hover:gap-3 transition-all"
+                  className="inline-flex items-center gap-2 text-indigo-600 font-bold text-[11px] md:text-xs  tracking-widest hover:gap-3 transition-all"
                 >
                   Linke Git 
                   <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg>
@@ -139,20 +139,20 @@ export default function VaultPage() {
       </div>
 
       {isModalOpen && (
-        <div className="fixed inset-0  backdrop-blur-xl z-50 flex justify-center p-18">
+        <div className="fixed inset-0  backdrop-blur-xl z-50 flex justify-center p-6 py-10 md:p-24">
           <div className="bg-white/90 w-full max-w-xl max-h-[90vh] overflow-y-auto rounded-[3.5rem] p-8 md:p-12 shadow-2xl animate-in fade-in zoom-in duration-300">
-            <div className="flex justify-between items-center mb-6">
-              <h2 className="text-3xl font-black tracking-tight">Depoya Ekle<span className="text-purple-600"> .</span></h2>
+            <div className="flex justify-between items-center mb-2 md:mb-6">
+              <h2 className="text-2xl md:text-3xl font-bold tracking-tight">Depoya Ekle<span className="text-purple-600"> .</span></h2>
               <button onClick={() => setIsModalOpen(false)} className="bg-slate-100 p-3 rounded-2xl text-slate-400 hover:text-red-500 transition-colors">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
               </button>
             </div>
 
-            <form onSubmit={handleSubmit} className="space-y-4">
+            <form onSubmit={handleSubmit} className="space-y-2 md:space-y-4">
               <div className="space-y-2">
-                <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-2">Başlık</label>
+                <label className="text-[9px] md:text-[10px] font-black uppercase tracking-widest text-slate-400 ml-2">Başlık</label>
                 <input
-                  className="w-full p-4 bg-slate-50 border-2 border-transparent focus:border-indigo-600 focus:bg-white rounded-2xl outline-none font-bold transition-all shadow-inner"
+                  className="w-full p-2 md:p-4 bg-slate-50 text-sm border-2 border-transparent focus:border-indigo-600 focus:bg-white rounded-2xl outline-none font-bold transition-all shadow-inner"
                   placeholder="Kaynağın adı nedir?"
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
@@ -161,9 +161,9 @@ export default function VaultPage() {
               </div>
 
               <div className="space-y-2">
-                <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-2">URL </label>
+                <label className="text-[9px] md:text-[10px] font-black uppercase tracking-widest text-slate-400 ml-2">URL </label>
                 <input
-                  className="w-full p-4 bg-slate-50 border-2 border-transparent focus:border-indigo-600 focus:bg-white rounded-2xl outline-none font-bold transition-all shadow-inner"
+                  className="w-full p-2 md:p-4 bg-slate-50 text-sm border-2 border-transparent focus:border-indigo-600 focus:bg-white rounded-2xl outline-none font-bold transition-all shadow-inner"
                   placeholder="https://..."
                   value={url}
                   onChange={(e) => setUrl(e.target.value)}
@@ -171,9 +171,9 @@ export default function VaultPage() {
               </div>
 
               <div className="space-y-2">
-                <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-2">Açıklama / İçerik</label>
+                <label className="text-[9px] md:text-[10px] font-black uppercase tracking-widest text-slate-400 ml-2">Açıklama / İçerik</label>
                 <textarea
-                  className="w-full p-4 bg-slate-50 border-2 border-transparent focus:border-indigo-600 focus:bg-white rounded-2xl outline-none font-medium h-32 resize-none transition-all shadow-inner"
+                  className="w-full p-2 md:p-4 bg-slate-50 text-sm border-2 border-transparent focus:border-indigo-600 focus:bg-white rounded-2xl outline-none font-medium h-32 resize-none transition-all shadow-inner"
                   placeholder="Bu kaynak hakkında neler bilmelisin?"
                   value={content}
                   onChange={(e) => setContent(e.target.value)}
@@ -182,9 +182,9 @@ export default function VaultPage() {
               </div>
 
               <div className="space-y-2">
-                <label className="text-[10px] font-black uppercase tracking-widest text-slate-400 ml-2">Etiketler </label>
+                <label className="text-[9px] md:text-[10px] font-black uppercase tracking-widest text-slate-400 ml-2">Etiketler </label>
                 <input
-                  className="w-full p-4 bg-slate-50 border-2 border-transparent focus:border-indigo-600 focus:bg-white rounded-2xl outline-none font-bold transition-all shadow-inner"
+                  className="w-full p-2 md:p-4 bg-slate-50 text-sm border-2 border-transparent focus:border-indigo-600 focus:bg-white rounded-2xl outline-none font-bold transition-all shadow-inner"
                   placeholder="nextjs, api, tasarım"
                   value={tags}
                   onChange={(e) => setTags(e.target.value)}
@@ -193,7 +193,7 @@ export default function VaultPage() {
 
               <button 
                 type="submit" 
-                className="w-full py-5 bg-gradient-to-t from-purple-600 via-purple-300 to-purple-500 to-purple-600 text-white rounded-[2rem] font-black text-lg shadow-xl shadow-indigo-100 hover:bg-purple-700 hover:-translate-y-1 transition-all mt-4"
+                className="w-full py-2 md:py-5 bg-gradient-to-t from-purple-600 via-purple-300 to-purple-500 to-purple-600 text-white rounded-[2rem] font-black text-md md:text-lg shadow-xl shadow-indigo-100 hover:bg-purple-700 hover:-translate-y-1 transition-all mt-2 md:mt-4"
               >
                 KAYNAĞI DEPOLA
               </button>
