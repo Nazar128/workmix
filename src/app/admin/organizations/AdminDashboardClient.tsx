@@ -30,31 +30,31 @@ export default function AdminDashboardClient({ orgs }: { orgs: Org[] }) {
     };
 
     return (
-        <div className="max-w-7xl mx-auto p-6 space-y-8 bg-gray-50/50 min-h-screen">
-            <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 pb-6 border-b border-gray-200">
+        <div className="max-w-6xl mx-auto space-y-2 md:space-y-8 bg-gray-50/50 min-h-screen">
+            <div className="flex flex-col md:mx-32 md:flex-row justify-between items-start md:items-center gap-2 pb-2 md:pb-6 border-b border-gray-200">
                 <div>
-                    <h1 className="text-4xl font-medium text-violet-800 tracking-tight flex items-center gap-3">
+                    <h1 className="text-2xl m-8 mb-2  md:text-4xl font-medium text-violet-800 tracking-tight flex items-center gap-3">
                         <ShieldAlert className="w-7 h-7 text-purple-600" />
-                        ORGANİZASYON <span className=" font-medium text-3xl text-slate-500">YÖNETİMİ</span>
+                        ORGANİZASYON <span className=" font-medium text-2xl md:text-3xl text-slate-500">YÖNETİMİ</span>
                     </h1>
-                    <p className="text-sm text-gray-500 mt-1">Sistemdeki tüm organizasyonları, limitleri ve erişim durumlarını buradan kontrol edebilirsiniz.</p>
+                    <p className="text-xs md:text-sm text-gray-500 m-2">Sistemdeki tüm organizasyonları, limitleri ve erişim durumlarını buradan kontrol edebilirsiniz.</p>
                 </div>
-                <div className="bg-purple-50 text-purple-700 px-4 py-2 rounded-2xl text-sm font-bold border border-purple-100 shadow-sm flex items-center gap-2">
-                    Toplam Kurum: <span className="text-base font-black">{orgs.length}</span>
+                <div className="bg-purple-50 text-purple-700 m-2 p-1 md:px-4 md:py-2 rounded-2xl text-sm font-bold border border-purple-100 shadow-sm flex items-center gap-2">
+                    Toplam Kurum:<span className="text-base font-black">{orgs.length}</span>
                 </div>
             </div>
 
-            <div className="bg-white rounded-2xl border border-gray-200/80 shadow-2xl shadow-violet-400 overflow-hidden">
+            <div className="bg-white rounded-2xl mr-4 md:mx-32 border border-gray-200/80 shadow-2xl shadow-violet-400 overflow-hidden">
                 <div className="overflow-x-auto">
                     <table className="w-full text-sm text-left  border-collapse">
                         <thead>
                             <tr className="bg-gradient-to-b from-violet-800 to-violet-200  text-gray-600 font-semibold">
-                                <th className="px-6 py-4 font-bold text-gray-700">İsim / Organizasyon</th>
-                                <th className="px-6 py-4 font-bold text-gray-700">Mevcut Plan</th>
-                                <th className="px-6 py-4 font-bold text-gray-700">Üye Durumu</th>
-                                <th className="px-6 py-4 font-bold text-gray-700">Proje Durumu</th>
-                                <th className="px-6 py-4 font-bold text-gray-700">Durum</th>
-                                <th className="px-6 py-4 text-right pr-8 font-bold text-gray-700">Aksiyonlar</th>
+                                <th className="py-2.5 px-6 md:py-4 font-bold text-gray-700">Organizasyon</th>
+                                <th className="py-2.5 px-6 md:py-4 font-bold text-gray-700">Mevcut Plan</th>
+                                <th className="py-2.5.5 px-6 md:py-4 font-bold text-gray-700">Üye Durumu</th>
+                                <th className="py-2.5 px-6 md:py-4 font-bold text-gray-700">Proje Durumu</th>
+                                <th className="py-2.5 px-6 md:py-4 font-bold text-gray-700">Durum</th>
+                                <th className="py-2.5 px-6 md:py-4 text-right pr-28 font-bold text-gray-700">Aksiyonlar</th>
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-gray-100">
@@ -65,57 +65,57 @@ export default function AdminDashboardClient({ orgs }: { orgs: Org[] }) {
 
                                 return (
                                     <tr key={org.id} className="hover:bg-gray-50/80 transition-colors group">
-                                        <td className="px-6 py-4.5">
-                                            <div className="font-semibold text-gray-900">{org.name}</div>
-                                            <div className="text-xs text-gray-400 mt-0.5">@{org.slug}</div>
+                                        <td className="p-2 md:px-6 md:py-4.5">
+                                            <div className="text-[12px] md:text-base font-semibold text-gray-900">{org.name}</div>
+                                            <div className="text-[9px] md:text-xs text-gray-400 mt-0.5">@{org.slug}</div>
                                         </td>
-                                        <td className="px-6 py-4.5">
-                                            <span className="inline-flex items-center px-2.5 py-1 rounded-lg text-xs font-semibold bg-gray-100 text-gray-700 border border-gray-200/60 uppercase tracking-wider">
+                                        <td className="p-2 md:px-6 md:py-4.5">
+                                            <span className="inline-flex items-center p-1 md:px-2.5 py-1 rounded-lg text-[10px] md:text-xs font-semibold bg-gray-100 text-gray-700 border border-gray-200/60 uppercase tracking-wider">
                                                 {org.plan}
                                             </span>
                                         </td>
-                                        <td className="px-6 py-4.5 text-gray-600">
+                                        <td className="p-2 md:px-6 md:py-4.5 text-gray-600">
                                             {isEditing ? (
                                                 <div className="flex items-center gap-2">
-                                                    <Users className="w-4 h-4 text-purple-400 shrink-0" />
+                                                    <Users className="w-2 h-2 md:w-4 md:h-4 text-purple-400 shrink-0" />
                                                     <input
                                                         type="number"
                                                         value={editingLimits.maxMembers}
                                                         onChange={(e) => setEditingLimits({ ...editingLimits, maxMembers: +e.target.value })}
-                                                        className="w-20 border border-purple-200 rounded-lg px-2 py-1 text-sm outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-100 font-medium transition-all"
+                                                        className="w-20 border border-purple-200 rounded-lg p-1 md:px-2 py-1 text-sm outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-100 font-medium transition-all"
                                                     />
                                                 </div>
                                             ) : (
                                                 <div className="flex items-center gap-2">
-                                                    <Users className="w-4 h-4 text-gray-400" />
+                                                    <Users className="w-2 h-2 md:w-4 md:h-4 text-gray-400" />
                                                     <span className="font-medium text-gray-900">{memberCount}</span>
                                                     <span className="text-gray-400">/</span>
                                                     <span className="text-gray-500 text-xs">{org.max_members}</span>
                                                 </div>
                                             )}
                                         </td>
-                                        <td className="px-6 py-4.5 text-gray-600">
+                                        <td className="p-2 md:px-6 md:py-4.5 text-gray-600">
                                             {isEditing ? (
                                                 <div className="flex items-center gap-2">
-                                                    <Layers className="w-4 h-4 text-purple-400 shrink-0" />
+                                                    <Layers className="w-2 h-2 md:w-4 md:h-4 text-purple-400 shrink-0" />
                                                     <input
                                                         type="number"
                                                         value={editingLimits.maxProjects}
                                                         onChange={(e) => setEditingLimits({ ...editingLimits, maxProjects: +e.target.value })}
-                                                        className="w-20 border border-purple-200 rounded-lg px-2 py-1 text-sm outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-100 font-medium transition-all"
+                                                        className="w-20 border border-purple-200 rounded-lg p-1 md:px-2 py-1 text-sm outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-100 font-medium transition-all"
                                                     />
                                                 </div>
                                             ) : (
                                                 <div className="flex items-center gap-2">
-                                                    <Layers className="w-4 h-4 text-gray-400" />
+                                                    <Layers className="w-2 h-2 md:w-4 md:h-4 text-gray-400" />
                                                     <span className="font-medium text-gray-900">{projectCount}</span>
                                                     <span className="text-gray-400">/</span>
                                                     <span className="text-gray-500 text-xs">{org.max_projects}</span>
                                                 </div>
                                             )}
                                         </td>
-                                        <td className="px-6 py-4.5">
-                                            <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold ${org.is_suspended ? "bg-red-50 text-red-700 border border-red-100" : "bg-emerald-50 text-emerald-700 border border-emerald-100"}`}>
+                                        <td className="p-2 md:px-6 md:py-4.5">
+                                            <span className={`inline-flex items-center gap-1.5 p-1 md:px-3 py-1 rounded-full text-xs font-semibold ${org.is_suspended ? "bg-red-50 text-red-700 border border-red-100" : "bg-emerald-50 text-emerald-700 border border-emerald-100"}`}>
                                                 {org.is_suspended ? (
                                                     <>
                                                         <XCircle className="w-3.5 h-3.5" /> Askıda
@@ -127,7 +127,7 @@ export default function AdminDashboardClient({ orgs }: { orgs: Org[] }) {
                                                 )}
                                             </span>
                                         </td>
-                                        <td className="px-6 py-4.5 text-right pr-8">
+                                        <td className="p-2 md:px-6 md:py-4.5 text-right pr-8">
                                             <div className="flex items-center justify-end gap-2.5 opacity-90 group-hover:opacity-100 transition-opacity">
                                                 {isEditing ? (
                                                     <div className="flex items-center gap-1.5">
@@ -137,22 +137,22 @@ export default function AdminDashboardClient({ orgs }: { orgs: Org[] }) {
                                                             className="p-1.5 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 transition-colors shadow-sm disabled:opacity-50"
                                                             title="Kaydet"
                                                         >
-                                                            {isPending ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <Save className="w-3.5 h-3.5" />}
+                                                            {isPending ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <Save className="w-2 h-2 md:w-3.5 md:h-3.5" />}
                                                         </button>
                                                         <button 
                                                             onClick={() => setEditingLimits(null)} 
                                                             className="p-1.5 bg-gray-100 text-gray-500 rounded-lg hover:bg-gray-200 transition-colors"
                                                             title="İptal"
                                                         >
-                                                            <X className="w-3.5 h-3.5" />
+                                                            <X className="w-2 h-2 md:w-3.5 md:h-3.5" />
                                                         </button>
                                                     </div>
                                                 ) : (
                                                     <button
                                                         onClick={() => setEditingLimits({ id: org.id, maxMembers: org.max_members, maxProjects: org.max_projects })}
-                                                        className="inline-flex items-center gap-1 px-2.5 py-1.5 bg-gray-50 border border-gray-200 text-gray-600 hover:text-purple-700 hover:border-purple-200 hover:bg-purple-50 rounded-xl text-xs font-semibold transition-all"
+                                                        className="inline-flex items-center gap-1 p-1.5 bg-gray-50 border border-gray-200 text-gray-600 hover:text-purple-700 hover:border-purple-200 hover:bg-purple-50 rounded-xl text-xs font-semibold transition-all"
                                                     >
-                                                        <Settings2 className="w-3.5 h-3.5" />
+                                                        <Settings2 className="w-2 h-2 md:w-3.5 md:h-3.5" />
                                                         Limitler
                                                     </button>
                                                 )}
@@ -169,7 +169,7 @@ export default function AdminDashboardClient({ orgs }: { orgs: Org[] }) {
                                                     href={`/admin/organizations/${org.id}`}
                                                     className="inline-flex items-center gap-0.5 px-2.5 py-1.5 bg-gray-900 text-white hover:bg-gray-800 rounded-xl text-xs font-semibold shadow-sm transition-all"
                                                 >
-                                                    Detay <ArrowUpRight className="w-3 h-3" />
+                                                    Detay <ArrowUpRight className="w-2 h-2 md:w-3 md:h-3" />
                                                 </Link>
                                             </div>
                                         </td>

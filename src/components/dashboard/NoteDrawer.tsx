@@ -96,35 +96,35 @@ export default function NotesDashboard({
   }
 
   return (
-    <div className="fixed inset-0 z-[150] bg-purple-950/20 backdrop-blur-[4px] flex items-center justify-center p-4">
+    <div className="fixed inset-0 z-[150] bg-purple-950/20 backdrop-blur-[4px] flex md:items-center justify-center py-8 px-4">
       <div className="absolute inset-0" onClick={onClose} />
       
-      <div className="relative bg-purple-50/40 w-full max-w-5xl h-[85vh] rounded-3xl shadow-2xl border border-purple-100 overflow-hidden flex text-gray-800 p-6 gap-6 animate-in fade-in zoom-in-95 duration-200 z-10">
+      <div className="relative bg-purple-50/40 w-full max-w-5xl  h-[90vh] rounded-3xl shadow-2xl border border-purple-100 overflow-hidden grid  md:flex text-gray-800 p-3 md:p-6 gap-6 animate-in fade-in zoom-in-95 duration-200 z-10">
         
-        <div className="w-80 shrink-0 flex flex-col gap-4 bg-white rounded-2xl border border-purple-100/80 shadow-sm p-5 h-full">
-          <div className="flex justify-between items-center pb-2 border-b border-purple-50">
-            <h1 className="text-lg font-bold text-purple-950 tracking-tight">Notlar</h1>
+        <div className="w-full md:w-80 shrink-0 flex flex-col gap-4 bg-white rounded-2xl border border-purple-100/80 shadow-sm p-5 h-30">
+          <div className="flex justify-between items-center pb-0.5 md:pb-2 border-b border-purple-50">
+            <h1 className="text-md md:text-lg  font-bold text-purple-950 tracking-tight">Notlar</h1>
             <div className="flex items-center gap-1">
               <button 
                 onClick={() => setIsModalOpen(true)}
-                className="p-2 text-purple-600 hover:bg-purple-50 rounded-xl transition-all"
+                className="p-1 md:p-2 text-purple-600 hover:bg-purple-50 rounded-xl transition-all"
                 title="Eski Notlar"
               >
-                <Folder className="w-4 h-4" />
+                <Folder className="w-2 h-2 md:w-4 md:h-4" />
               </button>
               <button 
                 onClick={handleNewNote}
-                className="p-2 bg-purple-600 text-white rounded-xl hover:bg-purple-700 transition-all shadow-sm"
+                className="p-1 md:p-2 bg-purple-600 text-white rounded-xl hover:bg-purple-700 transition-all shadow-sm"
                 title="Yeni Not"
               >
-                <Plus className="w-4 h-4" />
+                <Plus className="w-2 h-2 md:w-4 md:h-4" />
               </button>
             </div>
           </div>
 
-          <div className="flex-1 overflow-y-auto space-y-2 pr-1">
+          <div className="flex-1 overflow-y-auto space-y-1 md:space-y-2 pr-1">
             {notes.length === 0 ? (
-              <div className="text-center py-8">
+              <div className="text-center py-2 md:py-8">
                 <p className="text-xs font-medium text-purple-400">Henüz not yok</p>
               </div>
             ) : (
@@ -132,7 +132,7 @@ export default function NotesDashboard({
                 <div 
                   key={note.id} 
                   onClick={() => handleSelectNote(note)}
-                  className={`p-4 rounded-xl border transition-all cursor-pointer space-y-2 text-left ${selectedNoteId === note.id ? "bg-purple-50 border-purple-300 shadow-sm" : "bg-purple-50/20 border-purple-100/60 hover:border-purple-300 hover:bg-white"}`}
+                  className={`p-1 md:p-4 rounded-xl border transition-all cursor-pointer space-y-2 text-left ${selectedNoteId === note.id ? "bg-purple-50 border-purple-300 shadow-sm" : "bg-purple-50/20 border-purple-100/60 hover:border-purple-300 hover:bg-white"}`}
                 >
                   <h3 className="font-bold text-sm text-purple-950 truncate">{note.title || "Başlıksız Not"}</h3>
                   <div className="text-[9px] text-purple-400 font-medium bg-white border border-purple-100/50 w-fit px-1.5 py-0.5 rounded">
@@ -151,10 +151,10 @@ export default function NotesDashboard({
                 <FileText className="w-4 h-4 text-purple-600" />
               </div>
               <div>
-                <h2 className="text-sm font-bold text-purple-950">
+                <h2 className="text-xs md:text-sm font-bold text-purple-950">
                   {selectedNoteId ? "Notu Düzenle" : "Not Yazma Alanı"}
                 </h2>
-                <p className="text-[10px] text-purple-400 font-medium">{projectName || "Genel Notlar"}</p>
+                <p className="text-[8px] md:text-[10px] text-purple-400 font-medium">{projectName || "Genel Notlar"}</p>
               </div>
             </div>
             <button 
@@ -165,41 +165,41 @@ export default function NotesDashboard({
             </button>
           </div>
 
-          <div className="flex-1 overflow-y-auto px-6 py-6 space-y-5">
+          <div className="flex-1 overflow-y-auto py-2 px-6 md:py-6 space-y-2 md:space-y-5">
             <input 
               type="text" 
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               placeholder="Başlıksız Not" 
-              className="w-full text-2xl font-extrabold border-none focus:ring-0 placeholder:text-purple-200 p-0 outline-none text-purple-950 bg-transparent tracking-tight"
+              className="w-full text-lg md:text-2xl font-extrabold border-none focus:ring-0 placeholder:text-purple-200 p-0 outline-none text-purple-950 bg-transparent tracking-tight"
             />
             
-            <div className="flex items-center gap-3 text-[11px] text-purple-400 font-medium bg-purple-50/50 px-3 py-1.5 rounded-lg w-fit">
-              <Clock className="w-3.5 h-3.5 text-purple-500" />
+            <div className="flex items-center gap-3 text-[9px] md:text-[11px] text-purple-400 font-medium bg-purple-50/50 px-3 py-1.5 rounded-lg w-fit">
+              <Clock className="w-2 h-2 md:w-3.5 md:h-3.5 text-purple-500" />
               <span>Son Güncelleme: {new Date().toLocaleDateString('tr-TR')}</span>
             </div>
 
-            <div className="pt-4 border-t border-purple-50/80">
+            <div className="pt-2 md:pt-4 border-t border-purple-50/80">
               <div className="border border-purple-200 rounded-xl overflow-hidden focus-within:border-purple-400 transition-colors shadow-sm bg-white">
                 <TiptapEditor onUpdate={(editor) => (editorRef.current = editor)} />
               </div>
             </div>
           </div>
 
-          <div className="p-4 border-t border-purple-100/80 flex items-center gap-3 bg-purple-50/30">
+          <div className="p-2 md:p-4 border-t border-purple-100/80 flex items-center gap-3 bg-purple-50/30">
             <button 
               onClick={handleSave}
               disabled={loading}
-              className="flex-1 flex items-center justify-center gap-2 bg-purple-600 text-white py-3 rounded-xl text-sm font-semibold hover:bg-purple-700 active:scale-[0.98] transition-all shadow-md shadow-purple-200 disabled:opacity-50"
+              className="flex-1 flex items-center justify-center gap-2 bg-purple-600 text-white py-1 md:py-3 rounded-xl text-xs md:text-sm font-semibold hover:bg-purple-700 active:scale-[0.98] transition-all shadow-md shadow-purple-200 disabled:opacity-50"
             >
-              {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Save className="w-4 h-4" />}
+              {loading ? <Loader2 className="w-2 h-2 md:w-4 md:h-4 animate-spin" /> : <Save className="w-4 h-4" />}
               {selectedNoteId ? "Değişiklikleri Kaydet" : "Notu Kaydet"}
             </button>
             <button 
               onClick={handleNewNote}
-              className="p-3 text-purple-400 hover:text-red-500 hover:bg-red-50 hover:border-red-100 rounded-xl transition-all border border-purple-100 bg-white shadow-sm"
+              className="p-2 md:p-3 text-purple-400 hover:text-red-500 hover:bg-red-50 hover:border-red-100 rounded-xl transition-all border border-purple-100 bg-white shadow-sm"
             >
-              <Trash2 className="w-4 h-4" />
+              <Trash2 className="w-3 h-3 md:w-4 md:h-4" />
             </button>
           </div>
         </div>

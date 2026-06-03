@@ -21,10 +21,10 @@ export default async function AdminLayout({
     if (profile?.system_role !== "super_admin") redirect("/");
 
     return (
-        <div className="min-h-screen  dark:bg-black text-gray-600 flex">
+        <div className="min-h-screen min-w-full dark:bg-black text-gray-600 ">
             <AdminNavbar />
-            <main className="flex-1 pl-64 min-h-screen">
-                <div className="p-8 max-w-7xl mx-auto">
+            <main className="flex-1 py-12 min-h-screen">
+                <div className="align-center justify-center px-0.5 sm:p-4 lg:px-8 max-w-7xl mx-auto w-screen">
                     {children}
                 </div>
             </main>

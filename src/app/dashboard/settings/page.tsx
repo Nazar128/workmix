@@ -105,28 +105,28 @@ export default function UserSettings() {
 
       <section className="mb-4 space-y-4">
         <h2 className="text-md md:text-lg font-medium text-purple-400">Hesap Durumu</h2>
-        <div className="flex items-center justify-between p-4 border border-white/10 rounded-xl bg-white/5 backdrop-blur-md">
+        <div className="flex items-center justify-between p-2 md:p-4 border border-white/10 rounded-xl bg-white/5 backdrop-blur-md">
           <div className="flex items-center gap-3">
             <div className={`w-3 h-3 rounded-full ${user.is_active ? 'bg-green-500' : 'bg-red-500'}`}></div>
-            <span className="text-md font-medium text-green-800">Hesap Durumu: {user.is_active ? 'Aktif' : 'Kısıtlı'}</span>
+            <span className="text-sm md:text-md font-medium text-green-800">Hesap Durumu: {user.is_active ? 'Aktif' : 'Kısıtlı'}</span>
           </div>
           <span className="text-xs text-gray-500 uppercase tracking-widest">{user.system_role}</span>
         </div>
       </section>
 
-      <section className="mt-12 space-y-4 border-t border-red-500/20 pt-8">
+      <section className="mt-8 md:mt-12 space-y-4 border-t border-red-500/20 pt-6 md:pt-8">
         <h2 className="text-md md:text-lg font-medium text-purple-600">Oturum Ayarları</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-2 md:gap-4">
           <button
             onClick={handleLogout}
-            className="p-2 md:p-4 border border-white/10 rounded-xl bg-white/5 hover:bg-white/10 transition-all text-left"
+            className="p-1 md:p-4 border border-white/10 rounded-xl bg-white/5 hover:bg-white/10 transition-all text-left"
           >
             <h4 className="text-xs md:text-sm font-semibold text-red-900">Oturumu Kapat</h4>
             <p className="text-xs text-gray-500 mt-1">Mevcut oturumunuzu güvenli bir şekilde sonlandırın.</p>
           </button>
           <button
             onClick={handleDeleteAccount}
-            className="p-2 md:p-4 border border-red-500/10 rounded-xl bg-red-500/5 hover:bg-red-500/10 transition-all text-left group"
+            className="py-1 md:py-4 px-0.5 md:p-4 border border-red-500/10 rounded-xl bg-red-500/5 hover:bg-red-500/10 transition-all text-left group"
           >
             <h4 className="text-xs md:text-sm font-semibold text-red-500">Hesabı Sil</h4>
             <p className="text-xs text-gray-500 mt-1 group-hover:text-red-400">Tüm verileriniz kalıcı olarak silinecektir.</p>

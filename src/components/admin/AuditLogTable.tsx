@@ -42,50 +42,52 @@ export default function AuditLogTable({ logs }: { logs: AuditLog[] }) {
   }
 
   return (
-    <div className="bg-gray-900/50 rounded-xl border border-gray-800 overflow-hidden">
-      <table className="w-full text-sm text-left">
-        <thead className="bg-gray-800/50 text-gray-400 uppercase text-xs">
-          <tr>
-            <th className="px-6 py-4">İşlem</th>
-            <th className="px-6 py-4">Yapan</th>
-            <th className="px-6 py-4">Detay</th>
-            <th className="px-6 py-4">IP</th>
-            <th className="px-6 py-4">Zaman</th>
-          </tr>
-        </thead>
-        <tbody className="divide-y divide-gray-800">
-          {logs.map((log) => {
-            const meta = ACTION_LABELS[log.action] ?? { label: log.action, color: "text-gray-400 bg-gray-800" };
-            return (
-              <tr key={log.id} className="hover:bg-gray-800/30 transition-colors">
-                <td className="px-6 py-4">
-                  <span className={`text-xs font-semibold px-2 py-1 rounded ${meta.color}`}>
-                    {meta.label}
-                  </span>
-                </td>
-                <td className="px-6 py-4 text-gray-300">
-                  {log.users?.name ?? "Sistem"}
-                  {log.users?.email && (
-                    <div className="text-gray-500 text-xs">{log.users.email}</div>
-                  )}
-                </td>
-                <td className="px-6 py-4 text-gray-400 text-xs max-w-xs truncate">
-                  {log.new_value ? JSON.stringify(log.new_value) : "-"}
-                </td>
-                <td className="px-6 py-4 text-gray-500 text-xs">
-                  {log.ip_address ?? "-"}
-                </td>
-                <td className="px-6 py-4 text-gray-400 text-xs whitespace-nowrap">
-                  {formatDistanceToNow(new Date(log.created_at), {
-                    addSuffix: true,
-                    locale: tr,
-                  })}
-                </td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
+    <div className="w-full overflow-x-auto rounded-xl border border-gray-800 bg-gray-900/50 no-scrollbar">
+      <div className="inline-block min-w-full align-middle">
+        <table className="min-w-full table-fixed divide-y divide-gray-800 text-sm text-left">
+          <thead className="bg-gray-800/50 text-gray-400 uppercase text-xs">
+            <tr>
+              <th scope="col" className="w-[180px] px-4 sm:px-6 py-4 font-semibold">İşlem</th>
+              <th scope="col" className="w-[180px] px-4 sm:px-6 py-4 font-semibold">Yapan</th>
+              <th scope="col" className="w-[220px] px-4 sm:px-6 py-4 font-semibold">Detay</th>
+              <th scope="col" className="w-[120px] px-4 sm:px-6 py-4 font-semibold">IP</th>
+              <th scope="col" className="w-[140px] px-4 sm:px-6 py-4 font-semibold">Zaman</th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-gray-800 bg-transparent">
+            {logs.map((log) => {
+              const meta = ACTION_LABELS[log.action] ?? { label: log.action, color: "text-gray-400 bg-gray-800" };
+              return (
+                <tr key={log.id} className="hover:bg-gray-800/30 transition-colors">
+                  <td className="px-4 sm:px-6 py-4 whitespace-nowrap">
+                    <span className={`text-[11px] sm:text-xs font-semibold px-2 py-1 rounded inline-block truncate max-w-full ${meta.color}`}>
+                      {meta.label}
+                    </span>
+                  </td>
+                  <td className="px-4 sm:px-6 py-4 text-gray-300 break-words">
+                    <div className="font-medium truncate max-w-full">{log.users?.name ?? "Sistem"}</div>
+                    {log.users?.email && (
+                      <div className="text-gray-500 text-xs truncate max-w-full">{log.users.email}</div>
+                    )}
+                  </td>
+                  <td className="px-4 sm:px-6 py-4 text-gray-400 text-xs truncate max-w-[220px]">
+                    {log.new_value ? JSON.stringify(log.new_value) : "-"}
+                  </td>
+                  <td className="px-4 sm:px-6 py-4 text-gray-500 text-xs whitespace-nowrap">
+                    {log.ip_address ?? "-"}
+                  </td>
+                  <td className="px-4 sm:px-6 py-4 text-gray-400 text-xs whitespace-nowrap">
+                    {formatDistanceToNow(new Date(log.created_at), {
+                      addSuffix: true,
+                      locale: tr,
+                    })}
+                  </td>
+                </tr>
+              );
+            })}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }

@@ -96,12 +96,12 @@ export default function AnnouncementsClient({ announcements }: { announcements: 
     <div className="max-w-5xl mx-auto p-6 space-y-8 bg-gradient-to-br from-purple-50/30 via-slate-50 to-indigo-50/20 min-h-screen text-gray-800 antialiased">
       
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 pb-6 border-b border-purple-100">
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3 mt-2">
           <div className="p-3 bg-white border border-purple-100 rounded-2xl text-purple-600 shadow-md shadow-purple-100/50">
-            <Bell className="w-6 h-6 text-purple-600 animate-swing" />
+            <Bell className="w-4 h-4 md:w-6 md:h-6 text-purple-600 animate-swing" />
           </div>
           <div>
-            <h1 className="text-2xl font-black text-slate-900 tracking-tight flex items-center gap-2">
+            <h1 className="text-xl md:text-2xl font-black text-slate-900 tracking-tight flex items-center gap-2">
               Duyuru Yönetimi
             </h1>
             <p className="text-sm font-medium text-gray-400 mt-0.5">Tüm kullanıcılara veya organizasyonlara iletilecek sistem bildirimleri.</p>
@@ -110,7 +110,7 @@ export default function AnnouncementsClient({ announcements }: { announcements: 
         
         <button
           onClick={() => setShowForm(!showForm)}
-          className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-bold transition-all shadow-md active:scale-95 ${
+          className={`flex items-center gap-2 md:px-5 p-2.5 rounded-xl text-[11px] md:text-sm font-bold transition-all shadow-md active:scale-95 ${
             showForm 
               ? "bg-slate-200 text-slate-700 hover:bg-slate-300" 
               : "bg-purple-600 text-white hover:bg-purple-700 shadow-purple-200"
@@ -122,13 +122,13 @@ export default function AnnouncementsClient({ announcements }: { announcements: 
       </div>
 
       {showForm && (
-        <div className="bg-white border border-purple-100 rounded-2xl p-6 shadow-xl shadow-purple-100/40 relative overflow-hidden transition-all animate-in fade-in slide-in-from-top-4 duration-200">
+        <div className="bg-white border border-purple-100 rounded-2xl m-6 p-2 md:p-6 shadow-xl shadow-purple-100/40 relative overflow-hidden transition-all animate-in fade-in slide-in-from-top-4 duration-200">
           <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-purple-500 to-indigo-500" />
-          <h2 className="text-base font-black text-slate-900 mb-5 flex items-center gap-2">
+          <h2 className="text-sm md:text-base font-black text-slate-900 mb-5 flex items-center gap-2">
             <Megaphone className="w-4 h-4 text-purple-500" /> Yeni Duyuru Detayları
           </h2>
           
-          <div className="space-y-4">
+          <div className="space-y-2 md:space-y-4">
             <div>
               <label className="block text-xs font-bold text-gray-500  tracking-wider mb-1.5">Duyuru Başlığı</label>
               <input
@@ -136,7 +136,7 @@ export default function AnnouncementsClient({ announcements }: { announcements: 
                 placeholder="Örn: Sistem Bakım Çalışması Hakkında"
                 value={form.title}
                 onChange={(e) => setForm({ ...form, title: e.target.value })}
-                className="w-full bg-slate-50 border border-slate-200 text-slate-800 rounded-xl px-4 py-2.5 text-sm font-medium outline-none focus:border-purple-500 focus:ring-4 focus:ring-purple-100 transition-all"
+                className="w-full bg-slate-50 border border-slate-200 text-slate-800 rounded-xl p-1 md:px-4 md:py-2.5 text-xs md:text-sm font-medium outline-none focus:border-purple-500 focus:ring-4 focus:ring-purple-100 transition-all"
               />
             </div>
 
@@ -147,7 +147,7 @@ export default function AnnouncementsClient({ announcements }: { announcements: 
                 value={form.message}
                 onChange={(e) => setForm({ ...form, message: e.target.value })}
                 rows={3}
-                className="w-full bg-slate-50 border border-slate-200 text-slate-800 rounded-xl px-4 py-2.5 text-sm font-medium outline-none focus:border-purple-500 focus:ring-4 focus:ring-purple-100 transition-all resize-none"
+                className="w-full bg-slate-50 border border-slate-200 text-slate-800 rounded-xl p-1 md:px-4 md:py-2.5 text-xs md:text-sm font-medium outline-none focus:border-purple-500 focus:ring-4 focus:ring-purple-100 transition-all resize-none"
               />
             </div>
 
@@ -157,7 +157,7 @@ export default function AnnouncementsClient({ announcements }: { announcements: 
                 <select
                   value={form.type}
                   onChange={(e) => setForm({ ...form, type: e.target.value })}
-                  className="w-full bg-slate-50 border border-slate-200 text-slate-700 rounded-xl px-4 py-2.5 text-sm font-bold outline-none focus:border-purple-500 focus:ring-4 focus:ring-purple-100 transition-all shadow-sm"
+                  className="w-full bg-slate-50 border border-slate-200 text-slate-700 rounded-xl p-1 md:px-4 md:py-2.5 text-xs md:text-sm font-bold outline-none focus:border-purple-500 focus:ring-4 focus:ring-purple-100 transition-all shadow-sm"
                 >
                   <option value="info">Bilgi</option>
                   <option value="warning"> Uyarı</option>
@@ -172,7 +172,7 @@ export default function AnnouncementsClient({ announcements }: { announcements: 
                   type="datetime-local"
                   value={form.expiresAt}
                   onChange={(e) => setForm({ ...form, expiresAt: e.target.value })}
-                  className="w-full bg-slate-50 border border-slate-200 text-slate-600 rounded-xl px-4 py-2.5 text-sm font-medium outline-none focus:border-purple-500 focus:ring-4 focus:ring-purple-100 transition-all"
+                  className="w-full bg-slate-50 border border-slate-200 text-slate-600 rounded-xl p-1 md:px-4 md:py-2.5 text-xs md:text-sm font-medium outline-none focus:border-purple-500 focus:ring-4 focus:ring-purple-100 transition-all"
                 />
               </div>
             </div>
@@ -180,14 +180,14 @@ export default function AnnouncementsClient({ announcements }: { announcements: 
             <div className="flex gap-3 justify-end pt-2 border-t border-slate-100">
               <button
                 onClick={() => setShowForm(false)}
-                className="px-4 py-2.5 text-gray-500 hover:text-gray-700 text-sm font-bold transition-colors"
+                className="px-4 py-2.5 text-gray-500 hover:text-gray-700 text-xs md:text-sm font-bold transition-colors"
               >
                 Vazgeç
               </button>
               <button
                 onClick={handleCreate}
                 disabled={isPending || !form.title || !form.message}
-                className="bg-purple-600 hover:bg-purple-700 text-white px-6 py-2.5 rounded-xl text-sm font-black transition-all shadow-md shadow-purple-100 disabled:opacity-40 disabled:cursor-not-allowed flex items-center gap-2"
+                className="bg-purple-600 hover:bg-purple-700 text-white p-2 md:px-6 md:py-2.5 rounded-xl text-xs md:text-sm font-black transition-all shadow-md shadow-purple-100 disabled:opacity-40 disabled:cursor-not-allowed flex items-center gap-2"
               >
                 {isPending && <Loader2 className="w-4 h-4 animate-spin" />}
                 Duyuruyu Paylaş
@@ -197,7 +197,7 @@ export default function AnnouncementsClient({ announcements }: { announcements: 
         </div>
       )}
 
-      <div className="space-y-4">
+      <div className="m-6 space-y-4">
         {announcements.length === 0 ? (
           <div className="bg-white rounded-2xl border border-purple-100 p-12 text-center shadow-sm">
             <Megaphone className="w-12 h-12 text-slate-300 mx-auto mb-3" />
@@ -219,13 +219,13 @@ export default function AnnouncementsClient({ announcements }: { announcements: 
                 }`}
               >
                 <div className="flex items-start gap-4 flex-1">
-                  <div className={`p-2.5 rounded-xl border bg-white shadow-sm shrink-0 ${a.is_active ? style.iconColor : "text-gray-400 border-gray-100"}`}>
-                    <IconComponent className="w-5 h-5" />
+                  <div className={`p-1 md:p-2.5 rounded-xl border bg-white shadow-sm shrink-0 ${a.is_active ? style.iconColor : "text-gray-400 border-gray-100"}`}>
+                    <IconComponent className="w-3 h-3 md:w-5 md:h-5" />
                   </div>
 
                   <div className="space-y-1.5 flex-1">
                     <div className="flex items-center gap-2 flex-wrap">
-                      <h3 className={`font-black text-base ${a.is_active ? "text-slate-900" : "text-gray-500 line-through"}`}>
+                      <h3 className={`font-black text-sm md:text-base ${a.is_active ? "text-slate-900" : "text-gray-500 line-through"}`}>
                         {a.title}
                       </h3>
                       <span className={`inline-flex items-center px-2 py-0.5 rounded-md text-[10px] font-black  border tracking-wider ${
@@ -238,11 +238,11 @@ export default function AnnouncementsClient({ announcements }: { announcements: 
                       )}
                     </div>
                     
-                    <p className={`text-sm leading-relaxed ${a.is_active ? "text-slate-700" : "text-gray-400"}`}>
+                    <p className={`text-xs md:text-sm leading-relaxed ${a.is_active ? "text-slate-700" : "text-gray-400"}`}>
                       {a.message}
                     </p>
                     
-                    <div className="flex flex-wrap items-center gap-x-4 gap-y-1 pt-1 text-xs font-semibold opacity-60">
+                    <div className="flex flex-wrap items-center gap-x-4 gap-y-1 pt-1 text-[10px] md:text-xs font-semibold opacity-60">
                       <span className="flex items-center gap-1">
                         <Calendar className="w-3.5 h-3.5" />
                         {new Date(a.created_at).toLocaleDateString("tr-TR", {
@@ -262,7 +262,7 @@ export default function AnnouncementsClient({ announcements }: { announcements: 
                   <button
                     onClick={() => handleToggle(a.id, a.is_active)}
                     disabled={isPending}
-                    className={`relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out outline-none ${
+                    className={`relative inline-flex w-10 h-6 md:w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors duration-200 ease-in-out outline-none ${
                       a.is_active ? "bg-purple-600" : "bg-slate-200"
                     } disabled:opacity-50`}
                     title={a.is_active ? "Duyuruyu Gizle / Pasif Et" : "Duyuruyu Yayına Al"}
@@ -277,10 +277,10 @@ export default function AnnouncementsClient({ announcements }: { announcements: 
                   <button
                     onClick={() => handleDelete(a.id)}
                     disabled={isPending}
-                    className="p-2 bg-white hover:bg-rose-50 border border-slate-200 hover:border-rose-200 text-slate-400 hover:text-rose-600 rounded-xl transition-all shadow-sm active:scale-90"
+                    className="p-1 md:p-2 bg-white hover:bg-rose-50 border border-slate-200 hover:border-rose-200 text-slate-400 hover:text-rose-600 rounded-xl transition-all shadow-sm active:scale-90"
                     title="Duyuruyu Kalıcı Olarak Sil"
                   >
-                    <Trash2 className="w-4 h-4" />
+                    <Trash2 className="w-3 h-3 md:w-4 md:h-4" />
                   </button>
                 </div>
               </div>
