@@ -29,19 +29,28 @@ export async function updateTask(id: string, formData: FormData) {
     title: formData.get("title"),
     priority: formData.get("priority"),
     due_date: formData.get("due_date"),
+    assignee_id: formData.get("assignee_id")
   }).eq("id", id);
   revalidatePath("/dashboard/tasks");
 }
 
 export async function createTask(formData: FormData) {
   const { supabase, user } = await getClient();
+  
+  const { data: userProfile } = await supabase
+    .from("profiles")
+    .select("organization_id")
+    .eq("id", user.id)
+    .single();
+
   await supabase.from("tasks").insert({
     title: formData.get("title"),
     project_id: formData.get("project_id"),
     priority: formData.get("priority"),
     due_date: formData.get("due_date"),
     created_by: user.id,
-    assignee_id: user.id,
+    assignee_id: formData.get("assignee_id"),
+    organization_id: userProfile?.organization_id,
     status: "todo",
   });
   revalidatePath("/dashboard/tasks");

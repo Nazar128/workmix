@@ -25,76 +25,72 @@ export default function AddProjectModal({
     <>
       <button
         onClick={() => setIsOpen(true)}
-        className="flex items-center gap-2 bg-gradient-to-r from-purple-600 to-violet-700 hover:from-purple-700 hover:to-violet-800 text-white px-6 py-3 rounded-2xl transition-all shadow-xl shadow-purple-200 font-bold text-sm active:scale-95"
+        className="flex items-center gap-2 bg-purple-700 hover:bg-purple-800 text-white px-5 py-3 rounded-xl transition-all shadow-md font-bold text-xs uppercase tracking-wider active:scale-95 whitespace-nowrap flex-shrink-0"
       >
-        <Plus className="w-5 h-5" />
-        Yeni Proje Başlat
+        <Plus className="w-4 h-4" /> Yeni Proje
       </button>
 
       <AnimatePresence>
         {isOpen && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+          <div className="fixed h-screen inset-0 z-50 flex justify-center items-start p-4 overflow-y-auto bg-slate-900/50">
             <motion.div 
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               onClick={() => setIsOpen(false)}
-              className="absolute inset-0 bg-slate-900/40 backdrop-blur-md"
+              className="absolute inset-0"
             />
             
             <motion.div 
-              initial={{ opacity: 0, scale: 0.9, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              className="relative bg-white rounded-[2.5rem] w-full max-w-lg shadow-2xl overflow-hidden border border-white"
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              className="relative bg-white rounded-3xl m-4 md:m-24 w-full max-w-md shadow-xl border border-slate-100 overflow-hidden flex flex-col max-h-[90vh]"
             >
-              <div className="bg-gradient-to-br from-purple-50 to-violet-50 p-8 flex justify-between items-center border-b border-purple-100">
-                <div className="flex items-center gap-4">
-                  <div className="p-3 bg-white rounded-2xl shadow-sm text-purple-600">
-                    <Rocket className="w-6 h-6" />
+              <div className="p-6 border-b border-slate-100 flex justify-between items-center bg-slate-50 flex-shrink-0">
+                <div className="flex items-center gap-3">
+                  <div className="p-2 bg-purple-600 text-white rounded-lg shadow-sm">
+                    <Rocket className="w-5 h-5" />
                   </div>
-                  <div>
-                    <h2 className="text-2xl text-slate-900 font-black tracking-tight">Yeni Proje</h2>
-                    <p className="text-purple-600/60 text-xs font-bold uppercase tracking-widest">Workmix Workspace</p>
-                  </div>
+                  <h2 className="text-md md:text-lg font-bold text-slate-800 tracking-tight">Yeni Proje Başlat</h2>
                 </div>
-                <button onClick={() => setIsOpen(false)} className="p-2 hover:bg-white rounded-xl text-slate-400 hover:text-purple-600 transition-colors">
-                  <X className="w-6 h-6" />
+                <button onClick={() => setIsOpen(false)} className="p-2 text-slate-400 hover:text-purple-600 transition-colors">
+                  <X className="w-5 h-5" />
                 </button>
               </div>
 
-              <form action={action} className="p-8 space-y-6">
-                <div className="space-y-2">
-                  <label className="flex items-center gap-2 text-xs font-black text-slate-400 uppercase tracking-tighter ml-1">
-                    <Layout className="w-3.5 h-3.5" /> Proje Adı
+              <form action={action} className="p-6 space-y-4 overflow-y-auto text-left">
+                <div className="space-y-1.5">
+                  <label className="text-[9px] md:text-[10px] font-bold text-slate-400 uppercase tracking-wider ml-1 flex items-center gap-1">
+                    <Layout className="w-3 h-3" /> Proje Adı
                   </label>
                   <input
                     name="name"
                     placeholder="E-ticaret Mobil Uygulama..."
-                    className="w-full bg-slate-50 border border-slate-100 p-4 rounded-2xl focus:ring-2 focus:ring-purple-500/20 focus:border-purple-500 outline-none transition-all font-medium text-slate-700"
+                    className="w-full bg-slate-50 text-xs md:text-sm border border-slate-100 p-3.5 rounded-xl focus:ring-2 focus:ring-purple-500/20 focus:border-purple-500 outline-none transition-all font-medium text-slate-700"
                     required
                   />
                 </div>
 
-                <div className="space-y-2">
-                  <label className="flex items-center gap-2 text-xs font-black text-slate-400 uppercase tracking-tighter ml-1">
-                    <AlignLeft className="w-3.5 h-3.5" /> Açıklama
+                <div className="space-y-1.5">
+                  <label className="text-[9px] md:text-[10px] font-bold text-slate-400 uppercase tracking-wider ml-1 flex items-center gap-1">
+                    <AlignLeft className="w-3 h-3" /> Açıklama
                   </label>
                   <textarea
                     name="description"
                     placeholder="Projenin hedefleri ve kapsamı..."
-                    className="w-full bg-slate-50 border border-slate-100 p-4 rounded-2xl focus:ring-2 focus:ring-purple-500/20 focus:border-purple-500 outline-none transition-all font-medium text-slate-700 min-h-[100px] resize-none"
+                    className="w-full bg-slate-50 text-xs md:text-sm border border-slate-100 p-3.5 rounded-xl focus:ring-2 focus:ring-purple-500/20 focus:border-purple-500 outline-none transition-all font-medium text-slate-700 min-h-[100px] resize-none"
                     rows={3}
                   />
                 </div>
 
-                <div className="space-y-2">
-                  <label className="text-xs font-black text-slate-400 uppercase tracking-tighter ml-1">Çalışma Alanı</label>
+                <div className="space-y-1.5">
+                  <label className="text-[9px] md:text-[10px] font-bold text-slate-400 uppercase tracking-wider ml-1">Çalışma Alanı</label>
                   <select
                     name="org_id"
-                    className="w-full bg-slate-50 border border-slate-100 p-4 rounded-2xl focus:ring-2 focus:ring-purple-500/20 focus:border-purple-500 outline-none font-bold text-slate-600 appearance-none cursor-pointer"
+                    className="w-full bg-slate-50 border border-slate-100 p-3.5 rounded-xl font-medium text-xs md:text-sm text-slate-600 outline-none cursor-pointer"
+                    required
                   >
-                    <option value="">🏠 Bireysel Çalışma Alanı</option>
                     {organizations.map((org) => (
                       <option key={org.id} value={org.id}>🏢 {org.name}</option>
                     ))}
@@ -102,17 +98,17 @@ export default function AddProjectModal({
                 </div>
 
                 <div className="grid grid-cols-2 gap-4">
-                  <div className="space-y-2">
-                    <label className="flex items-center gap-2 text-xs font-black text-slate-400 uppercase tracking-tighter ml-1">
-                      <CalendarIcon className="w-3.5 h-3.5" /> Başlangıç
+                  <div className="space-y-1.5">
+                    <label className="text-[9px] md:text-[10px] font-bold text-slate-400 uppercase tracking-wider ml-1 flex items-center gap-1">
+                      <CalendarIcon className="w-3 h-3" /> Başlangıç
                     </label>
-                    <input type="date" name="start_date" className="w-full bg-slate-50 border border-slate-100 p-4 rounded-2xl focus:ring-2 focus:ring-purple-500/20 outline-none font-bold text-slate-600 text-sm" />
+                    <input type="date" name="start_date" className="w-full bg-slate-50 border border-slate-100 p-3.5 rounded-xl font-medium text-slate-600 outline-none text-xs md:text-sm" />
                   </div>
-                  <div className="space-y-2">
-                    <label className="flex items-center gap-2 text-xs font-black text-slate-400 uppercase tracking-tighter ml-1">
-                      <CalendarIcon className="w-3.5 h-3.5" /> Hedef Bitiş
+                  <div className="space-y-1.5">
+                    <label className="text-[9px] md:text-[10px] font-bold text-slate-400 uppercase tracking-wider ml-1 flex items-center gap-1">
+                      <CalendarIcon className="w-3 h-3" /> Hedef Bitiş
                     </label>
-                    <input type="date" name="end_date" className="w-full bg-slate-50 border border-slate-100 p-4 rounded-2xl focus:ring-2 focus:ring-purple-500/20 outline-none font-bold text-slate-600 text-sm" />
+                    <input type="date" name="end_date" className="w-full bg-slate-50 border border-slate-100 p-3.5 rounded-xl font-medium text-slate-600 outline-none text-xs md:text-sm" />
                   </div>
                 </div>
 
@@ -120,11 +116,11 @@ export default function AddProjectModal({
                   <button
                     type="button"
                     onClick={() => setIsOpen(false)}
-                    className="flex-1 px-6 py-4 bg-slate-100 text-slate-500 rounded-2xl font-bold hover:bg-slate-200 transition-all active:scale-95"
+                    className="flex-1 px-4 py-3 bg-slate-100 text-slate-500 rounded-xl font-medium hover:bg-slate-200 transition-all"
                   >
                     İptal
                   </button>
-                  <button type="submit" className="flex-1 bg-purple-700 text-white px-6 py-4 rounded-2xl font-black shadow-lg shadow-purple-200 hover:bg-purple-800 transition-all active:scale-95 uppercase tracking-widest text-xs">
+                  <button type="submit" className="flex-1 bg-purple-700 text-white px-4 py-3 rounded-xl font-bold shadow-md hover:bg-purple-800 transition-all uppercase text-xs tracking-wider">
                     Projeyi Oluştur
                   </button>
                 </div>

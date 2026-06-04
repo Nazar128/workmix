@@ -13,10 +13,18 @@ export default async function ProjectsPage({
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) redirect("/login");
 
+  const { data: userProfile } = await supabase
+    .from("users")
+    .select("organization_id")
+    .eq("id", user.id)
+    .single();
+
+  const orgId = userProfile?.organization_id;
+
   let query = supabase
     .from("projects")
     .select("*, organizations!org_id(name)")
-    .eq("created_by", user.id)
+    .eq("organization_id", orgId)
     .order('created_at', { ascending: false });
 
   if (typeof resolvedSearchParams.q === "string") query = query.ilike("name", `%${resolvedSearchParams.q}%`);
@@ -28,7 +36,7 @@ export default async function ProjectsPage({
     supabase
       .from("organizations")
       .select("id, name")
-      .eq("status", "active"),
+      .eq("id", orgId),
   ]);
 
   return (
