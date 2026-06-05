@@ -3,10 +3,10 @@ import { signIn } from '@/actions/auth';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
-import React, { useEffect, useTransition } from 'react';
+import  { Suspense, useEffect, useTransition } from 'react';
 import { toast } from 'sonner';
 
-export default function LoginPage() {
+ function LoginForm() {
     const [isPending, startTransition] = useTransition();
     const searchParams = useSearchParams();
 
@@ -128,6 +128,18 @@ export default function LoginPage() {
               
             </div>
         </div>
+    );
+}
+
+export default function LoginPage() {
+    return (
+        <Suspense fallback={
+            <div className="min-h-screen flex items-center justify-center bg-[#fafaff] text-purple-600 font-bold">
+                Yükleniyor...
+            </div>
+        }>
+            <LoginForm />
+        </Suspense>
     );
 }
 

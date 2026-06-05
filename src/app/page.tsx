@@ -1,5 +1,31 @@
 import Image from "next/image";
 
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "WorkMix | Hibrit Görev Yönetimi ve SaaS Platformu",
+  description: "Bireysel görev takibi ile kurumsal iş süreçlerini tek bir çatı altında birleştiren hibrit yönetim sistemi.",
+  keywords: ["görev yönetimi", "SaaS", "iş takibi", "hibrit sistem", "proje yönetimi", "WorkMix"],
+  authors: [{ name: "WorkMix Team" }],
+
+  openGraph: {
+    title: "WorkMix | Hibrit Görev Yönetimi",
+    description: "İş süreçlerinizi ve kişisel görevlerinizi WorkMix ile tek bir yerden yönetin.",
+    url: "https://workmix.com", 
+    siteName: "WorkMix",
+    images: [
+      {
+        url: "/workmix_logo.png", 
+        width: 800,
+        height: 600,
+      },
+    ],
+    locale: "tr_TR",
+    type: "website",
+  },
+};
+
+
 export default function Home() {
   return (
     <div className="flex flex-col flex-1 items-center justify-center  font-sans dark:bg-black">

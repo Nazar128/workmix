@@ -59,11 +59,14 @@ export default function GlobalSearch() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-4.35-4.35M17 11A6 6 0 1 1 5 11a6 6 0 0 1 12 0z" />
                 </svg>
                 <input
+                    id="global-search"
+                    name="global-search"
                     ref={inputRef}
                     type="text"
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}
                     placeholder="Ara..."
+                    autoComplete="off"
                     className="px-8 w-44 border border-[#936fb3] rounded-lg  pr-8 py-2 text-sm text-gray-100 outline-none focus:border-purple-500 placeholder:text-gray-200 transition-colors"
                 />
                 {query && (

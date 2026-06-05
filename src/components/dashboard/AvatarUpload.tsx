@@ -92,6 +92,8 @@ export default function AvatarUpload({
 
       <input
         ref={inputRef}
+        id="avatar-upload"
+        name="avatar"
         type="file"
         accept="image/jpeg,image/png,image/webp,image/gif"
         className="hidden"

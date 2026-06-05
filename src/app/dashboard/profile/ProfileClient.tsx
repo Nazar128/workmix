@@ -21,26 +21,34 @@ type Profile = {
   created_at: string
 };
 
-function Label({ children }: { children: React.ReactNode }) {
-  return <label className="block text-xs font-semibold text-purple-900/60 uppercase tracking-wider mb-2">{children}</label>;
+function Label({ children, htmlFor }: { children: React.ReactNode; htmlFor?: string }) {
+  return (
+    <label htmlFor={htmlFor} className="block text-xs font-semibold text-purple-900/60 uppercase tracking-wider mb-2">
+      {children}
+    </label>
+  );
 }
 
-function Input({ value, onChange, placeholder, type = "text", disabled = false }: { value: string; onChange?: (v: string) => void; placeholder?: string; type?: string; disabled?: boolean }) {
+function Input({ id, value,name, onChange, placeholder, type = "text", disabled = false, autoComplete = "off" }: { id?: string; value: string; name?: string; onChange?: (v: string) => void; placeholder?: string; type?: string; disabled?: boolean; autoComplete?: string }) {
   return (
     <input 
+      id={id}
+      name={name}
       type={type} 
       value={value} 
       onChange={(e) => onChange?.(e.target.value)} 
       placeholder={placeholder} 
       disabled={disabled} 
+      autoComplete={autoComplete}
       className="w-full bg-white/70 backdrop-blur-sm border border-slate-200/80 px-4 py-2.5 text-slate-800 placeholder-slate-400 focus:outline-none focus:border-purple-500 focus:ring-4 focus:ring-purple-500/10 rounded-xl transition-all text-sm shadow-sm disabled:opacity-50" 
     />
   );
 }
 
-function Textarea({ value, onChange, placeholder }: { value: string; onChange: (v: string) => void; placeholder?: string }) {
+function Textarea({id, value, onChange, placeholder, autoComplete = "off" }: { id?: string; value: string; onChange: (v: string) => void; placeholder?: string; autoComplete?: string }) {
   return (
     <textarea 
+      id={id}
       value={value} 
       onChange={(e) => onChange(e.target.value)} 
       placeholder={placeholder} 
@@ -165,16 +173,16 @@ export default function ProfileClient({ initialProfile }: { initialProfile: Prof
         <SectionCard title="Kişisel Bilgiler" icon={<User size={18} />}>
           <div className="space-y-4">
             <div>
-              <Label>Ad Soyad</Label>
-              <Input value={name} onChange={setName} placeholder="Adınızı ve soyadınızı girin" />
+              <Label htmlFor="full-name">Ad Soyad</Label>
+              <Input  id="full-name" autoComplete="name" value={name} onChange={setName} placeholder="Adınızı ve soyadınızı girin" />
             </div>
             <div>
-              <Label>Telefon</Label>
-              <Input value={phone} onChange={setPhone} placeholder="Telefon numaranızı girin" />
+              <Label htmlFor="phone-number">Telefon</Label>
+              <Input  id="phone-number" name="phone" type="tel" autoComplete="tel" value={phone} onChange={setPhone} placeholder="Telefon numaranızı girin" />
             </div>
             <div>
-              <Label>Biyografi</Label>
-              <Textarea value={bio} onChange={setBio} placeholder="Kendinizden kısaca bahsedin..." />
+              <Label htmlFor="bio">Biyografi</Label>
+              <Textarea id="bio"  autoComplete="bio" value={bio} onChange={setBio} placeholder="Kendinizden kısaca bahsedin..." />
             </div>
           </div>
         </SectionCard>
@@ -183,12 +191,12 @@ export default function ProfileClient({ initialProfile }: { initialProfile: Prof
           <div className="space-y-4 flex flex-col h-full justify-between">
             <div className="space-y-4">
               <div>
-                <Label>Ünvan</Label>
-                <Input value={jobTitle} onChange={setJobTitle} placeholder="Örn: Kıdemli Yazılım Geliştirici" />
+                <Label htmlFor="jobTitle">Ünvan</Label>
+                <Input type="text" id="jobTitle" value={jobTitle} onChange={setJobTitle} placeholder="Örn: Kıdemli Yazılım Geliştirici" />
               </div>
               <div>
-                <Label>Departman</Label>
-                <Input value={department} onChange={setDepartment} placeholder="Örn: Ar-Ge Müdürlüğü" />
+                <Label htmlFor="department">Departman</Label>
+                <Input type="text" id="department" value={department} onChange={setDepartment} placeholder="Örn: Ar-Ge Müdürlüğü" />
               </div>
             </div>
             <div className="bg-white/50 backdrop-blur-sm rounded-xl p-4 border border-slate-100 shadow-inner mt-4 space-y-1">
@@ -219,12 +227,12 @@ export default function ProfileClient({ initialProfile }: { initialProfile: Prof
       <SectionCard title="Güvenlik ve Şifre Güncelleme" icon={<ShieldCheck size={18} />}>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
-            <Label>Yeni Şifre</Label>
-            <Input type="password" value={newPassword} onChange={setNewPassword} placeholder="••••••••" />
+            <Label htmlFor="newPassword">Yeni Şifre</Label>
+            <Input type="password" id="newPassword" value={newPassword} onChange={setNewPassword} placeholder="••••••••" />
           </div>
           <div>
-            <Label>Yeni Şifre Tekrar</Label>
-            <Input type="password" value={confirmPassword} onChange={setConfirmPassword} placeholder="••••••••" />
+            <Label htmlFor="confirmPassword">Yeni Şifre Tekrar</Label>
+            <Input type="password" id="confirmPassword" value={confirmPassword} onChange={setConfirmPassword} placeholder="••••••••" />
           </div>
         </div>
         <div className="flex flex-wrap items-center gap-4 pt-2">

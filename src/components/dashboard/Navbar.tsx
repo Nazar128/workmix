@@ -49,6 +49,7 @@ export default function Navbar({ user, onOpenNotes, isSidebarOpen, onToggleSideb
               height={180} 
               className="w-full h-auto object-contain"
               priority
+              loading="eager"
             />
           </div>
         </div>

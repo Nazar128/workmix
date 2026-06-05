@@ -29,7 +29,7 @@ export function Sidebar({ isOpen }: SidebarProps) {
           transition-all duration-500 ease-in-out overflow-hidden
           ${isOpen ? " h-[480px] opacity-100 py-6 rounded-b-2xl" : "max-h-0 opacity-0 py-0 pointer-events-none"}`}
         >
-            <Image src="/workmıx_logo.png" alt="WorkMix Logo" width={200} height={160} className="mx-auto " />
+            <Image src="/workmıx_logo.png" alt="WorkMix Logo" width={200} height={160} className="mx-auto w-full h-auto object-contain" loading="eager"  />
             
             <nav className="flex-1 px-4 space-y-1">
                 {menuItems.map((item) => {

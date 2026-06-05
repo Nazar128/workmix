@@ -1,4 +1,4 @@
-import { Folder, Users, CheckCircle2, ArrowRight, Plus, Calendar, Clock, AlertCircle, ShieldAlert, CheckSquare, Activity } from "lucide-react";
+import { Folder, Users, CheckCircle2, ArrowRight, Calendar, AlertCircle, ShieldAlert, CheckSquare, Activity } from "lucide-react";
 import { createClient } from "@/lib/supabase/server";
 import { StatsCard } from "@/components/dashboard/Statcards";
 import AnnouncementBanner from "@/components/AnnouncementBanner";

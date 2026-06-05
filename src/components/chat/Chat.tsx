@@ -227,6 +227,8 @@ export default function ChatTest() {
         </button>
         <input ref={fileInputRef} type="file" accept="image/*" className="hidden" onChange={handleImageSelect} />
         <input
+          id="chat-input"
+          name="chat-input"
           type="text"
           value={text}
           onChange={(e) => setText(e.target.value)}

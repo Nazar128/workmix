@@ -1,7 +1,16 @@
-import { Sidebar } from "@/components/dashboard/Sidebar";
+
 import { createServerClient } from "@supabase/ssr";
 import { cookies } from "next/headers";
 import DashboardShell from "@/components/dashboard/DashboardShell";
+import { Metadata } from "next";
+
+
+export const metadata: Metadata = {
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
 
 export default async function DashboardLayout({
   children,

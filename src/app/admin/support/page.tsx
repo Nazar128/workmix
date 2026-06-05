@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import { createClient } from "@/lib/supabase/client";
 import { toast } from "sonner";
-import { User, Clock, CheckCircle2, MessageSquare, Inbox, Search, Send, Shield, Sparkles, HelpCircle, ChevronLeft } from "lucide-react";
+import { Clock, CheckCircle2, MessageSquare, Inbox, Search, Send, Shield, Sparkles, HelpCircle, ChevronLeft } from "lucide-react";
 
 export default function AdminSupportPanel() {
   const supabase = createClient();

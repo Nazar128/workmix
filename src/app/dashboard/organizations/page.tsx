@@ -1,7 +1,6 @@
 import { createServerClient } from "@supabase/ssr";
 import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
-import Link from "next/link";
 import AddOrganizationModal from "@/components/dashboard/AddOrganizationModal";
 import { OrganizationCard } from "@/components/dashboard/OrganizationCard";
 
